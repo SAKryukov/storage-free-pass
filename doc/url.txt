@@ -1,0 +1,14 @@
+https://en.wikipedia.org/wiki/Password_strength
+
+https://ss64.com/pass
+https://ss64.com/docs/security.html
+https://passwordsecurity.info/
+https://security.stackexchange.com/questions/44368/are-the-ss64-com-password-generators-a-good-approach
+http://www.angel.net/~nic/passwd.sha1.1a.html
+
+https://blog.codinghorror.com/password-rules-are-bullshit/
+https://blog.codinghorror.com/the-dirty-truth-about-web-passwords/
+https://github.com/dumb-password-rules/dumb-password-rules
+https://badpasswordpolicies.tumblr.com/
+https://password-shaming.tumblr.com/
+https://xkcd.com/936/
