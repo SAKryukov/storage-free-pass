@@ -9,6 +9,7 @@
     html, body { background-color: papayawhip; }
     html, body { height: 100%; }
     h1 { margin-bottom: 0.8em; }
+    h1 > a { font-size: 70%; margin-left: 2em; }
     body {
       display: flex;
       flex-flow: column;
@@ -20,6 +21,7 @@
       overflow: auto;
     }
     footer, header, input, textarea { padding: 1em; padding-top: 0.6em; padding-bottom: 0.6em; }
+    header > label:last-child { margin-left: 1em; }
     textarea { width: 100%; height: 100%; resize: none; }
     footer { text-align: right; }
 </style>
@@ -27,7 +29,7 @@
 <body>
 
   <header>
-    <h1>Character Repertoires</h1>
+    <h1>Character Repertoires <a href="https://en.wikipedia.org/wiki/Unicode_block">Unicode blocks</a></h1>
     <label>From: <input value="0x0021"/></label>
     <label>Length: <input value="32"/></label>
   </header>
@@ -48,6 +50,10 @@
         const action = ev => {
             const from = parseInt(inputFrom.value);
             const length = parseInt(inputLength.value);
+            if (isNaN(from + length)) {
+              output.value += `\nInvalid input: "${inputFrom.value}", "${inputLength.value}"`;
+              return;
+            } //if
             let value = "";
             let count = 0;
             for (let codePoint = from; codePoint < from + length; ++codePoint) {
@@ -60,9 +66,15 @@
         }; //action
         const calculateStatus = () => {
           const selected = output.selectionEnd - output.selectionStart;
-          footer.textContent = `Selected: ${selected}`;
+          const line = output.value.substring(0, output.selectionStart);
+          
+          const split = line.split("\n");
+          const y = split.length;
+          const x = split[split.length - 1].length + 1;
+          footer.textContent = `${y} : ${x} | Selected: ${selected}`;
         }; //calculateStatus
         calculateStatus();
+        output.onfocus = ev => { calculateStatus(); }
         output.onclick = ev => { calculateStatus(); }
         output.onkeyup = ev => { calculateStatus(); }
         output.input = ev => { calculateStatus(); }
