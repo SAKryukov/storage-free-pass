@@ -1,35 +1,48 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SHA2 Password Generator Tools</title>
-    <meta name="author" content="Sergey A Kryukov">
-    <meta name="owner" content="Sergey A Kryukov">
-    <meta name="copyright" content="Sergey A Kryukov, 2020">
-    <meta name="author" content="Sergey A Kryukov">
-    <meta name="description" content="Generator of highly secure passwords based on SHA-2 cryptographic hash and master password, which should be memorized; no password storage is involved">
-    <meta name="keywords" content="security, password, passwords, generator, cryptography, cryptographic, hash, SHA-256">
-    <!-- see also: https://gist.github.com/lancejpollard/1978404 -->
-    <style>
-        * { font-family: sans-serif; box-sizing: border-box; }
-        h1 { font-size: 140%; }
-        html, body { background-color: papayawhip; }
-        body, main { margin-left: 1em; }
-        textarea { width:  100%; height: 480px;  }
-    </style>
-</head>
+<!DOCTYPE>
+<html>
+  <head>
+  <meta charset="utf-8" />
+<style>
+    * { padding: 0; margin: 0; box-sizing: border-box; }
+    * { font-family: sans-serif; box-sizing: border-box; }
+    h1 { font-size: 140%; }
+    html, body { background-color: papayawhip; }
+    html, body { height: 100%; }
+    h1 { margin-bottom: 0.8em; }
+    body {
+      display: flex;
+      flex-flow: column;
+      height: 100%;
+    }
+    main {
+      flex: auto;
+      padding-left: 1em; padding-right: 1em;
+      overflow: auto;
+    }
+    footer, header, input, textarea { padding: 1em; padding-top: 0.6em; padding-bottom: 0.6em; }
+    textarea { width: 100%; height: 100%; resize: none; }
+    footer { text-align: right; }
+</style>
+  </head>
 <body>
 
-    <p><a href="https://en.wikipedia.org/wiki/Unicode_block">Unicode blocks</a></p>
-    <label>From: <input value="0x3400" /></label>
-    <label>Length: <input value="256"/></label>
-
+  <header>
+    <h1>Character Repertoires</h1>
+    <label>From: <input value="0x0021"/></label>
+    <label>Length: <input value="32"/></label>
+  </header>
+  <main>
     <textarea spellcheck="false"></textarea>
+  </main>
+  <footer>
+  </footer>
 
 <script>
     document.body.onload = () => {
         "use strict";
         const inputElements = document.querySelectorAll("input"); 
-        const output = document.querySelector("body > textarea");
+        const footer = document.querySelector("footer");
+        const output = document.querySelector("body > main > textarea");
         const inputFrom = inputElements[0];
         const inputLength = inputElements[1];
         const action = ev => {
@@ -45,10 +58,22 @@
             const normal = (value == value.normalize("NFC") && value == value.normalize("NFD") && value == value.normalize("NFKC") && value == value.normalize("NFKD"));
             output.value += `\nCharacters: ${count}, from: 0x${from.toString(16)}, normal form: ${normal}\n${value}`;
         }; //action
+        const calculateStatus = () => {
+          const selected = output.selectionEnd - output.selectionStart;
+          footer.textContent = `Selected: ${selected}`;
+        }; //calculateStatus
+        calculateStatus();
+        output.onclick = ev => { calculateStatus(); }
+        output.onkeyup = ev => { calculateStatus(); }
+        output.input = ev => { calculateStatus(); }
+        output.onkeydown = ev => { calculateStatus(); }
+        output.onmousemove = ev => { calculateStatus(); }
+        output.onpaste = ev => { calculateStatus(); }
         inputFrom.onkeydown = ev => { if (ev.key == "Enter") action(); }
         inputLength.onkeydown = ev => { if (ev.key == "Enter") action(); }
         inputFrom.focus();
     } //document.body.onload
 </script>
 
-</body></html>
+</body>
+</html>

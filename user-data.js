@@ -7,11 +7,21 @@ const userData = () => {
    const strongCharacterRepertoire = "!#$%&()+-0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^abcdefghijkmnopqrstuvwxyz|~/";
    const easiestCharacterRepertoire = "0123456789abcdefghijkmnopqrstuvwxyz";
    const easyCharacterRepertoire =    "0123456789abcdefghijkmnopqrstuvwxyz[]-=/";
+   const ultimateCharacterRepertoire =
+       "!#$%&()*+/0123456789<=>?@ABCDEFG" +
+       "HIJKLMNOPQRSTUVWXYZ[]^abcdefghij" +
+       "klmnopqrstuvwxyz{|}~¡¢£¤¥¦§©«¬­®" +
+       "±µ»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÐÑÒÓÔÕÖ×ØÜÝÞß" +
+       "ႠႡႢႣႤႥႦႧႨႩႪႫႬႭႮႯႰႱႲႳႴႵႶႷႸႹႺႻႼႽႾႿ" +
+       "աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտր" +
+       "ሀሁሂሃሄህሆሇለሉሊላሌልሎሏሐሑሒሓሔሕሖሗመሙሚማሜምሞሟ" +
+       "ሠሡሢሣሤሥሦሧረሩሪራሬርሮሯሰሱሲሳሴስሶሷሸሹሺሻሼሽሾሿ";
       
    return {
       accounts: [
          {
             identity: { seed: "MDB 2020/02/07",
+               characterRepertoire: ultimateCharacterRepertoire, 
                start: 3, length: 15, shift: 1 },
             display: { name: "Most Dependable Bank", url: "http://www.MostDependableBank.com", userName: "Responsible-bank-user" }
          },
