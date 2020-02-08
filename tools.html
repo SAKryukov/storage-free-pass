@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SHA2 Password Generator Tools</title>
+    <meta name="author" content="Sergey A Kryukov">
+    <meta name="owner" content="Sergey A Kryukov">
+    <meta name="copyright" content="Sergey A Kryukov, 2020">
+    <meta name="author" content="Sergey A Kryukov">
+    <meta name="description" content="Generator of highly secure passwords based on SHA-2 cryptographic hash and master password, which should be memorized; no password storage is involved">
+    <meta name="keywords" content="security, password, passwords, generator, cryptography, cryptographic, hash, SHA-256">
+    <!-- see also: https://gist.github.com/lancejpollard/1978404 -->
+    <style>
+        * { font-family: sans-serif; box-sizing: border-box; }
+        h1 { font-size: 140%; }
+        html, body { background-color: papayawhip; }
+        body, main { margin-left: 1em; }
+        textarea { width:  100%; height: 480px;  }
+    </style>
+</head>
+<body>
+
+    <p><a href="https://en.wikipedia.org/wiki/Unicode_block">Unicode blocks</a></p>
+    <label>From: <input value="0x3400" /></label>
+    <label>Length: <input value="256"/></label>
+
+    <textarea spellcheck="false"></textarea>
+
+<script>
+    document.body.onload = () => {
+        "use strict";
+        const inputElements = document.querySelectorAll("input"); 
+        const output = document.querySelector("body > textarea");
+        const inputFrom = inputElements[0];
+        const inputLength = inputElements[1];
+        const action = ev => {
+            const from = parseInt(inputFrom.value);
+            const length = parseInt(inputLength.value);
+            let value = "";
+            let count = 0;
+            for (let codePoint = from; codePoint < from + length; ++codePoint) {
+                const character = String.fromCodePoint(codePoint);
+                value += character;
+                ++count;
+            }
+            const normal = (value == value.normalize("NFC") && value == value.normalize("NFD") && value == value.normalize("NFKC") && value == value.normalize("NFKD"));
+            output.value += `\nCharacters: ${count}, from: 0x${from.toString(16)}, normal form: ${normal}\n${value}`;
+        }; //action
+        inputFrom.onkeydown = ev => { if (ev.key == "Enter") action(); }
+        inputLength.onkeydown = ev => { if (ev.key == "Enter") action(); }
+        inputFrom.focus();
+    } //document.body.onload
+</script>
+
+</body></html>
