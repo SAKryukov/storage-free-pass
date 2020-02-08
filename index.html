@@ -11,7 +11,6 @@
     <meta name="author" content="Sergey A Kryukov">
     <meta name="owner" content="Sergey A Kryukov">
     <meta name="copyright" content="Sergey A Kryukov, 2020">
-    <meta name="author" content="Sergey A Kryukov">
     <meta name="description" content="Generator of highly secure passwords based on SHA-2 cryptographic hash and master password, which should be memorized; no password storage is involved">
     <meta name="keywords" content="security, password, passwords, generator, cryptography, cryptographic, hash, SHA-256">
     <!-- see also: https://gist.github.com/lancejpollard/1978404 -->
@@ -24,7 +23,7 @@
         header { margin-bottom: 0.6em; display: flex; align-items: center; }
         header > input { width: 16em; margin-right: 0.2em; padding-left: 0.6em; padding-right: 0.6em; }
         select { vertical-align: top; }
-        select:focus, input:focus { background-color: lightcyan; }
+        select:focus, input:focus, button:focus { background-color: #DDEEFF; }
         main { display: inline-grid; grid-template-columns: auto auto auto; }
         main { border-left: 1px solid black; border-right: thin solid black; border-bottom: thin solid black; }
         main > label, main > section, main > aside {
@@ -40,10 +39,10 @@
         button { background-color: transparent; font-size: 160%; border: transparent solid thin; font-family: "Consolas"; }
         button { margin-top: 0.1em; margin-bottom: 0.1em; }
         button { padding: 0; padding-bottom: 0.1em; }
-        button:hover { background-color: lightcyan; }
+        button:hover { background-color: #A0E5FF; }
         button::-moz-focus-inner, a::-moz-focus-inner { border: 0; }
         button:focus { outline: solid black thin; }
-        button.down:hover { background-color:lightYellow; }
+        button.down:hover { background-color: #EEEEFF; }
         button:active, button.down:active { background-color: yellow; }
         button > b { opacity: 0.5; pointer-events: none; }
         button.down > b { opacity: 1; }
@@ -53,6 +52,7 @@
         hr { margin-bottom: 0; }
         body > footer  { margin-top: 0.2em; font-size: 70%; }
         body > footer  b { font-weight: normal; }
+        select > option { border-radius: 8px; }
     </style>
 </head>
 <body>
