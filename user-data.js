@@ -18,16 +18,17 @@ const userData = () => {
        "ሠሡሢሣሤሥሦሧረሩሪራሬርሮሯሰሱሲሳሴስሶሷሸሹሺሻሼሽሾሿ";
       
    return {
+      title: `${String.fromCodePoint(0x1F464)} Sample`,
       accounts: [
          {
             identity: { seed: "MDB 2020/02/07",
                characterRepertoire: ultimateCharacterRepertoire, 
-               start: 3, length: 15, shift: 1 },
+               start: 3, length: 15, shift: 1, inserts: [{value: "dF1", position: 2}] },
             display: { name: "Most Dependable Bank", url: "http://www.MostDependableBank.com", userName: "Responsible-bank-user" }
          },
          {
             identity: { seed: "WikipediA 2020/02/12 13:16",
-               start: 0, length: 12, shift: 201 },
+               start: 0, length: 32, shift: 201 },
             display: { name: "WikipediA", url: "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page", userName: "me" }
          },
          {
