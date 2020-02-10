@@ -129,20 +129,6 @@
                 elements.selectedPasswordHiddenText;
         }; //showPassword
 
-    const optimizeWidths = () => {
-        const sections = document.querySelectorAll("section");
-        let maxWidth = 0;
-        for (let index = 0; index < inputData.accounts.length; ++index) {
-            elements.accountSelector.selectedIndex = index;
-            refresh(index);
-            for (let sectionindex = 0; sectionindex < sections.length; ++sectionindex)
-                if (sections[sectionindex].offsetWidth > maxWidth)
-                    maxWidth = sections[sectionindex].offsetWidth;
-        } //loop
-        for (let sectionindex = 0; sectionindex < sections.length; ++sectionindex) 
-            sections[sectionindex].style.width = utility.styleSize(maxWidth);
-    }; //optimizeWidths
-
     const populate = () => {
         for (let accountIndex in inputData.accounts) {
             generatedData.push(undefined);
@@ -160,7 +146,6 @@
         { // optimize sizes:
             if (elements.accountSelector.size > elements.accountSelector.childElementCount)
                 elements.accountSelector.size = elements.accountSelector.childElementCount;
-            optimizeWidths();
         }
     }; //populate
 
