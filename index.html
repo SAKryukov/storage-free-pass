@@ -21,11 +21,11 @@
         body, main { margin-left: 1em; }
         header > label { margin-right: 0.2em; }
         header { margin-bottom: 0.6em; display: flex; align-items: center; }
-        header > input { width: 16em; margin-right: 0.2em; padding-left: 0.6em; padding-right: 0.6em; }
+        header > input { width: 16em; margin-left: 0.6em; margin-right: 0.2em; padding-left: 0.6em; padding-right: 0.6em; }
         select { vertical-align: top; }
         select:focus, input:focus, button:focus { background-color: #DDEEFF; }
         main { display: inline-grid; grid-template-columns: auto auto auto; }
-        main { border-left: 1px solid black; border-right: thin solid black; border-bottom: thin solid black; }
+        main { border-left: thin solid black; border-right: thin solid black; border-bottom: thin solid black; }
         main > label, main > section, main > aside {
             flex: none; flex-grow: 0; 
             border-top: 1px solid black;
@@ -53,7 +53,7 @@
         hr { margin-bottom: 0; }
         body > footer  { margin-top: 0.2em; font-size: 70%; }
         body > footer  b { font-weight: normal; }
-        select > option { border-radius: 8px; }
+        input, select > option { border-radius: 8px; }
     </style>
 </head>
 <body>

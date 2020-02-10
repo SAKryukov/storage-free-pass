@@ -4,6 +4,7 @@ const userData = () => {
 
    const defaultPasswordLength = 16;
    const basicCharacterRepertoire = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+   const testCharacterRepertoire = basicCharacterRepertoire;
    const strongCharacterRepertoire = "!#$%&()+-0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^abcdefghijkmnopqrstuvwxyz|~/";
    const easiestCharacterRepertoire = "0123456789abcdefghijkmnopqrstuvwxyz";
    const easyCharacterRepertoire =    "0123456789abcdefghijkmnopqrstuvwxyz[]-=/";
@@ -20,6 +21,12 @@ const userData = () => {
    return {
       title: `${String.fromCodePoint(0x1F464)} Sample`,
       accounts: [
+         {
+            identity: { seed: "Test",
+               characterRepertoire: testCharacterRepertoire,
+               start: 0, length: 8, shift: 0 },
+            display: { name: "Test", userName: "" }
+         },
          {
             identity: { seed: "MDB 2020/02/07",
                characterRepertoire: ultimateCharacterRepertoire, 
