@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html><html lang="en">
 
-<script src="user-data.js"></script>
+<script src="../sa/user-data.js"></script>
 <script src="utility.js"></script>
 <script src="crypto.js"></script>
 <script src="ui.js"></script>
@@ -32,6 +32,7 @@
             padding-left: 1em; padding-right: 1em;
             display: flex; align-items: center;
             background-color: snow;
+            white-space: nowrap;
         }
         header > input, select { border: solid thin black; }
         main > label { justify-content: flex-end; padding-top: 1em; padding-bottom: 1em; }
@@ -61,7 +62,7 @@
 
 <header title="Master password, should be memorized and never disclosed to anyone"><label accesskey="M" for="master-password"><u>M</u>aster Password:</label><input type="password" id="master-password" spellcheck="false"/><button title="Toggle visibility"><b>&#x1F576;</b></button></header>
 
-<select size="11" title="Set of accounts protected by password, defined in user-data.js"></select>
+<select size="15" title="Set of accounts protected by password, defined in user-data.js"></select>
 
 <main>
   <label></label>
