@@ -30,7 +30,7 @@ const userData = () => {
          {
             identity: { seed: "MDB2 2020/02/07",
                characterRepertoire: ultimateCharacterRepertoire, 
-               start: 3, length: 15, shift: 1, inserts: [{value: "dF1===========WWWWWWWW", position: 2}] },
+               start: 3, length: 15, shift: 1, inserts: [{value: "dF1", position: 2}] },
             display: { name: "Most Dependable Bank", url: "http://www.MostDependableBank.com", userName: "Responsible-bank-user" }
          },
          {

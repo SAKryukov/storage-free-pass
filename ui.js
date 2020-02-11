@@ -54,7 +54,7 @@
                 this.masterPassword.setAttribute("type", inputType);
             });
             this.userName.visibilityButton.addEventListener("click", ev => {
-                const accountDisplay = inputData.accounts[elements.accountSelector.selectedIndex].display;
+                const accountDisplay = inputData.accounts[this.accountSelector.selectedIndex].display;
                 this.userName.element.textContent = 
                     this.isButtonDown(ev.target) ? accountDisplay.userName : accountDisplay.hiddenUserName;
             });
@@ -62,6 +62,19 @@
             this.masterPassword.focus();
         }, //populate
         onload: function() { this.masterPassword.focus(); },
+        optimizeWidths: function(firstTime) {
+            for (let index = 0; index < inputData.accounts.length; ++index) {
+                if (firstTime) {
+                    this.accountSelector.selectedIndex = index;
+                    refresh(index);
+                } //firstTime
+                for (let sectionindex = 0; sectionindex < this.allSections.length; ++sectionindex)
+                    if (this.allSections[sectionindex].offsetWidth > this.MaxSectionWidth)
+                    this.MaxSectionWidth = this.allSections[sectionindex].offsetWidth;
+            } //loop
+            for (let sectionindex = 0; sectionindex < this.allSections.length; ++sectionindex)
+                this.allSections[sectionindex].style.minWidth = utility.styleSize(this.MaxSectionWidth);
+        }, //optimizeWidths
         adjustSizes: function() {
             let maxButtonSize = Math.max(
                 this.masterPasswordVisibilityButton.offsetHeight,
@@ -129,22 +142,8 @@
                 utility.humanReadablePassword(generatedData[optionIndex])
                 :
                 elements.selectedPasswordHiddenText;
-        optimizeWidths(false);
+        elements.optimizeWidths(false);
     }; //showPassword
-
-    const optimizeWidths = firstTime => {
-        for (let index = 0; index < inputData.accounts.length; ++index) {
-            if (firstTime) {
-                elements.accountSelector.selectedIndex = index;
-                refresh(index);
-            } //firstTime
-            for (let sectionindex = 0; sectionindex < elements.allSections.length; ++sectionindex)
-                if (elements.allSections[sectionindex].offsetWidth > elements.MaxSectionWidth)
-                    elements.MaxSectionWidth = elements.allSections[sectionindex].offsetWidth;
-        } //loop
-        for (let sectionindex = 0; sectionindex < elements.allSections.length; ++sectionindex)
-            elements.allSections[sectionindex].style.minWidth = utility.styleSize(elements.MaxSectionWidth);
-    }; //optimizeWidths    
 
     const populate = () => {
         for (let accountIndex in inputData.accounts) {
@@ -163,7 +162,7 @@
         { // optimize sizes:
             if (elements.accountSelector.size > elements.accountSelector.childElementCount)
                 elements.accountSelector.size = elements.accountSelector.childElementCount;
-            optimizeWidths(true);
+            elements.optimizeWidths(true);
         }
     }; //populate
 
