@@ -56,7 +56,7 @@
             this.userName.visibilityButton.addEventListener("click", ev => {
                 const accountDisplay = inputData.accounts[this.accountSelector.selectedIndex].display;
                 this.userName.element.textContent = 
-                    this.isButtonDown(ev.target) ? accountDisplay.userName : accountDisplay.hiddenUserName;
+                    this.isButtonDown(ev.target) ? accountDisplay.user.name : accountDisplay.hiddenUserName;
             });
             this.processMeta();
             this.masterPassword.focus();
@@ -175,7 +175,7 @@
         else
             elements.url.innerHTML = `<b>${value.display.name}</b>`;
         elements.userName.element.textContent = elements.isButtonDown(elements.userName.visibilityButton) ?
-            value.display.userName : value.display.hiddenUserName;
+            value.display.user.name : value.display.hiddenUserName;
         elements.seed.textContent = value.identity.seed;
         elements.positions.textContent = `${value.identity.start} ${value.identity.length} ${value.identity.shift}`;
     }; //refresh
@@ -184,7 +184,7 @@
         var data = userData();
         for (let account of data.accounts) {
             utility.populateUndefined(account, data.default);
-            account.display.hiddenUserName = utility.hiddenString(account.display.userName.length);
+            account.display.hiddenUserName = utility.hiddenString(account.display.user.name.length);
         } //loop
         return utility.createReadonly(data);
     } //prepareData
@@ -200,7 +200,7 @@
                 utility.clipboard.copy(generatedData[elements.accountSelector.selectedIndex]);
             };
             elements.userName.clipboardButton.onclick = ev => {
-                utility.clipboard.copy(inputData.accounts[elements.accountSelector.selectedIndex].display.userName);
+                utility.clipboard.copy(inputData.accounts[elements.accountSelector.selectedIndex].display.user.name);
             };
             elements.password.visibilityButton.addEventListener("click", ev => {
                 let test = elements.isButtonDown(ev.target);

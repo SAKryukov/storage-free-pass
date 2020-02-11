@@ -31,17 +31,17 @@ const userData = () => {
             identity: { seed: "MDB 2020/02/07",
                characterRepertoire: ultimateCharacterRepertoire, 
                start: 3, length: 15, shift: 1, inserts: [{value: "dF1", position: 2}] },
-            display: { name: "Most Dependable Bank", url: "http://www.MostDependableBank.com", userName: "Responsible-bank-user" }
+            display: { name: "Most Dependable Bank", url: "http://www.MostDependableBank.com", user: {name: "Responsible-bank-user"} }
          },
          {
             identity: { seed: "WikipediA 2020/02/12 13:16",
                start: 0, length: 32, shift: 201 },
-            display: { name: "WikipediA", url: "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page", userName: "me" }
+            display: { name: "WikipediA", url: "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page", user: {name: "me"} }
          },
          {
             identity: { seed: "GitHub 2020/02/12",
                start: 1, length: 16, shift: 0 },
-            display: { name: "GitHub", url: "https://github.com", userName: "me" }
+            display: { name: "GitHub", url: "https://github.com", user: {name: "me"} }
          },
       ], // accounts    
       default: {
@@ -49,7 +49,7 @@ const userData = () => {
             characterRepertoire: strongCharacterRepertoire, 
             start: 0, length: defaultPasswordLength, shift: 0,
          },
-         display: { name: "Incomplete account", url: "https://www.undefined.account", userName: "unknown user" }
+         display: { name: "Incomplete account", url: "https://www.undefined.account", user: { name: "unknown user", eMail: "", authenticateByEmail: false } }
       },
    }; //data
    
