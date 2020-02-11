@@ -10,6 +10,7 @@
             const downProperty = Symbol();
             const visionOnCharacter = String.fromCodePoint(0x1F441);
             const visionOffCharacter = String.fromCodePoint(0x1F576);
+            this.allSections = document.querySelectorAll("section");
             this.masterPassword = document.querySelector("header > input");
             this.masterPasswordVisibilityButton = document.querySelector("header > button");
             this.accountSelector = document.querySelector("select");
@@ -26,6 +27,7 @@
             this.password.visibilityButton = document.querySelector("main > aside:nth-of-type(5) > button:last-child");
             this.selectedPassword = document.querySelector("body > aside");
             this.selectedPasswordHiddenText = this.selectedPassword.textContent;
+            this.MaxSectionWidth = 0;
             this.adjustSizes();
             this.adjustTitles();
             const visibilityButtons = [
@@ -127,7 +129,22 @@
                 utility.humanReadablePassword(generatedData[optionIndex])
                 :
                 elements.selectedPasswordHiddenText;
-        }; //showPassword
+        optimizeWidths(false);
+    }; //showPassword
+
+    const optimizeWidths = firstTime => {
+        for (let index = 0; index < inputData.accounts.length; ++index) {
+            if (firstTime) {
+                elements.accountSelector.selectedIndex = index;
+                refresh(index);
+            } //firstTime
+            for (let sectionindex = 0; sectionindex < elements.allSections.length; ++sectionindex)
+                if (elements.allSections[sectionindex].offsetWidth > elements.MaxSectionWidth)
+                    elements.MaxSectionWidth = elements.allSections[sectionindex].offsetWidth;
+        } //loop
+        for (let sectionindex = 0; sectionindex < elements.allSections.length; ++sectionindex)
+            elements.allSections[sectionindex].style.minWidth = utility.styleSize(elements.MaxSectionWidth);
+    }; //optimizeWidths    
 
     const populate = () => {
         for (let accountIndex in inputData.accounts) {
@@ -146,6 +163,7 @@
         { // optimize sizes:
             if (elements.accountSelector.size > elements.accountSelector.childElementCount)
                 elements.accountSelector.size = elements.accountSelector.childElementCount;
+            optimizeWidths(true);
         }
     }; //populate
 
