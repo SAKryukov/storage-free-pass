@@ -25,8 +25,6 @@
             this.password.element = document.querySelector("main > section:nth-of-type(5)");
             this.password.clipboardButton = document.querySelector("#password-clipboard");
             this.password.visibilityButton = document.querySelector("main > aside:nth-of-type(5) > button:last-child");
-            this.selectedPassword = document.querySelector("body > aside");
-            this.selectedPasswordHiddenText = this.selectedPassword.textContent;
             this.MaxSectionWidth = 0;
             this.adjustSizes();
             this.adjustTitles();
@@ -138,10 +136,6 @@
                 generatedData[optionIndex]
                 :
                 utility.hiddenString(generatedData[optionIndex].length);
-            elements.selectedPassword.textContent = elements.isButtonDown(elements.password.visibilityButton) ?
-                utility.humanReadablePassword(generatedData[optionIndex])
-                :
-                elements.selectedPasswordHiddenText;
         elements.optimizeWidths(false);
     }; //showPassword
 

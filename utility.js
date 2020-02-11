@@ -38,22 +38,6 @@ const utility = {
         } //copy
     }, //clipboard
 
-    humanReadablePassword: value => { //SA??? unused
-        let groupSize = 5;
-        if (value.length % groupSize != 0) {
-            groupSize = 4;
-            if (value.length % groupSize != 0) {
-                groupSize = 3;
-                if (value.length % groupSize != 0)
-                    return value;
-	        } //if
-        } //if
-        let result = "";
-        for (let index = 0; index < value.length / groupSize; ++index)
-            result += value.substr(index * groupSize, groupSize) + " ";
-        return result;
-    }, //humanReadablePassword
-
     styleSize: value => `${value}px`,
 
 };
