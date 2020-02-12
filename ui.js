@@ -168,6 +168,7 @@
             option[elements.accountProperty] = account;
             elements.accountSelector.appendChild(option);    
         } //loop
+        elements.masterPassword.value = "";
         { // optimize sizes:
             if (elements.accountSelector.size > elements.accountSelector.childElementCount)
                 elements.accountSelector.size = elements.accountSelector.childElementCount;
