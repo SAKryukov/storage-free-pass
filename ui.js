@@ -17,10 +17,11 @@
             this.masterPasswordVisibilityButton = document.querySelector("header > button");
             this.accountSelector = document.querySelector("select");
             this.url = document.querySelector("main > section:nth-of-type(1)");
-            this.userName = {};
-            this.userName.element = document.querySelector("main > section:nth-of-type(2)");
-            this.userName.clipboardButton = document.querySelector("#user-name-clipboard");
-            this.userName.visibilityButton = document.querySelector("main > aside:nth-of-type(2) > button:last-child");
+            this.userInfo = {};
+            this.userInfo.name = document.querySelector("main > section:nth-of-type(2)");
+            this.userInfo.url = document.querySelector("main > label:nth-of-type(2) > a")
+            this.userInfo.clipboardButton = document.querySelector("#user-name-clipboard");
+            this.userInfo.visibilityButton = document.querySelector("main > aside:nth-of-type(2) > button:last-child");
             this.seed = document.querySelector("main > section:nth-of-type(3)");
             this.positions = document.querySelector("main > section:nth-of-type(4)");
             this.password = {};
@@ -33,7 +34,7 @@
             this.adjustTitles();
             const visibilityButtons = [
                 this.masterPasswordVisibilityButton,
-                this.userName.visibilityButton,
+                this.userInfo.visibilityButton,
                 this.password.visibilityButton,
             ];
             for (let button of visibilityButtons) {
@@ -54,10 +55,10 @@
                 const inputType = this.isButtonDown(ev.target) ? "text" : "password";
                 this.masterPassword.setAttribute("type", inputType);
             });
-            this.userName.visibilityButton.addEventListener("click", ev => {
+            this.userInfo.visibilityButton.addEventListener("click", ev => {
                 const accountDisplay = inputData.accounts[this.accountSelector.selectedIndex].display;
-                this.userName.element.textContent = 
-                    this.isButtonDown(ev.target) ? accountDisplay.user.name : accountDisplay.hiddenUserName;
+                this.userInfo.name.textContent = 
+                    this.isButtonDown(ev.target) ? accountDisplay.user.name : accountDisplay.hiddenUserAuthenticationName;
             });
             this.processMeta();
             this.masterPassword.focus();
@@ -92,8 +93,8 @@
             let maxButtonSize = Math.max(
                 this.masterPasswordVisibilityButton.offsetHeight,
                 this.masterPasswordVisibilityButton.offsetWidth,
-                this.userName.clipboardButton.offsetHeight,
-                this.userName.clipboardButton.offsetWidth
+                this.userInfo.clipboardButton.offsetHeight,
+                this.userInfo.clipboardButton.offsetWidth
             );
             const allButtons = document.querySelectorAll("button");
             for (let button of allButtons) {
@@ -184,17 +185,21 @@
             elements.url.innerHTML = `<a href="${value.display.url}">${value.display.name}</a>`;
         else
             elements.url.innerHTML = `<b>${value.display.name}</b>`;
-        elements.userName.element.textContent = elements.isButtonDown(elements.userName.visibilityButton) ?
-            value.display.user.name : value.display.hiddenUserName;
+        elements.userInfo.name.textContent = elements.isButtonDown(elements.userInfo.visibilityButton) ?
+            value.display.user.name : value.display.hiddenUserAuthenticationName;
         elements.seed.textContent = value.identity.seed;
         elements.positions.textContent = `${value.identity.start} ${value.identity.length} ${value.identity.shift}`;
+        if (value.display.user.url)
+            elements.userInfo.url.setAttribute("href", value.display.user.url);
+        else
+            elements.userInfo.url.removeAttribute("href");
     }; //refresh
 
     function prepareData() {
         var data = userData();
         for (let account of data.accounts) {
             utility.populateUndefined(account, data.default);
-            account.display.hiddenUserName = utility.hiddenString(account.display.user.name.length);
+            account.display.hiddenUserAuthenticationName = utility.hiddenString(account.display.user.name.length);
         } //loop
         return utility.createReadonly(data);
     } //prepareData
@@ -208,7 +213,7 @@
                 elements.setClipboardWarning(true);
                 utility.clipboard.copy(generatedData[elements.accountSelector.selectedIndex]);
             };
-            elements.userName.clipboardButton.onclick = ev => {
+            elements.userInfo.clipboardButton.onclick = ev => {
                 elements.setClipboardWarning(true);
                 utility.clipboard.copy(inputData.accounts[elements.accountSelector.selectedIndex].display.user.name);
             };

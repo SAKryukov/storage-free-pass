@@ -25,13 +25,13 @@ const userData = () => {
             identity: { seed: "Test",
                characterRepertoire: testCharacterRepertoire,
                start: 0, length: 8, shift: 0 },
-            display: { name: "Test", userName: "" }
+            display: { name: "Test", user: {name: ""} }
          },
          {
             identity: { seed: "MDB 2020/02/07",
                characterRepertoire: ultimateCharacterRepertoire, 
                start: 3, length: 15, shift: 1, inserts: [{value: "dF1", position: 2}] },
-            display: { name: "Most Dependable Bank", url: "http://www.MostDependableBank.com", user: {name: "Responsible-bank-user"} }
+            display: { name: "Most Dependable Bank", url: "http://www.MostDependableBank.com", user: {name: "Responsible-bank-user", url: "help.html#userDataMember.display.user.url" } }
          },
          {
             identity: { seed: "WikipediA 2020/02/12 13:16",
@@ -49,7 +49,7 @@ const userData = () => {
             characterRepertoire: strongCharacterRepertoire, 
             start: 0, length: defaultPasswordLength, shift: 0,
          },
-         display: { name: "Incomplete account", url: "https://www.undefined.account", user: { name: "unknown user", eMail: "", authenticateByEmail: false } }
+         display: { name: "Incomplete account", url: "https://www.undefined.account", user: { name: "unknown user", url: "" } }
       },
    }; //data
    

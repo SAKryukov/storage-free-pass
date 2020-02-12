@@ -9,6 +9,76 @@
 </head>
 <body>
 
-<p></p>
+<h1>User Data</h1>
+
+<p>The use can fill in account information in the file "user-data.js". Let's consider the following example with only one account defined:</p>
+
+<pre>
+"use strict";
+
+const userData = () => {
+
+   const defaultPasswordLength = 16;
+   const basicCharacterRepertoire = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+   const testCharacterRepertoire = basicCharacterRepertoire;
+   const strongCharacterRepertoire = "!#$%&()+-0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^abcdefghijkmnopqrstuvwxyz|~/";
+   const easiestCharacterRepertoire = "0123456789abcdefghijkmnopqrstuvwxyz";
+   const easyCharacterRepertoire =    "0123456789abcdefghijkmnopqrstuvwxyz[]-=/";
+   const ultimateCharacterRepertoire =
+       "!#$%&()*+/0123456789<=>?@ABCDEFG" +
+       "HIJKLMNOPQRSTUVWXYZ[]^abcdefghij" +
+       "klmnopqrstuvwxyz{|}~¡¢£¤¥¦§©«¬­®" +
+       "±µ»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÐÑÒÓÔÕÖ×ØÜÝÞß" +
+       "ႠႡႢႣႤႥႦႧႨႩႪႫႬႭႮႯႰႱႲႳႴႵႶႷႸႹႺႻႼႽႾႿ" +
+       "աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտր" +
+       "ሀሁሂሃሄህሆሇለሉሊላሌልሎሏሐሑሒሓሔሕሖሗመሙሚማሜምሞሟ" +
+       "ሠሡሢሣሤሥሦሧረሩሪራሬርሮሯሰሱሲሳሴስሶሷሸሹሺሻሼሽሾሿ";
+      
+   return {
+      title: `${String.fromCodePoint(0x1F464)} Sample`,
+      accounts: [
+         {
+            identity: { seed: "MDB 2020/02/07",
+               characterRepertoire: ultimateCharacterRepertoire, 
+               start: 3, length: 15, shift: 1, inserts: [{value: "dF1", position: 2}] },
+            display: { name: "Most Dependable Bank", url: "http://www.MostDependableBank.com", user: {name: "Responsible-bank-user", url: "help.html" } }
+         },
+      default: {
+         identity: { seed: "ERROR! define seed!",
+            characterRepertoire: strongCharacterRepertoire, 
+            start: 0, length: defaultPasswordLength, shift: 0,
+         },
+         display: { name: "Incomplete account", url: "https://www.undefined.account", user: { name: "unknown user", url: "" } }
+      },
+   }; //data
+   
+};</pre>
+
+<h2>Account Fields</h2>
+
+<ul>
+<li><code>title</code></li>
+<li><code>accounts</code></li>
+<li><code>accounts.default</code></li>
+</ul>
+<p>All other fields are represented in <code>accounts.default</code></li>:</p>
+<ul>
+<li><code>identity</code></li>
+<li><code>identity.seed</code></li>
+<li><code>identity.characterRepertoire</code></li>
+<li><code>identity.start</code></li>
+<li><code>identity.length</code></li>
+<li><code>identity.shift</code></li>
+<li><code>identity.inserts</code></li>
+<li><code>identity.inserts[].value</code></li>
+<li><code>identity.inserts[].position</code></li>
+<li><code>display</code></li>
+<li><code>display.name</code></li>
+<li><code>display.url</code></li>
+<li><code>display.user</code></li>
+<li><code>display.user.name</code></li>
+<li id="userDataMember.display.user.url"><code>display.user.url</code></li>
+</ul>
+
 
 </body></html>
