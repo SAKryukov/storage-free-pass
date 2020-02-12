@@ -10,6 +10,8 @@
             const downProperty = Symbol();
             const visionOnCharacter = String.fromCodePoint(0x1F441);
             const visionOffCharacter = String.fromCodePoint(0x1F576);
+            this.clipboardWarningTimeout = 5000;
+            //
             this.allSections = document.querySelectorAll("section");
             this.masterPassword = document.querySelector("header > input");
             this.masterPasswordVisibilityButton = document.querySelector("header > button");
@@ -25,6 +27,7 @@
             this.password.element = document.querySelector("main > section:nth-of-type(5)");
             this.password.clipboardButton = document.querySelector("#password-clipboard");
             this.password.visibilityButton = document.querySelector("main > aside:nth-of-type(5) > button:last-child");
+            this.clipboardWarning = document.querySelector("body > aside");
             this.MaxSectionWidth = 0;
             this.adjustSizes();
             this.adjustTitles();
@@ -60,6 +63,18 @@
             this.masterPassword.focus();
         }, //populate
         onload: function() { this.masterPassword.focus(); },
+        clipboardDataPresent: false,
+        setClipboardWarning: function(fromPaste) {
+            if (fromPaste) this.clipboardDataPresent = true;
+            if (!this.clipboardDataPresent) return;
+            this.clipboardWarning.style.visibility = "visible";
+            let timeoutId = 0;
+            const timeoutAction = () => {
+                elements.clipboardWarning.style.visibility = "hidden";
+                window.clearTimeout(timeoutId);
+            };
+            timeoutId = window.setTimeout(timeoutAction, this.clipboardWarningTimeout);
+        }, //setClipboardWarning
         optimizeWidths: function(firstTime) {
             for (let index = 0; index < inputData.accounts.length; ++index) {
                 if (firstTime) {
@@ -185,19 +200,18 @@
    
     //////// main:
 
-    window.onbeforeunload = () => { }; // stops page caching (so the back button won't reveal passwords)
-
     window.onload = () => {
         try {
             elements.populate();
             elements.password.clipboardButton.onclick = ev => {
+                elements.setClipboardWarning(true);
                 utility.clipboard.copy(generatedData[elements.accountSelector.selectedIndex]);
             };
             elements.userName.clipboardButton.onclick = ev => {
+                elements.setClipboardWarning(true);
                 utility.clipboard.copy(inputData.accounts[elements.accountSelector.selectedIndex].display.user.name);
             };
             elements.password.visibilityButton.addEventListener("click", ev => {
-                let test = elements.isButtonDown(ev.target);
                 showPassword();
             }); //elements.password.visibilityButton on click        
             populate();

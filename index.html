@@ -48,7 +48,7 @@
         button.down > b { opacity: 1; }
         select { padding: 3px; }
         option { padding-left: 1em; padding-right: 1em; padding-top: 0.2em; padding-bottom: 0.2em; }
-        body > aside { display: inline-block; vertical-align: bottom; padding-left: 0.4em; padding-bottom: 0.8em; font-size: 120%; } /* human-readable password */
+        body > aside { display: block; margin-top: 0.6em; visibility: hidden; color: red; }
         hr { margin-bottom: 0; }
         body > footer  { margin-top: 0.2em; font-size: 70%; }
         body > footer  b { font-weight: normal; }
@@ -81,7 +81,7 @@
   <aside><button id="password-clipboard" accesskey="P" title="Copy to clipboard">&#x1F4CB;</button><button title="Toggle visibility"><b>&#x1F576;</b></button></aside>
 </main>
 
-<aside>&nbsp;</aside>
+<aside>Sensitive data has been added to the system clipboard. Make sure to wipe it when it is no longer needed.</aside>
 
 <p><a href="help.html">Help</a></p>
 <hr/>
