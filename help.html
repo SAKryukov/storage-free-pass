@@ -4,7 +4,10 @@
     <title>SHA2 Password Generator Help</title>
     <style>
         * { font-family: sans-serif; box-sizing: border-box; }
+        code, pre, summary { font-family: "Consolas", monospace; color: darkblue; font-size: 120%; }
+        summary { font-weight: bold; }
         html, body { background-color: papayawhip;  }
+        details > details, details > p { margin: 0; margin-left: 3em; }
     </style>
 </head>
 <body>
@@ -54,30 +57,101 @@ const userData = () => {
    
 };</pre>
 
-<h2>Account Fields</h2>
+<h2 id="account-members">Account Members</h2>
 
-<ul>
-<li><code>title</code></li>
-<li><code>accounts</code></li>
-<li><code>accounts.default</code></li>
-</ul>
-<p>All other fields are represented in <code>accounts.default</code></li>:</p>
-<ul>
-<li><code>identity</code></li>
-<li><code>identity.seed</code></li>
-<li><code>identity.characterRepertoire</code></li>
-<li><code>identity.start</code></li>
-<li><code>identity.length</code></li>
-<li><code>identity.shift</code></li>
-<li><code>identity.inserts</code></li>
-<li><code>identity.inserts[].value</code></li>
-<li><code>identity.inserts[].position</code></li>
-<li><code>display</code></li>
-<li><code>display.name</code></li>
-<li><code>display.url</code></li>
-<li><code>display.user</code></li>
-<li><code>display.user.name</code></li>
-<li id="userDataMember.display.user.url"><code>display.user.url</code></li>
-</ul>
+<details open="true">
+    <summary>title</summary>
+    <p>Title string corresponding to the user. It is displayed as the page/tab title.</p>
+</details>
+<details open="true">
+    <summary>accounts</summary>
+    <p>Array of account objects:</p>
+    <details>
+        <summary>identity</summary>
+        <details>
+            <summary>seed</summary>
+            <p>Mandarory, critically important seed string</p>
+        </details>
+        <details>
+            <summary>characterRepertoire</summary>
+            <p>Optional characterRepertoire string</p>
+        </details>
+    </details>
+    <details>
+        <summary>display</summary>
+    </details>
+</details>
+<details open="true">
+    <summary>default</summary>
+    <p>All members of default are mandatory and should not be assigned to <code>undefined</code>. They represent account
+        data used to fill in all undefined members of each account:</p>
+    <details>
+        <summary>identity</summary>
+        <p>Set of parameters which uniquely determine the content of the password string, depending on master password:</p>
+        <details>
+            <summary>seed</summary>
+            <p>Seed string used for cryptographic hash generation. The hash is generated from a master password and <code>seed</code>.</p>
+        </details>
+        <details>
+            <summary>seed</summary>
+            <p>Seed string used for cryptographic hash generation. The hash is generated from a master password and <code>seed</code>.</p>
+        </details>
+        <details>
+            <summary>characterRepertoire</summary>
+            <p>Character repertoire string used to represent part of generated cryptographic hash array in textual form. A password string will be composed from the characters taken from character repertoire and also those found in <code>inserts</code>.</p>
+        </details>
+
+        start: 3, length: 15, shift: 1, inserts
+
+        <details>
+            <summary>start</summary>
+            <p>Starting index in the cryptographic hash array. This is an integer value which doesn't have to be less than the size of the array.</p>
+        </details>
+        <details>
+            <summary>length</summary>
+            <p>Length of the password string, not counting <code>inserts</code>.</p>
+        </details>
+        <details>
+            <summary>shift</summary>
+            <p>Integer representing shift in the character repertoire. This index doesn't have to be less then the length of the character repertoire.</p>
+        </details>
+        <details>
+            <summary>inserts</summary>
+            <p>Inserts member is used to work around the problem with the sites with some special password rules. For example, some rules require the presense of at least one character of each of several character sets.
+                To meed such criteria, some fixed character sequences can be <i>inserted</i> into the automatically generated password string in different positions. This is an array of the objects:</p>
+            <details>
+                <summary>value</summary>
+                <p>String value of the text to be inserted in the password string.</p>
+            </details>    
+            <details>
+                <summary>position</summary>
+                <p>Position of the text to be inserted in the password string. If this value exceeds the length of current password string, the <code>value</code> is appended. If this value is negative, the position is counted from the end of the current password string.</p>
+            </details>    
+        </details>
+    </details>
+    <details>
+        <summary>display</summary>
+        <p>Set of parameters which do not affect the content of the password string. The only member which affects login is <code>user.name</code>. All the members are used for the presentation of account data in UI:</p>
+        <details>
+            <summary>name</summary>
+            <p>Display name of the account, used in the navigation list box and in the header of the account table.</p>
+        </details>
+        <details>
+            <summary>url</summary>
+            <p>URL of the site where authentication is required. Ideally, it should be a logon page or a page where logon is clearly visible. If URL is defined, the header of the account table becomes an anchor used to navigate to the authentication page.</p>
+        </details>
+        <details>
+            <summary>user</summary>
+            <details>
+                <summary>name</summary>
+                <p>User name used for authentication. It can be viewed or obtained via the system clipboard.</p>
+            </details>
+            <details>
+                <summary>url</summary>
+                <p>User-provided URL used to place additional informal data related to the account. If URL is defined "User" part of the "User Name" lable becomes a anchor.</p>
+            </details>    
+        </details>
+    </details>
+</details>
 
 </body></html>

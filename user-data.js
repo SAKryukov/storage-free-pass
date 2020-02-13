@@ -31,7 +31,7 @@ const userData = () => {
             identity: { seed: "MDB 2020/02/07",
                characterRepertoire: ultimateCharacterRepertoire, 
                start: 3, length: 15, shift: 1, inserts: [{value: "dF1", position: 2}] },
-            display: { name: "Most Dependable Bank", url: "http://www.MostDependableBank.com", user: {name: "Responsible-bank-user", url: "help.html#userDataMember.display.user.url" } }
+            display: { name: "Most Dependable Bank", url: "http://www.MostDependableBank.com", user: {name: "Responsible-bank-user", url: "help.html#account-members" } }
          },
          {
             identity: { seed: "WikipediA 2020/02/12 13:16",
