@@ -145,7 +145,7 @@
 
     const showPassword = (generateNew) => {
         const optionIndex =  elements.accountSelector.selectedIndex;
-        if (generateNew || !generatedData[optionIndex])
+        if (generateNew || generatedData[optionIndex] == undefined)
             return generatePassword();        
         elements.password.element.textContent =
             elements.isButtonDown(elements.password.visibilityButton) ?
