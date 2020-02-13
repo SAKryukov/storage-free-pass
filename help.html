@@ -4,7 +4,8 @@
     <title>SHA2 Password Generator Help</title>
     <style>
         * { font-family: sans-serif; box-sizing: border-box; }
-        code, pre, summary { font-family: "Consolas", monospace; color: darkblue; font-size: 120%; }
+        code, pre, summary { font-family: "Consolas", monospace; color: darkblue; }
+        code, summary { font-size: 120%; }
         summary { font-weight: bold; }
         html, body { background-color: papayawhip;  }
         details > details, details > p { margin: 0; margin-left: 3em; }
@@ -22,40 +23,38 @@
 const userData = () => {
 
    const defaultPasswordLength = 16;
-   const basicCharacterRepertoire = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-   const testCharacterRepertoire = basicCharacterRepertoire;
    const strongCharacterRepertoire = "!#$%&()+-0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^abcdefghijkmnopqrstuvwxyz|~/";
-   const easiestCharacterRepertoire = "0123456789abcdefghijkmnopqrstuvwxyz";
-   const easyCharacterRepertoire =    "0123456789abcdefghijkmnopqrstuvwxyz[]-=/";
    const ultimateCharacterRepertoire =
-       "!#$%&()*+/0123456789<=>?@ABCDEFG" +
-       "HIJKLMNOPQRSTUVWXYZ[]^abcdefghij" +
-       "klmnopqrstuvwxyz{|}~¡¢£¤¥¦§©«¬­®" +
-       "±µ»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÐÑÒÓÔÕÖ×ØÜÝÞß" +
-       "ႠႡႢႣႤႥႦႧႨႩႪႫႬႭႮႯႰႱႲႳႴႵႶႷႸႹႺႻႼႽႾႿ" +
-       "աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտր" +
-       "ሀሁሂሃሄህሆሇለሉሊላሌልሎሏሐሑሒሓሔሕሖሗመሙሚማሜምሞሟ" +
-       "ሠሡሢሣሤሥሦሧረሩሪራሬርሮሯሰሱሲሳሴስሶሷሸሹሺሻሼሽሾሿ";
+       "!#$%&()*+/0123456789<=>?@ABCDEFG" + "HIJKLMNOPQRSTUVWXYZ[]^abcdefghij" + "klmnopqrstuvwxyz{|}~¡¢£¤¥¦§©«¬­®" + "±µ»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÐÑÒÓÔÕÖ×ØÜÝÞß" +
+       "ႠႡႢႣႤႥႦႧႨႩႪႫႬႭႮႯႰႱႲႳႴႵႶႷႸႹႺႻႼႽႾႿ" + "աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտր" + "ሀሁሂሃሄህሆሇለሉሊላሌልሎሏሐሑሒሓሔሕሖሗመሙሚማሜምሞሟ" + "ሠሡሢሣሤሥሦሧረሩሪራሬርሮሯሰሱሲሳሴስሶሷሸሹሺሻሼሽሾሿ";
       
    return {
       title: `${String.fromCodePoint(0x1F464)} Sample`,
       accounts: [
          {
-            identity: { seed: "MDB 2020/02/07",
-               characterRepertoire: ultimateCharacterRepertoire, 
-               start: 3, length: 15, shift: 1, inserts: [{value: "dF1", position: 2}] },
-            display: { name: "Most Dependable Bank", url: "http://www.MostDependableBank.com", user: {name: "Responsible-bank-user", url: "help.html" } }
+            identity: {
+               seed: "Test",
+               selection: { characterRepertoire: testCharacterRepertoire, start: 0, length: 8, shift: 0 }
+            },
+            display: { name: "Test", user: {name: ""} }
          },
+         {
+            identity: {
+               seed: "MDB 2020/02/07", 
+               selection: { characterRepertoire: ultimateCharacterRepertoire, start: 3, length: 15, shift: 1, inserts: [{value: "dF1", position: 2}] }
+            },
+            display: { name: "Most Dependable Bank", url: "http://www.MostDependableBank.com", user: {name: "Responsible-bank-user", url: "help.html#account-members" } }
+         },
+      ], // accounts    
       default: {
          identity: { seed: "ERROR! define seed!",
-            characterRepertoire: strongCharacterRepertoire, 
-            start: 0, length: defaultPasswordLength, shift: 0,
+            selection: { characterRepertoire: strongCharacterRepertoire, start: 0, length: defaultPasswordLength, shift: 0, }
          },
          display: { name: "Incomplete account", url: "https://www.undefined.account", user: { name: "unknown user", url: "" } }
       },
    }; //data
    
-};</pre>
+};};</pre>
 
 <h2 id="account-members">Account Members</h2>
 
