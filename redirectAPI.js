@@ -12,4 +12,12 @@ const redirectAPI = {
         return parts[1];
     }, //getUserDataScriptFileName
 
+    applyScripts: function(sourceFileNames) { //called by application side
+        for (let source of sourceFileNames) {
+            const script = document.createElement("script");
+            script.src = source;
+            document.body.appendChild(script);
+        } //loop
+    }, //applyScripts
+
 };
