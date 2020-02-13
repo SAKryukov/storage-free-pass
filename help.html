@@ -65,80 +65,107 @@ const userData = () => {
 </details>
 <details open="true">
     <summary>accounts</summary>
-    <p>Array of account objects:</p>
+    <p>Array of account objects. Each object in the array has the same structure as <code>default</code>,
+        which is used to populate <code>undefined</code> members of each account structure, so, all members of each account are formally optional.
+        For explanation of account object members, see <code>default</code> below.
+        However, three members are practically essential in all cases:
+    </p>
     <details>
-        <summary>identity</summary>
-        <details>
-            <summary>seed</summary>
-            <p>Mandarory, critically important seed string</p>
-        </details>
-        <details>
-            <summary>characterRepertoire</summary>
-            <p>Optional characterRepertoire string</p>
-        </details>
+        <summary>identity.seed</summary>
+        <p>This field is critically important and should be unique. Combined with master password, it is used for generation of cryptographic hash.
+            If an account password has to be changed, some part of <code>seed</code> should be modified, otherwise new password will be the same as old one,
+            or made different only due to the changes in <code>selection</code>, which would be not safe enough.
+            It's a good idea to include date or date/time of the new password creation in the <code>seed</code> string.
+        </p>
     </details>
     <details>
-        <summary>display</summary>
+        <summary>display.name</summary>
+        <p>This name is used for UI navigation using the list box on left.
+            Besides, it is shown on top of the account table, which also can be used as an anchor, if <code>display.url</code>code> is defined.</code></p>
+    </details>
+    <details>
+        <summary>display.user.name</summary>
+        <p>This name is used as a logon name for authentication.</p>
     </details>
 </details>
+
 <details open="true">
     <summary>default</summary>
     <p>All members of default are mandatory and should not be assigned to <code>undefined</code>. They represent account
         data used to fill in all undefined members of each account:</p>
     <details>
         <summary>identity</summary>
-        <p>Set of parameters which uniquely determine the content of the password string, depending on master password:</p>
+        <p>Set of parameters which uniquely determine the content of the password string, depending on master password:
+        </p>
         <details>
             <summary>seed</summary>
-            <p>Seed string used for cryptographic hash generation. The hash is generated from a master password and <code>seed</code>.</p>
+            <p>Seed string used for cryptographic hash generation. The hash is generated from a master password and
+                <code>seed</code>.</p>
         </details>
         <details>
-            <summary>seed</summary>
-            <p>Seed string used for cryptographic hash generation. The hash is generated from a master password and <code>seed</code>.</p>
-        </details>
-        <details>
-            <summary>characterRepertoire</summary>
-            <p>Character repertoire string used to represent part of generated cryptographic hash array in textual form. A password string will be composed from the characters taken from character repertoire and also those found in <code>inserts</code>.</p>
-        </details>
-
-        start: 3, length: 15, shift: 1, inserts
-
-        <details>
-            <summary>start</summary>
-            <p>Starting index in the cryptographic hash array. This is an integer value which doesn't have to be less than the size of the array.</p>
-        </details>
-        <details>
-            <summary>length</summary>
-            <p>Length of the password string, not counting <code>inserts</code>.</p>
-        </details>
-        <details>
-            <summary>shift</summary>
-            <p>Integer representing shift in the character repertoire. This index doesn't have to be less then the length of the character repertoire.</p>
-        </details>
-        <details>
-            <summary>inserts</summary>
-            <p>Inserts member is used to work around the problem with the sites with some special password rules. For example, some rules require the presense of at least one character of each of several character sets.
-                To meed such criteria, some fixed character sequences can be <i>inserted</i> into the automatically generated password string in different positions. This is an array of the objects:</p>
+            <summary>selection</summary>
+            <p>Parameters of selection of password string based on generated cryptographic hash:</p>
             <details>
-                <summary>value</summary>
-                <p>String value of the text to be inserted in the password string.</p>
-            </details>    
+                <summary>characterRepertoire</summary>
+                <p>Character repertoire string used to represent part of generated cryptographic hash array in textual
+                    form.
+                    A password string will be composed from the characters taken from character repertoire and also
+                    those
+                    found in <code>inserts</code>.</p>
+            </details>
             <details>
-                <summary>position</summary>
-                <p>Position of the text to be inserted in the password string. If this value exceeds the length of current password string, the <code>value</code> is appended. If this value is negative, the position is counted from the end of the current password string.</p>
-            </details>    
+                <summary>start</summary>
+                <p>Starting index in the cryptographic hash array. This is an integer value which doesn't have to be
+                    less
+                    than the size of the array.</p>
+            </details>
+            <details>
+                <summary>length</summary>
+                <p>Length of the password string, not counting <code>inserts</code>.</p>
+            </details>
+            <details>
+                <summary>shift</summary>
+                <p>Integer representing shift in the character repertoire. This index doesn't have to be less then the
+                    length of the character repertoire.</p>
+            </details>
+            <details>
+                <summary>inserts</summary>
+                <p>Inserts member is used to work around the problem with the sites with some special password rules.
+                    For
+                    example, some rules require the presense of at least one character of each of several character
+                    sets.
+                    To meed such criteria, some fixed character sequences can be <i>inserted</i> into the automatically
+                    generated password string in different positions. This is an array of the objects:</p>
+                <details>
+                    <summary>value</summary>
+                    <p>String value of the text to be inserted in the password string.</p>
+                </details>
+                <details>
+                    <summary>position</summary>
+                    <p>Position of the text to be inserted in the password string. If this value exceeds the length of
+                        current password string, the <code>value</code> is appended. If this value is negative, the
+                        position
+                        is counted from the end of the current password string.</p>
+                </details>
+            </details>
         </details>
     </details>
     <details>
         <summary>display</summary>
-        <p>Set of parameters which do not affect the content of the password string. The only member which affects login is <code>user.name</code>. All the members are used for the presentation of account data in UI:</p>
+        <p>Set of parameters which do not affect the content of the password string. The only member which affects login
+            is
+            <code>user.name</code>. All the members are used for the presentation of account data in UI:</p>
         <details>
             <summary>name</summary>
             <p>Display name of the account, used in the navigation list box and in the header of the account table.</p>
         </details>
         <details>
             <summary>url</summary>
-            <p>URL of the site where authentication is required. Ideally, it should be a logon page or a page where logon is clearly visible. If URL is defined, the header of the account table becomes an anchor used to navigate to the authentication page.</p>
+            <p>URL of the site where authentication is required. Ideally, it should be a logon page or a page where
+                logon is
+                clearly visible. If URL is defined, the header of the account table becomes an anchor used to navigate
+                to
+                the authentication page.</p>
         </details>
         <details>
             <summary>user</summary>
@@ -148,8 +175,10 @@ const userData = () => {
             </details>
             <details>
                 <summary>url</summary>
-                <p>User-provided URL used to place additional informal data related to the account. If URL is defined "User" part of the "User Name" lable becomes a anchor.</p>
-            </details>    
+                <p>User-provided URL used to place additional informal data related to the account. If URL is defined
+                    "User"
+                    part of the "User Name" lable becomes a anchor.</p>
+            </details>
         </details>
     </details>
 </details>

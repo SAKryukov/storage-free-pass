@@ -22,32 +22,37 @@ const userData = () => {
       title: `${String.fromCodePoint(0x1F464)} Sample`,
       accounts: [
          {
-            identity: { seed: "Test",
-               characterRepertoire: testCharacterRepertoire,
-               start: 0, length: 8, shift: 0 },
+            identity: {
+               seed: "Test",
+               selection: { characterRepertoire: testCharacterRepertoire, start: 0, length: 8, shift: 0 }
+            },
             display: { name: "Test", user: {name: ""} }
          },
          {
-            identity: { seed: "MDB 2020/02/07",
-               characterRepertoire: ultimateCharacterRepertoire, 
-               start: 3, length: 15, shift: 1, inserts: [{value: "dF1", position: 2}] },
+            identity: {
+               seed: "MDB 2020/02/07", 
+               selection: { characterRepertoire: ultimateCharacterRepertoire, start: 3, length: 15, shift: 1, inserts: [{value: "dF1", position: 2}] }
+            },
             display: { name: "Most Dependable Bank", url: "http://www.MostDependableBank.com", user: {name: "Responsible-bank-user", url: "help.html#account-members" } }
          },
          {
-            identity: { seed: "WikipediA 2020/02/12 13:16",
-               start: 0, length: 32, shift: 201 },
+            identity: {
+               seed: "WikipediA 2020/02/12 13:16",
+               selection: { start: 0, length: 32, shift: 201 }
+            },
             display: { name: "WikipediA", url: "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page", user: {name: "me"} }
          },
          {
-            identity: { seed: "GitHub 2020/02/12",
-               start: 1, length: 16, shift: 0 },
+            identity: {
+               seed: "GitHub 2020/02/12",
+               selection: { start: 1, length: 16, shift: 0 }
+            },
             display: { name: "GitHub", url: "https://github.com", user: {name: "me"} }
          },
       ], // accounts    
       default: {
          identity: { seed: "ERROR! define seed!",
-            characterRepertoire: strongCharacterRepertoire, 
-            start: 0, length: defaultPasswordLength, shift: 0,
+            selection: { characterRepertoire: strongCharacterRepertoire, start: 0, length: defaultPasswordLength, shift: 0, }
          },
          display: { name: "Incomplete account", url: "https://www.undefined.account", user: { name: "unknown user", url: "" } }
       },
