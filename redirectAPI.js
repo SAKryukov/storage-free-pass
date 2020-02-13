@@ -2,18 +2,14 @@
 
 const redirectAPI = {
     
-    APIDataKey: "S. A. Kryukov SHA-2 Password Generator API",
-    storage: sessionStorage,
-
     redirect: function(applicationPath, userDataScriptFileName) { //called by user side
-        this.storage.setItem(this.APIDataKey, userDataScriptFileName);
-        document.location = applicationPath;
+        document.location = applicationPath + "?" + userDataScriptFileName;
     }, //redirect
 
     getUserDataScriptFileName: function() { //called by application side
-        const fileName = this.storage.getItem(this.APIDataKey);
-        this.storage.removeItem(this.APIDataKey);
-        return fileName;
+	const parts = document.location.toString().split("?");
+	if (parts.length != 2) return null;
+        return parts[1];
     }, //getUserDataScriptFileName
 
 };
