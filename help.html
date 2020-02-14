@@ -130,21 +130,19 @@ const userData = () => {
             <details>
                 <summary>inserts</summary>
                 <p>Inserts member is used to work around the problem with the sites with some special password rules.
-                    For
-                    example, some rules require the presense of at least one character of each of several character
+                    For example, some rules require the presense of at least one character of each of several character
                     sets.
                     To meed such criteria, some fixed character sequences can be <i>inserted</i> into the automatically
-                    generated password string in different positions. This is an array of the objects:</p>
+                    generated password string in different positions. This is an object with the structure shown below, or and array of such objects:</p>
                 <details>
                     <summary>value</summary>
                     <p>String value of the text to be inserted in the password string.</p>
                 </details>
                 <details>
                     <summary>position</summary>
-                    <p>Position of the text to be inserted in the password string. If this value exceeds the length of
+                    <p>Optional position of the text to be inserted in the password string. If this value exceeds the length of
                         current password string, the <code>value</code> is appended. If this value is negative, the
-                        position
-                        is counted from the end of the current password string.</p>
+                        position is counted from the end of the current password string. If it is not defined, it is equivalent to position 0.</p>
                 </details>
             </details>
         </details>

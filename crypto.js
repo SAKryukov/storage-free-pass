@@ -27,7 +27,10 @@ const passwordGenerator = (() => {
         if (!inserts) return output;
         if (!(inserts instanceof Array)) inserts = [inserts];
         for (let insert of inserts)
-            output = output.slice(0, insert.position) + insert.value + output.slice(insert.position);
+            output = insert.position ?
+                output.slice(0, insert.position) + insert.value + output.slice(insert.position)
+                :
+                insert.value + output;
         return output;
     }; //generatePassword
 
