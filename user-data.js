@@ -56,6 +56,6 @@ const userData = () => {
          },
          display: { name: "Incomplete account", url: "https://www.undefined.account", user: { name: "unknown user", url: "" } }
       },
-   }; //data
+   };
    
 };
