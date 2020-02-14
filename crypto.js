@@ -24,9 +24,10 @@ const passwordGenerator = (() => {
         let output = "";
         for (let index = start; index < start + length; ++index)
             output += characterRepertoire.charAt((shift + arrayOfBytes[index % maxLength]) % characterRepertoire.length);
-        if (inserts)
-            for (let insert of inserts)
-                output = output.slice(0, insert.position) + insert.value + output.slice(insert.position);
+        if (!inserts) return output;
+        if (!(inserts instanceof Array)) inserts = [inserts];
+        for (let insert of inserts)
+            output = output.slice(0, insert.position) + insert.value + output.slice(insert.position);
         return output;
     }; //generatePassword
 
