@@ -19,7 +19,7 @@ const userData = () => {
        "ሠሡሢሣሤሥሦሧረሩሪራሬርሮሯሰሱሲሳሴስሶሷሸሹሺሻሼሽሾሿ";
       
    return {
-      title: `${String.fromCodePoint(0x1F464)} Sample`,
+      title: `${String.fromCodePoint(0x1F44D)} Sample`,
       accounts: [
          {
             identity: {
