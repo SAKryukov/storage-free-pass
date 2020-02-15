@@ -2,20 +2,21 @@
 
 const redirectAPI = {
     
-    redirect: function(applicationPath, userDataScriptFileName) { //called by user side
-        document.location = applicationPath + "?" + userDataScriptFileName;
+    redirect: function(applicationPath, names) { //called by user side
+        let url = applicationPath + "?";
+        if (!names) return;
+        for (let index in names)
+            url += `${index}=${names[index]}&`;
+        url = url.slice(0, -1);
+        document.location = url;
     }, //redirect
 
-    getUserDataScriptFileName: function() { //called by application side
-	const parts = document.location.toString().split("?");
-	if (parts.length != 2) return null;
-        return parts[1];
-    }, //getUserDataScriptFileName
-
     applyScripts: function(sourceFileNames) { //called by application side
+        const search = new URLSearchParams(document.location.search);
         for (let source of sourceFileNames) {
+            const substitute = search.get(source);
             const script = document.createElement("script");
-            script.src = source;
+            script.src = substitute ? `${substitute}.js` : `${source}.js`;
             document.body.appendChild(script);
         } //loop
     }, //applyScripts
