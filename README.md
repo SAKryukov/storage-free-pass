@@ -14,6 +14,11 @@ Really secret piece of data is your master password, which should better be memo
 
 Run the application "index.html". Enter the master password. The account passwords will be generated each time you modify the master passwords string. You can access password using "Copy to clipboard" or "Toggle visibility" buttons.
 
+## Where is the Code?
+
+For source code, see "docs". This naming is chosen to enable GitHub Web site for this repository:
+[Live Demo](https://sakryukov.github.io/html-javascript-password-generator)
+
 ## Credits
 
 Inspired by [this work](https://SS64.com/pass) by [Simon Sheppard](https://ss64.com). 
