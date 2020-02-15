@@ -29,7 +29,7 @@ const userData = () => {
             seed: "ERROR! define seed!",
             selection: { characterRepertoire: strongCharacterRepertoire, start: 0, length: defaultPasswordLength, shift: 0 }
          },
-         display: { name: "Incomplete account", url: "https://www.undefined.account", user: { name: "unknown user", url: "" } }
+         display: { name: "Incomplete account", url: "https://www.undefined.account", user: { name: "unknown user", url: String.empty } }
       },
    };
    

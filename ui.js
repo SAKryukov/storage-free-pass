@@ -41,7 +41,7 @@
                 button.addEventListener("click", ev => {
                     if (ev.target[downProperty]) {
                         ev.target[downProperty] = false;
-                        ev.target.className = "";
+                        ev.target.className = String.empty;
                         ev.target.firstChild.textContent = visionOffCharacter;
                     } else {
                         ev.target[downProperty] = true;
@@ -169,7 +169,7 @@
             option[elements.accountProperty] = account;
             elements.accountSelector.appendChild(option);    
         } //loop
-        elements.masterPassword.value = "";
+        elements.masterPassword.value = String.empty;
         { // optimize sizes:
             if (elements.accountSelector.size > elements.accountSelector.childElementCount)
                 elements.accountSelector.size = elements.accountSelector.childElementCount;

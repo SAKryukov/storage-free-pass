@@ -12,7 +12,7 @@ const passwordGenerator = (() => {
     } //digestSHA2
 
     async function generatePassword(masterPassword, seed, start, length, characterRepertoire, shift, inserts) {
-        if (!masterPassword) return "";
+        if (!masterPassword) return String.empty;
         const arrayOfBytes = await digestSHA2(masterPassword + seed);
         const maxLength = arrayOfBytes.length;
         if (!start) start = 0;
@@ -21,7 +21,7 @@ const passwordGenerator = (() => {
         if (length > maxLength) length = maxLength;
         if (!shift) shift = 0;
         shift = shift % characterRepertoire.length;
-        let output = "";
+        let output = String.empty;
         for (let index = start; index < start + length; ++index)
             output += characterRepertoire.charAt((shift + arrayOfBytes[index % maxLength]) % characterRepertoire.length);
         if (!inserts) return output;

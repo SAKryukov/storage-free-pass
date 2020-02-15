@@ -1,5 +1,16 @@
 ﻿"use strict";
 
+(function upgradeString(){
+    if (!String.empty) {
+        Object.defineProperty(String, "empty", {
+            enumerable: false,
+            configurable: false,
+            writable: false,
+            value: ""
+        });
+    } //if !String.empty
+})();
+
 const utility = {
 
     populateUndefined: function(structure, defaultStructure) {
