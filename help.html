@@ -15,7 +15,7 @@
 
 <h1>User Data</h1>
 
-<p>The use can fill in account information in the file "user-data.js". Let's consider the following example with only one account defined:</p>
+<p>The use can fill in account information in the file "userData.js". Let's consider the following example with only one account defined:</p>
 
 <pre>
 "use strict";
@@ -36,7 +36,7 @@ const userData = () => {
                seed: "Test",
                selection: { characterRepertoire: testCharacterRepertoire, start: 0, length: 8, shift: 0 }
             },
-            display: { name: "Test", user: {name: ""} }
+            display: { name: "Test", user: {name: String.empty} }
          },
          {
             identity: {
@@ -50,7 +50,7 @@ const userData = () => {
          identity: { seed: "ERROR! define seed!",
             selection: { characterRepertoire: strongCharacterRepertoire, start: 0, length: defaultPasswordLength, shift: 0, }
          },
-         display: { name: "Incomplete account", url: "https://www.undefined.account", user: { name: "unknown user", url: "" } }
+         display: { name: "Incomplete account", url: "https://www.undefined.account", user: { name: "unknown user", url: String.empty } }
       },
    }; //data
    
@@ -182,7 +182,7 @@ const userData = () => {
 
 <h1>Redirect API</h1>
 
-<p>SHA-2 Password Generator can be used as is, if the user edits the file "user-data.js", as if it was a part of the application. However, this would be utterly inconvenient, especially when a new version of the application is pulled from its Git repository; then the user would either support a separate copy of all files, resolve conflicts, and so on. It would also be difficult to support more than one set of accounts.<p>
+<p>SHA-2 Password Generator can be used as is, if the user edits the file "userData.js", as if it was a part of the application. However, this would be utterly inconvenient, especially when a new version of the application is pulled from its Git repository; then the user would either support a separate copy of all files, resolve conflicts, and so on. It would also be difficult to support more than one set of accounts.<p>
 
 <p>Redirect API is the way to have a separate user data file with a separate HTML file, which would launch the application through redirection, supplying a separate user data file as a parameter.<p>
 
@@ -191,7 +191,7 @@ const userData = () => {
 <pre>
 &lt;!DOCTYPE html&gt;
 &lt;script src="../redirectAPI.js"&gt;&lt;/script&gt;
-&lt;script&gt;redirectAPI.redirect("../index.html", "./redirect-demo/accounts.js");&lt;/script&gt;
+&lt;script&gt;redirectAPI.redirect("../index.html", { userData: "./redirect-demo/accounts" } );&lt;/script&gt;
 </pre>
 
 <p>Note that the paths in "accounts.js" are still the paths relative to the application directory. In practice, the user-supplied files should be placed anywhere outside of the application directory.</p>
