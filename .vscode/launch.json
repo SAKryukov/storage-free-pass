@@ -5,7 +5,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Tools",
-            "file": "${workspaceFolder}/index.html",
+            "file": "${workspaceFolder}/docs/tools.html",
             "webRoot": "${workspaceFolder}"
         }
     ]
