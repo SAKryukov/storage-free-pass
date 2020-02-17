@@ -10,22 +10,27 @@
     * { padding: 0; margin: 0; font-family: sans-serif; box-sizing: border-box; }
     h1 { font-size: 140%; }
     body, html { height: 100%; max-height: 100%; background-color: moccasin; }
-    body, main { display: flex; overflow: hidden; }
+    body, main { display: flex; overflow: hidden; height: 100%; }
     body { flex-direction: column; }
     header { background-color: lightblue; }
     footer { background-color: lemonchiffon; }
     section { background-color: snow; }
-    aside { background-color: lightgreen; }
+    aside { background-color: lightgreen;  height: 100%; }
     header, footer, section, aside { padding: 1em; padding-top: 0.4em; padding-bottom: 0.4em; }
     section { flex: 1; overflow: auto; } /* remove "flex: 1" to get content-defined width */
     aside { overflow: auto; }
     main > section { display: flex; flex-direction: column; }
     textarea { width: 100%; height: 100%; resize: none; flex: 1; }
-    main > section > div { display: flex; flex-direction: row; }
-    main > section > div  * { align-self: center; height: 2em; }
+    div { display: flex; flex-direction: row; }
+    div  * { align-self: center; height: 2em; }
     label  { display: flex; align-items: center; }
     main > section > div input { margin-left: 0.4em; margin-right: 1em; }
-    button, input { padding-left: 1em; padding-right: 1em; }
+    button, input, select, option { padding-left: 1em; padding-right: 1em; }
+    main > aside { width:  30em; }
+    main > aside > div > input, main > aside > div > select { flex: 1; }
+    main > aside > div select, main > aside > div:nth-child(3) label:last-child { margin-left: 0.4em; }
+    main > aside > div:nth-child(3), main > aside > div:nth-child(4), main > aside > div:nth-child(6), main > aside > div:nth-child(7) { margin-top: 0.8em; }
+    aside > div:last-child > textarea { height: 10em; border: 0; background-color: rgba(170, 200, 20, 0.3); }
   </style>
 <head>
 
@@ -41,15 +46,14 @@
       <footer>222</footer>
     </section>
     <aside>
-      <div>1</div>
-      <p><input /></p>
-      This is main result content yes, this way no other wy
-      <br><br><br><br><br><br><br><br><br><br>
-      <br><br><br><br><br><br><br><br><br><br>
-      <br><br><br><br><br><br><br><br><br><br>
-      <br><br><br><br><br><br><br><br><br><br>
-      <br><br><br><br><br><br><br><br><br><br>
-      SOME LESS CONTENT
+        <div><label>Master Password:</label></div>
+        <div><input/></div>
+        <div><label>Offset: <select><option>64</option></select></label><label>Size: <select><option>64</option></select></label></div>
+        <div><label for="label-character-repertioire">Character Repertoire:</label></div>
+        <div><input id="input-character-repertioire" value="!#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~"/></div>
+        <div><label>Shift: <select><option>64</option></select></div>
+        <div>Password:</div>
+        <div><textarea readonly="true"></textarea></div>
     </aside>
 
   </main>
