@@ -1,91 +1,59 @@
-<!DOCTYPE>
+<!doctype html>
+
+<script src="utility.js"></script>
+<script src="crypto.js"></script>
+<script src="tools.js"></script>
+
 <html>
-  <head>
-  <meta charset="utf-8" />
-<style>
-    * { padding: 0; margin: 0; box-sizing: border-box; }
-    * { font-family: sans-serif; box-sizing: border-box; }
+<head>
+  <style>
+    * { padding: 0; margin: 0; font-family: sans-serif; box-sizing: border-box; }
     h1 { font-size: 140%; }
-    html, body { background-color: papayawhip; }
-    html, body { height: 100%; }
-    h1 { margin-bottom: 0.8em; }
-    h1 > a { font-size: 70%; margin-left: 2em; }
-    body {
-      display: flex;
-      flex-flow: column;
-      height: 100%;
-    }
-    main {
-      flex: auto;
-      padding-left: 1em; padding-right: 1em;
-      overflow: auto;
-    }
-    footer, header, input, textarea { padding: 1em; padding-top: 0.6em; padding-bottom: 0.6em; }
-    header > label:last-child { margin-left: 1em; }
-    textarea { width: 100%; height: 100%; resize: none; }
-    footer { text-align: right; }
-</style>
-  </head>
+    body, html { height: 100%; max-height: 100%; background-color: moccasin; }
+    body, main { display: flex; overflow: hidden; }
+    body { flex-direction: column; }
+    header { background-color: lightblue; }
+    footer { background-color: lemonchiffon; }
+    section { background-color: snow; }
+    aside { background-color: lightgreen; }
+    header, footer, section, aside { padding: 1em; padding-top: 0.4em; padding-bottom: 0.4em; }
+    section { flex: 1; overflow: auto; } /* remove "flex: 1" to get content-defined width */
+    aside { overflow: auto; }
+    main > section { display: flex; flex-direction: column; }
+    textarea { width: 100%; height: 100%; resize: none; flex: 1; }
+    main > section > div { display: flex; flex-direction: row; }
+    main > section > div  * { align-self: center; height: 2em; }
+    label  { display: flex; align-items: center; }
+    main > section > div input { margin-left: 0.4em; margin-right: 1em; }
+    button, input { padding-left: 1em; padding-right: 1em; }
+  </style>
+<head>
+
 <body>
-
-  <header>
-    <h1>Character Repertoires <a href="https://en.wikipedia.org/wiki/Unicode_block">Unicode blocks</a></h1>
-    <label>From: <input value="0x0021"/></label>
-    <label>Length: <input value="32"/></label>
-  </header>
+  <header>Fixed Top</header>
   <main>
-    <textarea spellcheck="false"></textarea>
+    <section>
+      <div>
+        <label>From: <input value="0x0021" /></label>
+        <label>Length: <input value="32" /></label>
+        <button>Bbb</button></div>
+      <textarea></textarea>
+      <footer>222</footer>
+    </section>
+    <aside>
+      <div>1</div>
+      <p><input /></p>
+      This is main result content yes, this way no other wy
+      <br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br>
+      SOME LESS CONTENT
+    </aside>
+
   </main>
-  <footer>
-  </footer>
-
-<script>
-    document.body.onload = () => {
-        "use strict";
-        const inputElements = document.querySelectorAll("input"); 
-        const footer = document.querySelector("footer");
-        const output = document.querySelector("body > main > textarea");
-        const inputFrom = inputElements[0];
-        const inputLength = inputElements[1];
-        const action = ev => {
-            const from = parseInt(inputFrom.value);
-            const length = parseInt(inputLength.value);
-            if (isNaN(from + length)) {
-              output.value += `\nInvalid input: "${inputFrom.value}", "${inputLength.value}"`;
-              return;
-            } //if
-            let value = "";
-            let count = 0;
-            for (let codePoint = from; codePoint < from + length; ++codePoint) {
-                const character = String.fromCodePoint(codePoint);
-                value += character;
-                ++count;
-            }
-            const normal = (value == value.normalize("NFC") && value == value.normalize("NFD") && value == value.normalize("NFKC") && value == value.normalize("NFKD"));
-            output.value += `\nCharacters: ${count}, from: 0x${from.toString(16)}, normal form: ${normal}\n${value}`;
-        }; //action
-        const calculateStatus = () => {
-          const selected = output.selectionEnd - output.selectionStart;
-          const line = output.value.substring(0, output.selectionStart);
-          
-          const split = line.split("\n");
-          const y = split.length;
-          const x = split[split.length - 1].length + 1;
-          footer.textContent = `${y} : ${x} | Selected: ${selected}`;
-        }; //calculateStatus
-        calculateStatus();
-        output.onfocus = ev => { calculateStatus(); }
-        output.onclick = ev => { calculateStatus(); }
-        output.onkeyup = ev => { calculateStatus(); }
-        output.input = ev => { calculateStatus(); }
-        output.onkeydown = ev => { calculateStatus(); }
-        output.onmousemove = ev => { calculateStatus(); }
-        output.onpaste = ev => { calculateStatus(); }
-        inputFrom.onkeydown = ev => { if (ev.key == "Enter") action(); }
-        inputLength.onkeydown = ev => { if (ev.key == "Enter") action(); }
-        inputFrom.focus();
-    } //document.body.onload
-</script>
-
+  <footer>end</footer>
 </body>
+
 </html>
