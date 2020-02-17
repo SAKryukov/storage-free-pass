@@ -4,22 +4,31 @@
 
     const elements = {
         setup: function() {
-            const inputElements = document.querySelectorAll("input");
             this.footer = document.querySelector("main > section > footer");
             this.output = document.querySelector("textarea");
-            this.inputFrom = inputElements[0];
-            this.inputLength = inputElements[1];
+            this.inputFrom = document.querySelector("#input-unicode-subset-start");
+            this.inputLength = document.querySelector("#input-unicode-subset-length");
             this.masterPassword = document.querySelector("#input-master-password");
             this.seed = document.querySelector("#input-seed");
             this.characterRepertioire = document.querySelector("#input-character-repertioire");
-            const selectElements = document.querySelectorAll("aside > div select");
-            this.offset = selectElements[0];
-            this.size = selectElements[1];
-            this.shift = selectElements[2];
-            this.insertValue = document.querySelector("#input-insert");
-            this.insertPosition = this.insertValue.parentElement.nextElementSibling;
+            this.offset = document.querySelector("#select-start");
+            this.size = document.querySelector("#select-length");
+            this.shift = document.querySelector("#select-shift");
+            this.insertValue = document.querySelector("#input-insert-value");
+            this.insertPosition = document.querySelector("#input-insert-position");
             this.password = document.querySelector("aside > div > textarea");
         }, //setup
+        processMeta: function() {
+            const metaElements = document.getElementsByTagName("meta");
+            const mainTitleElement = document.querySelector("header");
+            const copyrightElement = document.querySelector("body > footer > p:last-child b");
+            const meta = {};
+            for (let element of metaElements)
+                meta[element.name] = element.content;
+            copyrightElement.textContent = meta.copyright;
+            mainTitleElement.textContent = document.title;
+            mainTitleElement.title = meta.description;
+        }, //processMeta
     };
 
     const populateSelect = (select, start, size) => {
@@ -53,6 +62,7 @@
 
     window.onload = () => {
         elements.setup();
+        elements.processMeta();
         populateSelect(elements.offset, 0, 64);
         populateSelect(elements.size, 1, 64);
         populateSelect(elements.shift, 0, 256);
