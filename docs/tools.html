@@ -23,7 +23,8 @@
     div  * { align-self: center; height: 2em; }
     label  { display: flex; align-items: center; }
     button, input, select, option { padding-left: 1em; padding-right: 1em; }
-    main > aside > p { margin-top: 1em; }
+    main > aside > p, main > aside > hr { margin-top: 1em; }
+    main > aside > hr { margin-bottom: 0.8em; }
     main > aside { width:  30em; }
     main > aside > div > input, main > aside > div > select { flex: 1; }
     aside > div:last-child > textarea { height: 10em; border: 0; background-color: lightgreen; filter: brightness(110%); }
@@ -53,14 +54,14 @@
         <div><input id="input-seed"/></div>
         <p></p>
         <div><label>Offset:</label><select><option>64</option></select><label>Size:</label><select><option>64</option></select></div>
-        <p></p>
+        <p></p><hr/>
         <div><label for="input-character-repertioire" accesskey="R">Character Repertoire:</label></div>
         <div><input id="input-character-repertioire" value="!#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~"/></div>
         <p></p>
         <div><label accesskey="H">Shift in Character Repertoire: </label><select><option>64</option></select></div>
         <p></p>
         <div><label class="inset">Insert: <input id="input-insert"/> at</label> <select></select></div>
-        <p></p>
+        <p></p><hr/>
         <div>Password:</div>
         <div><textarea readonly="true"></textarea></div>
     </aside>
