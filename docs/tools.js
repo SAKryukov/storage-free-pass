@@ -54,10 +54,16 @@
     window.onload = () => {
         elements.setup();
         populateSelect(elements.offset, 0, 64);
-        populateSelect(elements.size, 10, 32);
-        populateSelect(elements.shift, 1, 10);
-        populateSelect(elements.insertPosition, 0, 10);
-        setupDataChange([elements.masterPassword, elements.seed, elements.offset, elements.size, elements.shift, elements.insertValue, elements.insertPosition], () => {
+        populateSelect(elements.size, 1, 64);
+        populateSelect(elements.shift, 0, 256);
+        populateSelect(elements.insertPosition, 0, 64);        
+        elements.size.selectedIndex = 23; //SA???
+        const dataElements = [
+            elements.masterPassword, elements.seed, elements.offset, elements.size,
+            elements.characterRepertioire,
+            elements.shift, elements.insertValue, elements.insertPosition
+        ];
+        setupDataChange(dataElements, () => {
             passwordGenerator(
                 elements.masterPassword.value,
                 elements.seed.value,
