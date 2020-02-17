@@ -14,18 +14,16 @@
 <head>
   <style>
     * { padding: 0; margin: 0; font-family: sans-serif; box-sizing: border-box; }
-    h1 { font-size: 140%; }
-    body, html { height: 100%; max-height: 100%; background-color: moccasin; }
+    header { font-size: 140%; font-weight: bold;}
+    body, html { height: 100%; max-height: 100%; background-color: cornsilk }
     body, main { display: flex; overflow: hidden; height: 100%; }
     body { flex-direction: column; }
-    header { background-color: lightblue; }
-    footer { background-color: lemonchiffon; }
-    section { background-color: snow; }
     aside { background-color: lightgreen; height: 100%; }
     header, footer, section, aside { padding: 1em; padding-top: 0.4em; padding-bottom: 0.4em; }
     section { flex: 1; overflow: auto; } /* remove "flex: 1" to get content-defined width */
     aside { overflow: auto; }
     main > section { display: flex; flex-direction: column; }
+    main > section div { margin-bottom: 0.4em; }
     textarea { width: 100%; height: 100%; resize: none; flex: 1; }
     div { display: flex; flex-direction: row; }
     div  * { align-self: center; height: 2em; }
@@ -35,9 +33,10 @@
     main > aside > hr { margin-bottom: 0.8em; }
     main > aside { width:  30em; }
     main > aside > div > input, main > aside > div > select { flex: 1; }
-    aside > div:last-child > textarea { height: 10em; border: 0; background-color: lightgreen; filter: brightness(110%); }
+    aside > div > textarea { height: 4em; border: 0; background-color: lightgreen; filter: brightness(110%); }
     label + input, label + select { margin-left: 0.4em; }
     select + label, input + label, input + button { margin-left: 1.4em; }
+    body > footer { border-top: thin solid gray; }
     body > footer > p:last-child { font-size: 70%; }
     body > footer > p:last-child b { font-weight: normal; }
   </style>
@@ -74,7 +73,7 @@
         <p></p><hr/>
         <div>Password:</div>
         <div><textarea readonly="true"></textarea></div>
-    </aside>
+      </aside>
   </main>
 
   <footer>
