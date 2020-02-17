@@ -1,45 +1,105 @@
-window.onload = () => {
-    "use strict";
-    const inputElements = document.querySelectorAll("input");
-    const footer = document.querySelector("main > section > footer");
-    const output = document.querySelector("textarea");
-    const inputFrom = inputElements[0];
-    const inputLength = inputElements[1];
-    const action = ev => {
-        const from = parseInt(inputFrom.value);
-        const length = parseInt(inputLength.value);
-        if (isNaN(from + length)) {
-            output.value += `\nInvalid input: "${inputFrom.value}", "${inputLength.value}"`;
-            return;
-        } //if
-        let value = "";
-        let count = 0;
-        for (let codePoint = from; codePoint < from + length; ++codePoint) {
-            const character = String.fromCodePoint(codePoint);
-            value += character;
-            ++count;
-        }
-        const normal = (value == value.normalize("NFC") && value == value.normalize("NFD") && value == value.normalize("NFKC") && value == value.normalize("NFKD"));
-        output.value += `\nCharacters: ${count}, from: 0x${from.toString(16)}, normal form: ${normal}\n${value}`;
-    }; //action
-    const calculateStatus = () => {
-        const selected = output.selectionEnd - output.selectionStart;
-        const line = output.value.substring(0, output.selectionStart);
+"use strict";
 
-        const split = line.split("\n");
-        const y = split.length;
-        const x = split[split.length - 1].length + 1;
-        footer.textContent = `${y} : ${x} | Selected: ${selected}`;
-    }; //calculateStatus
-    calculateStatus();
-    output.onfocus = ev => { calculateStatus(); }
-    output.onclick = ev => { calculateStatus(); }
-    output.onkeyup = ev => { calculateStatus(); }
-    output.input = ev => { calculateStatus(); }
-    output.onkeydown = ev => { calculateStatus(); }
-    output.onmousemove = ev => { calculateStatus(); }
-    output.onpaste = ev => { calculateStatus(); }
-    inputFrom.onkeydown = ev => { if (ev.key == "Enter") action(); }
-    inputLength.onkeydown = ev => { if (ev.key == "Enter") action(); }
-    inputFrom.focus();
-} //window.onload
+(() => {
+
+    const elements = {
+        setup: function() {
+            const inputElements = document.querySelectorAll("input");
+            this.footer = document.querySelector("main > section > footer");
+            this.output = document.querySelector("textarea");
+            this.inputFrom = inputElements[1];
+            this.inputLength = inputElements[2];
+            this.masterPassword = document.querySelector("#input-master-password");
+            this.seed = document.querySelector("#input-seed");
+            this.characterRepertioire = document.querySelector("#input-character-repertioire");
+            const selectElements = document.querySelectorAll("aside > div select");
+            this.offset = selectElements[0];
+            this.size = selectElements[1];
+            this.shift = selectElements[2];
+            this.insertValue = document.querySelector("#input-insert");
+            this.insertPosition = this.insertValue.parentElement.nextElementSibling;
+            this.password = document.querySelector("aside > div > textarea");
+        }, //setup
+    };
+
+    const populateSelect = (select, start, size) => {
+        while (select.childElementCount) select.removeChild(select.firstElementChild);
+        for (let index = start; index < size; ++index) {
+            const option = document.createElement("option");
+            option.value = index;
+            option.textContent = `${index}`;
+            select.appendChild(option);
+        } //loop
+        select.selectedIndex = 0;
+    }; //populateSelect
+
+    const setupSelectionUpdate = (element, updater) => {
+        element.onfocus = ev => { updater(); }
+        element.onclick = ev => { updater(); }
+        element.onkeyup = ev => { updater(); }
+        element.input = ev => { updater(); }
+        element.onkeydown = ev => { updater(); }
+        element.onmousemove = ev => { updater(); }
+        element.onpaste = ev => { updater(); }
+    }; //setupSelectionUpdate
+
+    const setupDataChange = (elements, updater) => {
+        for (let element of elements)
+            if (element instanceof HTMLInputElement)
+                element.oninput = updater;
+            else if (element instanceof HTMLSelectElement)
+                element.onchange = updater;        
+    }; //setupDataChange
+
+    window.onload = () => {
+        elements.setup();
+        populateSelect(elements.offset, 0, 64);
+        populateSelect(elements.size, 10, 32);
+        populateSelect(elements.shift, 1, 10);
+        populateSelect(elements.insertPosition, 0, 10);
+        setupDataChange([elements.masterPassword, elements.seed, elements.offset, elements.size, elements.shift, elements.insertValue, elements.insertPosition], () => {
+            passwordGenerator(
+                elements.masterPassword.value,
+                elements.seed.value,
+                elements.offset.value,
+                elements.size.value,
+                elements.characterRepertioire.value,
+                elements.shift.value,
+                { value: elements.insertValue.value, position: elements.insertPosition.value})
+                    .then(autoGeneratedPassword => {
+                        elements.password.textContent = autoGeneratedPassword;
+                    });
+        });
+        const action = ev => {
+            const from = parseInt(elements.inputFrom.value);
+            const length = parseInt(elements.inputLength.value);
+            if (isNaN(from + length)) {
+                elements.output.value += `\nInvalid input: "${elements.inputFrom.value}", "${elements.inputLength.value}"`;
+                return;
+            } //if
+            let value = String.empty;
+            let count = 0;
+            for (let codePoint = from; codePoint < from + length; ++codePoint) {
+                const character = String.fromCodePoint(codePoint);
+                value += character;
+                ++count;
+            } //loop
+            const normal = (value == value.normalize("NFC") && value == value.normalize("NFD") && value == value.normalize("NFKC") && value == value.normalize("NFKD"));
+            elements.output.value += `\nCharacters: ${count}, from: 0x${from.toString(16)}, normal form: ${normal}\n${value}`;
+        }; //action
+        const calculateStatus = () => {
+            const selected = elements.output.selectionEnd - elements.output.selectionStart;
+            const line = elements.output.value.substring(0, elements.output.selectionStart);
+            const split = line.split("\n");
+            const y = split.length;
+            const x = split[split.length - 1].length + 1;
+            elements.footer.textContent = `${y} : ${x} | Selected: ${selected}`;
+        }; //calculateStatus
+        calculateStatus();
+        setupSelectionUpdate(elements.output, calculateStatus);
+        elements.inputFrom.onkeydown = ev => { if (ev.key == "Enter") action(); }
+        elements.inputLength.onkeydown = ev => { if (ev.key == "Enter") action(); }
+        elements.inputFrom.focus();
+    } //window.onload    
+
+})();
