@@ -17,6 +17,7 @@
     header { font-size: 140%; font-weight: bold;}
     body, html { height: 100%; max-height: 100%; background-color: cornsilk }
     body, main { display: flex; overflow: hidden; height: 100%; }
+    input:focus, textarea:focus, select:focus { background-color: lightblue; filter: brightness(120%); border: thin solid gray; }
     body { flex-direction: column; }
     aside { background-color: lightgreen; height: 100%; }
     header, footer, section, aside { padding: 1em; padding-top: 0.4em; padding-bottom: 0.4em; }
@@ -74,7 +75,7 @@
         <div><label for="input-insert-value" accesskey="N">I<u>n</u>sert:</label><input id="input-insert-value" spellcheck="false"/><label  for="input-insert-position">at</label><select id="input-insert-position"></select></div>
         <p></p><hr/>
         <div>Password:</div>
-        <div><textarea readonly="true"></textarea></div>
+        <div><textarea readonly="true" tabindex="-1"></textarea></div>
       </aside>
   </main>
 
