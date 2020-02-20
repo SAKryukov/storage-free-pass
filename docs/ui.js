@@ -129,7 +129,7 @@
     const generatePassword = () => {
         for (let accountIndex in inputData.accounts)
             generatedData[accountIndex] = undefined;
-        const index = elements.accountSelector.options[accountIndexMap[elements.accountSelector.selectedIndex]].value;
+        const index = accountIndexMap[elements.accountSelector.selectedIndex];
         passwordGenerator(
             elements.masterPassword.value,
             inputData.accounts[index].identity.seed,
