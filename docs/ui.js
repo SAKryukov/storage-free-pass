@@ -56,7 +56,7 @@
                 this.masterPassword.setAttribute("type", inputType);
             });
             this.userInfo.visibilityButton.addEventListener("click", ev => {
-                const accountDisplay = inputData.accounts[this.accountSelector.selectedIndex].display;
+                const accountDisplay = inputData.accounts[accountIndexMap[this.accountSelector.selectedIndex]].display;
                 this.userInfo.name.textContent = 
                     this.isButtonDown(ev.target) ? accountDisplay.user.name : accountDisplay.hiddenUserAuthenticationName;
             });
@@ -124,11 +124,12 @@
     }; //elements
 
     const generatedData = [];
+    const accountIndexMap = {};
 
     const generatePassword = () => {
         for (let accountIndex in inputData.accounts)
             generatedData[accountIndex] = undefined;
-        const index = elements.accountSelector.options[elements.accountSelector.selectedIndex].value;
+        const index = elements.accountSelector.options[accountIndexMap[elements.accountSelector.selectedIndex]].value;
         passwordGenerator(
             elements.masterPassword.value,
             inputData.accounts[index].identity.seed,
@@ -144,7 +145,7 @@
     }; //generatePassword
 
     const showPassword = (generateNew) => {
-        const optionIndex =  elements.accountSelector.selectedIndex;
+        const optionIndex =  accountIndexMap[elements.accountSelector.selectedIndex];
         if (generateNew || generatedData[optionIndex] == undefined)
             return generatePassword();        
         elements.password.element.textContent =
@@ -167,7 +168,8 @@
             option.textContent = account.display.name;
             option.value = accountIndex;
             option[elements.accountProperty] = account;
-            elements.accountSelector.appendChild(option);    
+            elements.accountSelector.appendChild(option);
+            accountIndexMap[option.index] = accountIndex;    
         } //loop
         elements.masterPassword.value = String.empty;
         { // optimize sizes:
@@ -177,9 +179,8 @@
         }
     }; //populate
 
-    const refresh = optionIndex => {
+    const refresh = accountIndex => {
         showPassword();
-        const accountIndex = elements.accountSelector.options[optionIndex].value; 
         const value = inputData.accounts[accountIndex];
         if (value.display.url)
             elements.url.innerHTML = `<a href="${value.display.url}">${value.display.name}</a>`;
@@ -211,18 +212,18 @@
             elements.populate();
             elements.password.clipboardButton.onclick = ev => {
                 elements.setClipboardWarning(true);
-                utility.clipboard.copy(generatedData[elements.accountSelector.selectedIndex]);
+                utility.clipboard.copy(generatedData[accountIndexMap[elements.accountSelector.selectedIndex]]);
             };
             elements.userInfo.clipboardButton.onclick = ev => {
                 elements.setClipboardWarning(true);
-                utility.clipboard.copy(inputData.accounts[elements.accountSelector.selectedIndex].display.user.name);
+                utility.clipboard.copy(inputData.accounts[accountIndexMap[elements.accountSelector.selectedIndex]].display.user.name);
             };
             elements.password.visibilityButton.addEventListener("click", ev => {
                 showPassword();
             }); //elements.password.visibilityButton on click        
             populate();
             elements.masterPassword.oninput = () => { showPassword(true /*generate new*/); };
-            elements.accountSelector.onchange = ev => { refresh(ev.target.selectedIndex); };
+            elements.accountSelector.onchange = ev => { refresh(accountIndexMap[ev.target.selectedIndex]); };
             if (elements.accountSelector.childElementCount > 0) {
                 elements.accountSelector.selectedIndex = 0;
                 refresh(0);
