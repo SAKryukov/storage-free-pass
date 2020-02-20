@@ -26,7 +26,7 @@ const userData = () => {
                seed: "Test",
                selection: { characterRepertoire: testCharacterRepertoire, start: 0, length: 8, shift: 0 }
             },
-            display: { group: "$", name: "Test", user: {name: String.empty} }
+            display: { name: "Test", user: {name: String.empty} }
          },
          {
             identity: {

@@ -158,32 +158,48 @@
 
     const populate = () => {
         let groupCount = 0;
-        const groupDictionary = {};
-        for (let account of inputData.accounts) {
-            if (!account.display.group) continue;
-            if (groupDictionary[account.display.group]) continue;
-            const element = document.createElement("optgroup");
-            element.label = account.display.group;
-            elements.accountSelector.appendChild(element);
-            groupDictionary[account.display.group] = element;
-            ++groupCount;
-        } //loop
-        for (let accountIndex in inputData.accounts) {
-            generatedData.push(undefined);
+        const noGroupAccounts = [];
+        const groupAccounts = {};
+        const addAccountDescriptor = accountIndex => {
             const account = inputData.accounts[accountIndex];
+            const descriptor = { index: accountIndex, account: account };
+            if (account.display.group) {
+                let array = groupAccounts[account.display.group];
+                if (!array) {
+                    array = groupAccounts[account.display.group] = [];
+                    const element = document.createElement("optgroup");
+                    element.label = account.display.group;
+                    //elements.accountSelector.appendChild(element);
+                    descriptor.group = element;
+                    ++groupCount;
+                } //if
+                array.push(descriptor);
+            } else
+                noGroupAccounts.push(descriptor);
+        }; //addAccountDescriptor
+        for (let accountIndex in inputData.accounts)
+            addAccountDescriptor(accountIndex);
+        let currentSelectionIndex = 0;
+        for (let account of noGroupAccounts) {
             const option = document.createElement("option");
-            if (!account.display)
-                throw `no display at index ${accountIndex}`;
-            if (!account.display.name)
-                throw `no display at index ${accountIndex}`;
-            option.textContent = account.display.name;
-            option.value = accountIndex;
-            option[elements.accountProperty] = account;
-            const parent = account.display.group ?
-                groupDictionary[account.display.group] : elements.accountSelector;
-            parent.appendChild(option);
-            accountIndexMap[accountIndex] = accountIndex;    
-        } //loop
+            option.textContent = account.account.display.name;
+            elements.accountSelector.appendChild(option);
+            accountIndexMap[currentSelectionIndex++] = account.index; 
+        }
+        for (let index in groupAccounts) {
+            const groupContainer = groupAccounts[index];
+            let optionGroupElement;
+            if (groupContainer.length > 0) {
+                optionGroupElement = groupContainer[0].group;
+                elements.accountSelector.appendChild(optionGroupElement);
+            } //if
+            for (let account of groupContainer) {
+                const option = document.createElement("option");
+                option.textContent = account.account.display.name;
+                optionGroupElement.appendChild(option);
+                accountIndexMap[currentSelectionIndex++] = account.index;
+            } 
+        }
         elements.masterPassword.value = String.empty;
         { // optimize sizes:
             const itemLength = inputData.accounts.length + groupCount; 
