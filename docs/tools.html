@@ -27,7 +27,7 @@
     main > section div { margin-bottom: 0.4em; }
     textarea { width: 100%; height: 100%; resize: none; flex: 1; }
     div { display: flex; flex-direction: row; align-items: center; }
-    div input, div select, div buttom { height: 2em; }
+    div input, div select, div button { height: 2em; }
     button, input, select, option { padding-left: 1em; padding-right: 1em; }
     main > aside > p, main > aside > hr { margin-top: 1em; }
     main > aside > hr { margin-bottom: 0.8em; }
@@ -35,7 +35,7 @@
     main > aside > div > input, main > aside > div > select { flex: 1; }
     aside > div > textarea { height: 4em; border: 0; background-color: lightgreen; filter: brightness(110%); }
     label + input, label + select { margin-left: 0.4em; }
-    select + label, input + label, input + button { margin-left: 1.4em; }
+    select + label, input + label, input + button, button + a { margin-left: 1.4em; }
     body > footer { border-top: thin solid gray; }
     body > footer > p:last-child { font-size: 70%; }
     body > footer > p:last-child b { font-weight: normal; }
@@ -51,7 +51,9 @@
       <div>
         <label for="input-unicode-subset-start">Unicode Code Point: From:</label><input id="input-unicode-subset-start" value="0x0021" spellcheck="false"/>
         <label for="input-unicode-subset-length">Length:</label><input id="input-unicode-subset-length" value="32" spellcheck="false"/>
-        <button>Normalized Forms&hellip;</button></div>
+        <button>Normalized Forms&hellip;</button>
+        <a href="https://en.wikipedia.org/wiki/Unicode_block">Unicode Blocks</a>
+      </div>
       <textarea spellcheck="false"></textarea>
       <footer>222</footer>
     </section>

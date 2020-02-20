@@ -40,7 +40,7 @@ const userData = () => {
                seed: "WikipediA 2020/02/12 13:16",
                selection: { start: 0, length: 32, shift: 201 }
             },
-            display: { name: "WikipediA", group: "Education", url: "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page", user: {name: "me"} }
+            display: { name: "WikipediA", group: `${String.fromCodePoint(0x1F4DA)}`, url: "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page", user: {name: "me"} }
          },
          {
             identity: {
