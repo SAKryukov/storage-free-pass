@@ -157,6 +157,17 @@
     }; //showPassword
 
     const populate = () => {
+        let groupCount = 0;
+        const groupDictionary = {};
+        for (let account of inputData.accounts) {
+            if (!account.display.group) continue;
+            if (groupDictionary[account.display.group]) continue;
+            const element = document.createElement("optgroup");
+            element.label = account.display.group;
+            elements.accountSelector.appendChild(element);
+            groupDictionary[account.display.group] = element;
+            ++groupCount;
+        } //loop
         for (let accountIndex in inputData.accounts) {
             generatedData.push(undefined);
             const account = inputData.accounts[accountIndex];
@@ -168,13 +179,16 @@
             option.textContent = account.display.name;
             option.value = accountIndex;
             option[elements.accountProperty] = account;
-            elements.accountSelector.appendChild(option);
-            accountIndexMap[option.index] = accountIndex;    
+            const parent = account.display.group ?
+                groupDictionary[account.display.group] : elements.accountSelector;
+            parent.appendChild(option);
+            accountIndexMap[accountIndex] = accountIndex;    
         } //loop
         elements.masterPassword.value = String.empty;
         { // optimize sizes:
-            if (elements.accountSelector.size > elements.accountSelector.childElementCount)
-                elements.accountSelector.size = elements.accountSelector.childElementCount;
+            const itemLength = inputData.accounts.length + groupCount; 
+            if (elements.accountSelector.size > itemLength)
+                elements.accountSelector.size = itemLength;
             elements.optimizeWidths(true);
         }
     }; //populate
