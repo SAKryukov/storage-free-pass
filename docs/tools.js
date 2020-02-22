@@ -11,8 +11,8 @@
             this.masterPassword = document.querySelector("#input-master-password");
             this.seed = document.querySelector("#input-seed");
             this.characterRepertoire = document.querySelector("#input-character-repertoire");
-            this.offset = document.querySelector("#select-start");
-            this.size = document.querySelector("#select-length");
+            this.start = document.querySelector("#select-start");
+            this.length = document.querySelector("#select-length");
             this.shift = document.querySelector("#select-shift");
             this.insertValue = document.querySelector("#input-insert-value");
             this.insertPosition = document.querySelector("#input-insert-position");
@@ -65,21 +65,23 @@
         if (!accounts) return;
         if (accounts.accounts.length < 1) return;
         elements.seed.value = accounts.accounts[0].identity.seed;
-        elements.size.selectedIndex = accounts.accounts[0].identity.selection.length + 1;
         elements.characterRepertoire.value = accounts.accounts[0].identity.selection.characterRepertoire;
+        elements.start.value = accounts.accounts[0].identity.selection.start;
+        elements.length.value = accounts.accounts[0].identity.selection.length;
+        elements.shift.value = accounts.accounts[0].identity.selection.shift;
     }; //populateFirstAccount
 
     window.onload = () => {
         elements.setup();
         elements.processMeta();
-        populateSelect(elements.offset, 0, 64);
-        populateSelect(elements.size, 1, 64);
+        populateSelect(elements.start, 0, 64);
+        populateSelect(elements.length, 1, 64);
         populateSelect(elements.shift, 0, 256);
         populateSelect(elements.insertPosition, 0, 64);        
-        elements.size.selectedIndex = 23; //SA???
+        elements.length.selectedIndex = 23; //SA???
         populateFirstAccount();
         const dataElements = [
-            elements.masterPassword, elements.seed, elements.offset, elements.size,
+            elements.masterPassword, elements.seed, elements.start, elements.length,
             elements.characterRepertoire,
             elements.shift, elements.insertValue, elements.insertPosition
         ];
@@ -87,8 +89,8 @@
             passwordGenerator(
                 elements.masterPassword.value,
                 elements.seed.value,
-                parseInt(elements.offset.value),
-                parseInt(elements.size.value),
+                parseInt(elements.start.value),
+                parseInt(elements.length.value),
                 elements.characterRepertoire.value,
                 parseInt(elements.shift.value),
                 { value: elements.insertValue.value, position: elements.insertPosition.value})
