@@ -29,7 +29,7 @@
             mainTitleElement.textContent = document.title;
             mainTitleElement.title = meta.description;
         }, //processMeta
-    };
+    }; //elements
 
     const populateSelect = (select, start, size) => {
         while (select.childElementCount) select.removeChild(select.firstElementChild);
@@ -60,6 +60,15 @@
                 element.onchange = updater;  
     }; //setupDataChange
 
+    const populateFirstAccount = () => {
+        const accounts = userData();
+        if (!accounts) return;
+        if (accounts.accounts.length < 1) return;
+        elements.seed.value = accounts.accounts[0].identity.seed;
+        elements.size.selectedIndex = accounts.accounts[0].identity.selection.length + 1;
+        elements.characterRepertoire.value = accounts.accounts[0].identity.selection.characterRepertoire;
+    }; //populateFirstAccount
+
     window.onload = () => {
         elements.setup();
         elements.processMeta();
@@ -68,6 +77,7 @@
         populateSelect(elements.shift, 0, 256);
         populateSelect(elements.insertPosition, 0, 64);        
         elements.size.selectedIndex = 23; //SA???
+        populateFirstAccount();
         const dataElements = [
             elements.masterPassword, elements.seed, elements.offset, elements.size,
             elements.characterRepertoire,
