@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>SHA-2 Password Generator</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta name="version" content="1.0">
     <meta name="author" content="Sergey A Kryukov">
     <meta name="owner" content="Sergey A Kryukov">
     <meta name="copyright" content="Sergey A Kryukov, 2020">
@@ -14,6 +15,7 @@
     <!-- see also: https://gist.github.com/lancejpollard/1978404 -->
     <style>
         * { font-family: sans-serif; box-sizing: border-box; }
+        hgroup * { display: inline-block; }
         h1 { font-size: 140%; }
         html, body { background-color: papayawhip; }
         body, main { margin-left: 1em; }
@@ -56,11 +58,14 @@
 </head>
 <body>
 
+<hgroup>
 <h1></h1>
+<p>&ensp;v.&thinsp;<b>version</b></p>
+</hgroup>
 
 <header title="Master password, should be memorized and never disclosed to anyone"><label accesskey="M" for="master-password"><u>M</u>aster Password:</label><input type="password" id="master-password" spellcheck="false"/><button title="Toggle visibility"><b>&#x1F576;</b></button></header>
 
-<select size="20" title="Set of accounts protected by password, defined in user-data.js"></select>
+<select size="20" title="Set of accounts protected by passwords"></select>
 
 <main>
   <label></label>

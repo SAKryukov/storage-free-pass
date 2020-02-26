@@ -19,7 +19,9 @@ const userData = () => {
        "ሠሡሢሣሤሥሦሧረሩሪራሬርሮሯሰሱሲሳሴስሶሷሸሹሺሻሼሽሾሿ";
       
    return {
-      title: `${String.fromCodePoint(0x1F44D)} Sample`,
+      metadata: {
+          title: `${String.fromCodePoint(0x1F44D)} Sample`
+      },
       accounts: [
          {
             identity: {

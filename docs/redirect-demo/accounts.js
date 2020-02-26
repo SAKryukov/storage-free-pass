@@ -7,7 +7,7 @@ const userData = () => {
    const strongCharacterRepertoire = "!#$%&()+-0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^abcdefghijkmnopqrstuvwxyz|~/";
       
    return {
-      title: `${String.fromCodePoint(0x1F642)} User`,
+      metadata: { title: `${String.fromCodePoint(0x1F642)} User` },
       accounts: [
          {
             identity: {

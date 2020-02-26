@@ -113,13 +113,15 @@
             const metaElements = document.getElementsByTagName("meta");
             const mainTitleElement = document.querySelector("h1");
             const copyrightElement = document.querySelector("body > footer b");
+            const versionElement = document.querySelector("hgroup > h1 + p > b");
             const meta = {};
             for (let element of metaElements)
                 meta[element.name] = element.content;
             mainTitleElement.textContent = document.title;
             mainTitleElement.title = meta.description;
-            if (inputData.title) document.title += ` ${inputData.title}`;
+            if (inputData.metadata.title) document.title += ` ${inputData.metadata.title}`;
             copyrightElement.textContent = meta.copyright;
+            versionElement.textContent = meta.version;
         }, //processMeta
     }; //elements
 
@@ -169,7 +171,6 @@
                     array = groupAccounts[account.display.group] = [];
                     const element = document.createElement("optgroup");
                     element.label = account.display.group;
-                    //elements.accountSelector.appendChild(element);
                     descriptor.group = element;
                     ++groupCount;
                 } //if
@@ -206,6 +207,14 @@
             if (elements.accountSelector.size > itemLength)
                 elements.accountSelector.size = itemLength;
             elements.optimizeWidths(true);
+        }
+        { //populate metadata:
+            if (!inputData.metadata.title) return;
+            const accountSetInfo = inputData.metadata.version ? 
+                `${inputData.metadata.title}${String.fromCodePoint(0x2003)}v.${String.fromCodePoint(0x2009)}${inputData.metadata.version}`
+                :
+                inputData.metadata.title;
+            elements.accountSelector.title += `\n\nAccount set:${String.fromCodePoint(0x2003)}${accountSetInfo}`;
         }
     }; //populate
 
