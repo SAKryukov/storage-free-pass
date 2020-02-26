@@ -59,8 +59,15 @@ const userData = () => {
 <h2 id="account-members">Account Members</h2>
 
 <details open="true">
-    <summary>title</summary>
-    <p>Title string representing the user. It is displayed as the browser's page/tab title.</p>
+    <summary>metadata</summary>
+    <details>  
+        <summary>title</summary>
+        <p>Title string representing the user's account set. It is displayed as the browser's page/tab title and the title of the account selector.</p>
+    </details>
+    <details>  
+        <summary>version</summary>
+        <p>Optional string representing version of the user's account set, if defined, shown in  the title of the account selector.</p>
+    </details>
 </details>
 <details open="true">
     <summary>accounts</summary>
@@ -155,6 +162,10 @@ const userData = () => {
         <details>
             <summary>name</summary>
             <p>Display name of the account, used in the navigation list box and in the header of the account table.</p>
+        </details>
+        <details>
+            <summary>group</summary>
+            <p>Optional string representing a group of accounts shown in the account selector. Note that grouping can re-order accounts, as accounts with the same group name are grouped together. The accounts for which the group is not defined are placed on top of the list.</p>
         </details>
         <details>
             <summary>url</summary>
