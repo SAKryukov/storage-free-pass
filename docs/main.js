@@ -1,5 +1,5 @@
 "use strict";
 
 (()=>{
-    redirectAPI.applyScripts([ "utility", "userData", "crypto", "ui" ]);
+    redirectAPI.applyScripts([ "utility", "userData", "crypto", "version", "ui" ]);
 })();   

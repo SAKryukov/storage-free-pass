@@ -10,6 +10,7 @@
             const downProperty = Symbol();
             const visionOnCharacter = String.fromCodePoint(0x1F441);
             const visionOffCharacter = String.fromCodePoint(0x1F576);
+            this.thinSpace = String.fromCodePoint(0x2009);
             this.clipboardWarningTimeout = 5000;
             //
             this.allSections = document.querySelectorAll("section");
@@ -118,10 +119,10 @@
             for (let element of metaElements)
                 meta[element.name] = element.content;
             mainTitleElement.textContent = document.title;
-            mainTitleElement.title = meta.description;
+            mainTitleElement.title = `${meta.description}\n\nv.${this.thinSpace}${productVersion}`;
             if (inputData.metadata.title) document.title += ` ${inputData.metadata.title}`;
             copyrightElement.textContent = meta.copyright;
-            versionElement.textContent = meta.version;
+            versionElement.textContent = displayProductVersion;
         }, //processMeta
     }; //elements
 
