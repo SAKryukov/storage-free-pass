@@ -4,9 +4,10 @@
     <title>SHA-2 Password Generator Help</title>
     <style>
         * { font-family: sans-serif; box-sizing: border-box; }
-        code, pre, summary { font-family: "Consolas", monospace; color: darkblue; }
-        code, summary { font-size: 120%; }
-        summary { font-weight: bold; }
+        pre, summary { font-family: "Consolas", monospace; }
+	pre, code { color: darkblue; }
+        code { font-size: 1rem; }
+        summary { font-weight: bold; font-size: 120%; }
         html, body { background-color: papayawhip;  }
         details > details, details > p { margin: 0; margin-left: 3em; }
     </style>
@@ -23,38 +24,37 @@
 const userData = () => {
 
    const defaultPasswordLength = 16;
+   const testCharacterRepertoire = "1234567890ABCDDEFG";
    const strongCharacterRepertoire = "!#$%&()+-0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^abcdefghijkmnopqrstuvwxyz|~/";
-   const ultimateCharacterRepertoire =
-       "!#$%&()*+/0123456789<=>?@ABCDEFG" + "HIJKLMNOPQRSTUVWXYZ[]^abcdefghij" + "klmnopqrstuvwxyz{|}~¡¢£¤¥¦§©«¬­®" + "±µ»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÐÑÒÓÔÕÖ×ØÜÝÞß" +
-       "ႠႡႢႣႤႥႦႧႨႩႪႫႬႭႮႯႰႱႲႳႴႵႶႷႸႹႺႻႼႽႾႿ" + "աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտր" + "ሀሁሂሃሄህሆሇለሉሊላሌልሎሏሐሑሒሓሔሕሖሗመሙሚማሜምሞሟ" + "ሠሡሢሣሤሥሦሧረሩሪራሬርሮሯሰሱሲሳሴስሶሷሸሹሺሻሼሽሾሿ";
       
    return {
-      title: `${String.fromCodePoint(0x1F464)} Sample`,
+      metadata: { title: `${String.fromCodePoint(0x1F642)} User` },
       accounts: [
          {
             identity: {
                seed: "Test",
                selection: { characterRepertoire: testCharacterRepertoire, start: 0, length: 8, shift: 0 }
             },
-            display: { name: "Test", user: {name: String.empty} }
+            display: { name: "Test" }
          },
          {
             identity: {
-               seed: "MDB 2020/02/07", 
-               selection: { characterRepertoire: ultimateCharacterRepertoire, start: 3, length: 15, shift: 1, inserts: [{value: "dF1", position: 2}] }
+               seed: "Real account 2020/02/14",
+               selection: { characterRepertoire: strongCharacterRepertoire, start: 0, length: 24, shift: 0 }
             },
-            display: { name: "Most Dependable Bank", url: "http://www.MostDependableBank.com", user: {name: "Responsible-bank-user", url: "help.html#account-members" } }
+            display: { group: "$", name: "Real Account", user: { name: "user", url: "./redirect-demo/accounts.html" } }
          },
       ], // accounts    
       default: {
-         identity: { seed: "ERROR! define seed!",
-            selection: { characterRepertoire: strongCharacterRepertoire, start: 0, length: defaultPasswordLength, shift: 0, }
+         identity: {
+            seed: "ERROR! define seed!",
+            selection: { characterRepertoire: strongCharacterRepertoire, start: 0, length: defaultPasswordLength, shift: 0 }
          },
          display: { name: "Incomplete account", url: "https://www.undefined.account", user: { name: "unknown user", url: String.empty } }
       },
-   }; //data
+   };
    
-};};</pre>
+};</pre>
 
 <h2 id="account-members">Account Members</h2>
 
@@ -87,7 +87,7 @@ const userData = () => {
     <details>
         <summary>display.name</summary>
         <p>This name is used for UI navigation using the list box on left.
-            Besides, it is shown on top of the account table, which also can be used as an anchor, if <code>display.url</code>code> is defined.</code></p>
+            Besides, it is shown on top of the account table, which also can be used as an anchor, if <code>display.url</code> is defined.</code></p>
     </details>
     <details>
         <summary>display.user.name</summary>
@@ -197,10 +197,10 @@ const userData = () => {
 
 <p>Redirect API is the way to have a separate user data file with a separate HTML file, which would launch the application through redirection, supplying a separate user data file as a parameter.<p>
 
-<p>Let's consider the example shown in the directory "redirect-demo", placed as a sub-directory of the application directory, with the user data file "accounts.js". Then a near-minimal HTML file looks like this:</p>
+<p>Let's consider the example shown in the directory "redirect-demo", placed as a sub-directory of the application directory, with the user data file "accounts.js". Then a near-minimal HTML file can look like this:</p>
 
 <pre>
-&lt;!DOCTYPE html&gt;
+&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;
 &lt;script src="../redirectAPI.js"&gt;&lt;/script&gt;
 &lt;script&gt;redirectAPI.redirect("../index.html", { userData: "./redirect-demo/accounts" } );&lt;/script&gt;
 </pre>

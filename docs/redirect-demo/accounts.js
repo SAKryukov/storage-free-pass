@@ -21,7 +21,7 @@ const userData = () => {
                seed: "Real account 2020/02/14",
                selection: { characterRepertoire: strongCharacterRepertoire, start: 0, length: 24, shift: 0 }
             },
-            display: { name: "Real Account", user: { name: "user", url: "./redirect-demo/accounts.html" } }
+            display: { group: "$", name: "Real Account", user: { name: "user", url: "./redirect-demo/accounts.html" } }
          },
       ], // accounts    
       default: {
