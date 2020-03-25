@@ -13,14 +13,19 @@
     <meta name="keywords" content="security, password, passwords, generator, cryptography, cryptographic, hash, SHA-256">
     <!-- see also: https://gist.github.com/lancejpollard/1978404 -->
     <style>
+        :root {
+            --vspace: 0.2em;
+            --vspace-button: 0.1em;
+            --hspace: 1em;
+        }
         * { font-family: sans-serif; box-sizing: border-box; }
         hgroup * { display: inline-block; }
         h1 { font-size: 140%; }
-	h1 + p > b { font-weight: normal; }
+        h1 + p > b { font-weight: normal; }
         html, body { background-color: papayawhip; }
-        body, main { margin-left: 1em; }
+        body, main { margin-left: var(--hspace); }
         header { margin-bottom: 0.6em; display: flex; align-items: center; }
-        header > input { width: 24em; margin-left: 0.8em; margin-right: 0.2em; padding-left: 0.6em; padding-right: 0.6em; }
+        header > input { width: 24em; margin-left: 0.8em; margin-right: var(--vspace); padding-left: 0.6em; padding-right: 0.6em; }
         select { vertical-align: top; }
         select:focus, input:focus, button:focus { background-color: #DDEEFF; }
         main { display: inline-grid; grid-template-columns: auto auto auto; }
@@ -28,16 +33,16 @@
         main > label, main > section, main > aside {
             flex: none; flex-grow: 0; 
             border-top: 1px solid black;
-            padding-left: 1em; padding-right: 1em;
+            padding-left: var(--hspace); padding-right: var(--hspace);
             display: flex; align-items: center;
             background-color: snow;
             white-space: nowrap;
         }
         header > input, select { border: solid thin black; }
-        main > label { justify-content: flex-end; padding-top: 1em; padding-bottom: 1em; }
+        main > label { justify-content: flex-end; padding-top: var(--hspace); padding-bottom: var(--hspace); }
         main > section { justify-content: center; }
         button { background-color: transparent; font-size: 160%; border: transparent solid thin; font-family: "Consolas"; }
-        button { margin-top: 0.1em; margin-bottom: 0.1em; }
+        button { margin-top: var(--vspace-button); margin-bottom: var(--vspace-button); }
         button { padding: 0; }
         button:hover { background-color: #A0E5FF; }
         button::-moz-focus-inner, a::-moz-focus-inner { border: 0; }
@@ -48,10 +53,10 @@
         button.down > b { opacity: 1; }
         select { padding: 3px; }
         optgroup { color: darkblue; font-weight: bolder; font-style: normal; font-size: 1.1rem; }
-        option { font-size: 0.8rem; padding-left: 1em; padding-right: 1em; padding-top: 0.2em; padding-bottom: 0.2em; color: black; }
+        option { font-size: 0.8rem; padding-left: var(--hspace); padding-right: var(--hspace); padding-top: var(--vspace); padding-bottom: var(--vspace); color: black; }
         body > aside { display: block; margin-top: 0.6em; visibility: hidden; color: red; }
         hr { margin-bottom: 0; }
-        body > footer  { margin-top: 0.2em; font-size: 70%; }
+        body > footer  { margin-top: var(--vspace); font-size: 70%; }
         body > footer  b { font-weight: normal; }
         input, select option { border-radius: 4px; }
     </style>
