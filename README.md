@@ -1,6 +1,6 @@
-# SHA-2 Password Generator
+# Storage-Free Pass
 
-*Generator of highly secure passwords based on SHA-2 cryptographic hash and master password, which should be memorized; no password storage is involved*
+*Generator of highly secure passwords based on cryptographic hash and master password, which should be memorized; no password storage is involved*
 
 ## Background
 
