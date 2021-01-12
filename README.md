@@ -16,8 +16,9 @@ Run the application "index.html". Enter the master password. The account passwor
 
 ## Where is the Code?
 
-For source code, see "docs". This naming is chosen to enable GitHub Web site for this repository:
-[Live Demo](https://sakryukov.github.io/html-javascript-password-generator).
+For source code, see [code](./code)
+
+[Live Demo](https://SAKryukov.github.io/html-javascript-password-generator).
 
 ## Credits
 
