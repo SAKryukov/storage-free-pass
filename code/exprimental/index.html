@@ -14,7 +14,7 @@
 
 <html lang="en-us">
 <head>
-   <title>Sequence Tool</title>
+   <title>Storage-Free Pass</title>
    <meta charset="utf-8"/>
    <style>
       :root {
@@ -26,23 +26,6 @@
          --horizontal-gap: 0.6em;
          --frame: 0.2em 1.2em 0.2em 1.2em;
       }
-
-        section { display: inline-grid; grid-template-columns: auto auto auto; }
-        section { border-left: thin solid black; border-right: thin solid black; border-bottom: thin solid black; }
-        section > label, main > section, main > aside {
-            flex: none; flex-grow: 0; 
-            border-top: 1px solid black;
-            padding-left: var(--hspace); padding-right: var(--hspace);
-            display: flex; align-items: center;
-            background-color: snow;
-            white-space: nowrap;
-        }
-        section > input, select { border: solid thin black; }
-        section > label { justify-content: flex-end; padding-top: var(--hspace); padding-bottom: var(--hspace); }
-        section > section { justify-content: center; }
-
-
-
       * { padding: 0; margin: 0; box-sizing: border-box; }
       * { font-family: sans-serif; }
       select { height: 100%; }
@@ -50,50 +33,74 @@
       div > select option { padding-left: var(--big-horizontal-gap); padding-right: var(--big-horizontal-gap); }
       html, body { height: 100%; }
       body { display: flex; flex-flow: column; height: 100%; }
-      header { background: transparent; border-bottom: gray solid thin; }
-      main { display: flex; flex-flow: row; flex:auto; overflow: auto; justify-items: start; }
-      footer { border-top: gray solid thin; }
-      button, option, input, main, footer, header { padding: var(--horizontal-gap); }
-      button, option, input, footer, header { padding-top: var(--small-vertical-gap); padding-bottom: var(--small-vertical-gap); }
+      header { background-color: transparent; border-bottom: gray solid thin; }
+      header { margin-bottom: 0.6em; }
+      header input { width: 24em; text-overflow: ellipsis; padding: 0.4em; padding-left: 0.6em; padding-right: 0.6em; border-radius: 4px; }
+      header > section { display: flex; align-items: center; width: fit-content; }
+      header > section > div { width: var(--horizontal-gap); }
+      h1 { font-size: 110%; margin-top: var(--big-vertical-gap); margin-bottom: var(--big-vertical-gap); }
+      h1 > small { font-size: 100%; font-weight: normal; }
+      option, input, main, footer, header, th, td { padding: var(--horizontal-gap); }
+      option, input, footer, header, th, tr { padding-top: var(--small-vertical-gap); padding-bottom: var(--small-vertical-gap); }
       main { padding-top: var(--big-vertical-gap); padding-bottom: var(--big-vertical-gap); }
-      section { margin-left: var(--big-vertical-gap); }
-      section { display: flex; flex-flow: column; flex: auto; }
+      table { border: solid thin black; border-collapse: collapse; margin-left: 3em; }
+      th { font-weight: normal; padding: 1em; }
+      td { border-top: solid thin black; vertical-align: middle; }
+      td:first-child { text-align: right; }
+      td:last-child { padding-left: 0; }
+      td:nth-last-child(2) { padding: var(--horizontal-gap); }
+      button { border: none; font-size: 160%; padding: 0.2em; border-radius: 0; outline: none; }
+      button:focus { outline: solid thin gray; }
+      /*
       button, input { width: 16em; }
       div button { width: fit-content; padding-top: 0; padding-bottom: 0.2em; font-size: 108%; }
       section button:not(:last-child), section input:not(:last-child) { margin-bottom: var(--vertical-gap);}
+      */
+      main { display: flex; flex-flow: row; flex:auto; overflow: auto; justify-items: start; }
+      footer { border-top: gray solid thin; }
       footer em { font-style: normal; font-weight: normal; }
       footer i { font-style: normal; margin-left: var(--horizontal-gap); color: red; margin-left: var(--big-horizontal-gap); margin-right: var(--big-horizontal-gap);  overflow-x:auto; white-space: nowrap; user-select: all; }
       html, body { background-color: papayawhip; }
       footer { background-color: azure; }
+      table { background-color: white; }
+      button { background-color: transparent; }
+      select:focus, input:focus, button:focus { background-color: #DDEEFF; }
   </style>
 </head>
 <body>
 
-<header>Master Password</header>
+<header>
+  <h1>Storage-Free Pass <small>v.&thinsp;1</small></h1>
+  <section>
+    <label>Master Password:</label>
+    <div></div>
+    <input />
+    <div></div>
+    <button>&#x1F576;</button>
+  </section>
+</header>
 
 <main>
   <select multiple="true"></select>
-  <article>
-      <section>
-
-  <label></label>
-  <section title="Optional account URL used for authentication">&nbsp;</section>
-  <aside></aside>
-  <label for="user-name-clipboard" accesskey="N"><a>User</a>&ensp;<u>N</u>ame:</label>
-  <section title="Optional account user name"></section>
-  <aside><button id="user-name-clipboard" title="Copy to clipboard">&#x1F4CB;</button><button title="Toggle visibility"><b>&#x1F576;</b></button></aside>
-  <label>Seed:</label>
-  <section title="Essential data security-critical element: seed for cryptographic hash generation, should always be defined"></section>
-  <aside></aside>
-  <label>Selection:</label>
-  <section title="Selection of data used for password generation: start of password in cryptographic hash, password length, character repertoire offset, inserts"></section>
-  <aside></aside>
-  <label for="password-clipboard"><u>P</u>assword:</label>
-  <section title="Account password"></section>
-  <aside><button id="password-clipboard" accesskey="P" title="Copy to clipboard">&#x1F4CB;</button><button title="Toggle visibility"><b>&#x1F576;</b></button></aside>
-
-      </section>
-  </article>
+  <section>
+    <table>
+      <tr>
+        <th colspan="4">Account</th>
+      </tr>
+      <tr>
+        <td>User <u>N</u>ame:</td><td>Center</td><td><button>&#x1F4CB;</button></td><td><button>&#x1F576;</button></td>
+      </tr>
+      <tr>
+        <td>Seed:</td><td>Center</td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>Selection:</td><td>Center</td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>Password:</td><td>Center</td><td><button>&#x1F4CB;</button></td><td><button>&#x1F576;</button></td>
+      </tr>
+    </table>
+  </section>
 </main>
 
 <footer><small>Copyright &copy; by S A Kryukov, <em></em><i></i></small></footer>
