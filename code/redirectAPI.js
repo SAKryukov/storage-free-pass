@@ -2,7 +2,7 @@
 
 const redirectAPI = {
     
-    redirect: function(applicationPath, names) { //called by user side
+    redirect: (applicationPath, names)  => { //called by user side
         let url = applicationPath + "?";
         if (!names) return;
         for (let index in names)
@@ -11,14 +11,24 @@ const redirectAPI = {
         document.location = url;
     }, //redirect
 
-    applyScripts: function(sourceFileNames) { //called by application side
+    applyScripts: sourceFileNames => { //called by application side
         const search = new URLSearchParams(document.location.search);
+        const effectiveSourceFileNames = [];
         for (let source of sourceFileNames) {
             const substitute = search.get(source);
-            const script = document.createElement("script");
-            script.src = substitute ? `${substitute}.js` : `${source}.js`;
-            document.body.appendChild(script);
+            const effectiveSource = substitute ? `${substitute}.js` : `${source}.js`;
+            effectiveSourceFileNames.push(effectiveSource);
         } //loop
+        let currentIndex = 0;
+        const addScript = () => {
+            if (currentIndex >= effectiveSourceFileNames) return;
+            const source = effectiveSourceFileNames[currentIndex++];
+            const script = document.createElement("script");
+            script.src = source;
+            script.addEventListener('load', addScript);
+            document.body.appendChild(script);
+        }; //addScript
+        addScript();
     }, //applyScripts
 
-};
+}; //redirectAPI
