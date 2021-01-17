@@ -4,128 +4,6 @@
 
     const inputData = prepareData();
 
-    const elements = {        
-        populate: function () {
-            const downClass = "down";
-            const downProperty = Symbol();
-            const visionOnCharacter = String.fromCodePoint(0x1F441);
-            const visionOffCharacter = String.fromCodePoint(0x1F576);
-            this.thinSpace = String.fromCodePoint(0x2009);
-            this.clipboardWarningTimeout = 5000;
-            //
-            this.allSections = document.querySelectorAll("section");
-            this.masterPassword = document.querySelector("header > input");
-            this.masterPasswordVisibilityButton = document.querySelector("header > button");
-            this.accountSelector = document.querySelector("select");
-            this.url = document.querySelector("main > section:nth-of-type(1)");
-            this.userInfo = {};
-            this.userInfo.name = document.querySelector("main > section:nth-of-type(2)");
-            this.userInfo.url = document.querySelector("main > label:nth-of-type(2) > a")
-            this.userInfo.clipboardButton = document.querySelector("#user-name-clipboard");
-            this.userInfo.visibilityButton = document.querySelector("main > aside:nth-of-type(2) > button:last-child");
-            this.seed = document.querySelector("main > section:nth-of-type(3)");
-            this.positions = document.querySelector("main > section:nth-of-type(4)");
-            this.password = {};
-            this.password.element = document.querySelector("main > section:nth-of-type(5)");
-            this.password.clipboardButton = document.querySelector("#password-clipboard");
-            this.password.visibilityButton = document.querySelector("main > aside:nth-of-type(5) > button:last-child");
-            this.clipboardWarning = document.querySelector("body > aside");
-            this.MaxSectionWidth = 0;
-            this.adjustSizes();
-            this.adjustTitles();
-            const visibilityButtons = [
-                this.masterPasswordVisibilityButton,
-                this.userInfo.visibilityButton,
-                this.password.visibilityButton,
-            ];
-            for (let button of visibilityButtons) {
-                button.addEventListener("click", ev => {
-                    if (ev.target[downProperty]) {
-                        ev.target[downProperty] = false;
-                        ev.target.className = String.empty;
-                        ev.target.firstChild.textContent = visionOffCharacter;
-                    } else {
-                        ev.target[downProperty] = true;
-                        ev.target.className = downClass;
-                        ev.target.firstChild.textContent = visionOnCharacter;
-                    } //if
-                }); // button.onClick
-            } //loop buttons
-            this.isButtonDown = button => button[downProperty] == true;
-            this.masterPasswordVisibilityButton.addEventListener("click", ev => {
-                const inputType = this.isButtonDown(ev.target) ? "text" : "password";
-                this.masterPassword.setAttribute("type", inputType);
-            });
-            this.userInfo.visibilityButton.addEventListener("click", ev => {
-                const accountDisplay = inputData.accounts[accountIndexMap[this.accountSelector.selectedIndex]].display;
-                this.userInfo.name.textContent = 
-                    this.isButtonDown(ev.target) ? accountDisplay.user.name : accountDisplay.hiddenUserAuthenticationName;
-            });
-            this.processMeta();
-            this.masterPassword.focus();
-        }, //populate
-        onload: function() { this.masterPassword.focus(); },
-        clipboardDataPresent: false,
-        setClipboardWarning: function(fromPaste) {
-            if (fromPaste) this.clipboardDataPresent = true;
-            if (!this.clipboardDataPresent) return;
-            this.clipboardWarning.style.visibility = "visible";
-            let timeoutId = 0;
-            const timeoutAction = () => {
-                elements.clipboardWarning.style.visibility = "hidden";
-                window.clearTimeout(timeoutId);
-            };
-            timeoutId = window.setTimeout(timeoutAction, this.clipboardWarningTimeout);
-        }, //setClipboardWarning
-        optimizeWidths: function(firstTime) {
-            for (let index = 0; index < inputData.accounts.length; ++index) {
-                if (firstTime) {
-                    this.accountSelector.selectedIndex = index;
-                    refresh(index);
-                } //firstTime
-                for (let sectionindex = 0; sectionindex < this.allSections.length; ++sectionindex)
-                    if (this.allSections[sectionindex].offsetWidth > this.MaxSectionWidth)
-                    this.MaxSectionWidth = this.allSections[sectionindex].offsetWidth;
-            } //loop
-            for (let sectionindex = 0; sectionindex < this.allSections.length; ++sectionindex)
-                this.allSections[sectionindex].style.minWidth = utility.styleSize(this.MaxSectionWidth);
-        }, //optimizeWidths
-        adjustSizes: function() {
-            let maxButtonSize = Math.max(
-                this.masterPasswordVisibilityButton.offsetHeight,
-                this.masterPasswordVisibilityButton.offsetWidth,
-                this.userInfo.clipboardButton.offsetHeight,
-                this.userInfo.clipboardButton.offsetWidth
-            );
-            const allButtons = document.querySelectorAll("button");
-            for (let button of allButtons) {
-                button.style.width = utility.styleSize(maxButtonSize);
-                button.style.height = utility.styleSize(maxButtonSize);
-            }    
-            this.masterPassword.style.height = utility.styleSize(maxButtonSize);
-        }, //adjustSizes
-        adjustTitles: function() {
-            for (let section of document.querySelectorAll("section")) {
-                section.previousElementSibling.title = section.title;
-                section.nextElementSibling.title = section.title;
-            } //loop
-        }, //adjustTitles
-        processMeta: function() {
-            const metaElements = document.getElementsByTagName("meta");
-            const mainTitleElement = document.querySelector("h1");
-            const copyrightElement = document.querySelector("body > footer b");
-            const versionElement = document.querySelector("hgroup > h1 + p > b");
-            const meta = {};
-            for (let element of metaElements)
-                meta[element.name] = element.content;
-            mainTitleElement.textContent = document.title;
-            mainTitleElement.title = `${meta.description}\n\nv.${this.thinSpace}${productVersion}`;
-            if (inputData.metadata.title) document.title += ` ${inputData.metadata.title}`;
-            copyrightElement.textContent = meta.copyright;
-            versionElement.textContent = displayProductVersion;
-        }, //processMeta
-    }; //elements
-
     const generatedData = [];
     const accountIndexMap = {};
 
@@ -248,29 +126,27 @@
     //////// main:
 
     window.onload = () => {
-        try {
-            elements.populate();
-            elements.password.clipboardButton.onclick = ev => {
-                elements.setClipboardWarning(true);
-                utility.clipboard.copy(generatedData[accountIndexMap[elements.accountSelector.selectedIndex]]);
-            };
-            elements.userInfo.clipboardButton.onclick = ev => {
-                elements.setClipboardWarning(true);
-                utility.clipboard.copy(inputData.accounts[accountIndexMap[elements.accountSelector.selectedIndex]].display.user.name);
-            };
-            elements.password.visibilityButton.addEventListener("click", ev => {
-                showPassword();
-            }); //elements.password.visibilityButton on click        
-            populate();
-            elements.masterPassword.oninput = () => { showPassword(true /*generate new*/); };
-            elements.accountSelector.onchange = ev => { refresh(accountIndexMap[ev.target.selectedIndex]); };
-            if (elements.accountSelector.childElementCount > 0) {
-                elements.accountSelector.selectedIndex = 0;
-                refresh(0);
-            } //if
-        } catch (ex) {
-            alert(ex);
-        } //exception
+        elements.populate(inputData, refresh, accountIndexMap);
+        elements.password.clipboardButton.onclick = ev => {
+            elements.setClipboardWarning(true);
+            utility.clipboard.copy(generatedData[accountIndexMap[elements.accountSelector.selectedIndex]]);
+        };
+        elements.userInfo.clipboardButton.onclick = ev => {
+            elements.setClipboardWarning(true);
+            utility.clipboard.copy(inputData.accounts[accountIndexMap[elements.accountSelector.selectedIndex]].display.user.name);
+        };
+        elements.password.visibilityButton.addEventListener("click", ev => {
+            showPassword();
+        }); //elements.password.visibilityButton on click        
+        populate();
+        elements.masterPassword.oninput = () => { showPassword(true /*generate new*/); };
+        elements.accountSelector.onchange = ev => {
+            refresh(accountIndexMap[ev.target.selectedIndex]);
+        };
+        if (elements.accountSelector.childElementCount > 0) {
+            elements.accountSelector.selectedIndex = 0;
+            refresh(0);
+        } //if
     }; //main
 
 })();

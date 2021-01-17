@@ -1,102 +1,127 @@
-﻿<!DOCTYPE html><html lang="en">
+﻿<!DOCTYPE html>
 
-<script src="redirectAPI.js"></script>
+<!--
+// Microtonal Music Study with Chromatic Lattice Keyboard
+//
+// Copyright (c) Sergey A Kryukov, 2017-2021
+//
+// http://www.SAKryukov.org<aside>Sensitive data has been added to the system clipboard. Make sure to wipe it when it is no longer needed.</aside>
+// http://www.codeproject.com/Members/SAKryukov
+// https://github.com/SAKryukov
+// https://github.com/SAKryukov/microtonal-chromatic-lattice-keyboard
+//
+-->
 
+<html lang="en-us">
 <head>
-    <meta charset="UTF-8">
-    <title>Storage-Free Pass</title>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta name="author" content="Sergey A Kryukov">
-    <meta name="owner" content="Sergey A Kryukov">
-    <meta name="copyright" content="Sergey A Kryukov, 2020">
-    <meta name="description" content="Generator of highly secure passwords based on SHA-2 cryptographic hash and master password, which should be memorized; no password storage is involved">
-    <meta name="keywords" content="security, password, passwords, generator, cryptography, cryptographic, hash, SHA-256">
-    <!-- see also: https://gist.github.com/lancejpollard/1978404 -->
-    <style>
-        :root {
-            --vspace: 0.2em;
-            --vspace-button: 0.1em;
-            --hspace: 1em;
-        }
-        * { font-family: sans-serif; box-sizing: border-box; }
-        hgroup * { display: inline-block; }
-        h1 { font-size: 140%; }
-        h1 + p > b { font-weight: normal; }
-        html, body { background-color: papayawhip; }
-        body, main { margin-left: var(--hspace); }
-        header { margin-bottom: 0.6em; display: flex; align-items: center; }
-        header > input { width: 24em; margin-left: 0.8em; margin-right: var(--vspace); padding-left: 0.6em; padding-right: 0.6em; }
-        select { vertical-align: top; }
-        select:focus, input:focus, button:focus { background-color: #DDEEFF; }
-        main { display: inline-grid; grid-template-columns: auto auto auto; }
-        main { border-left: thin solid black; border-right: thin solid black; border-bottom: thin solid black; }
-        main > label, main > section, main > aside {
-            flex: none; flex-grow: 0; 
-            border-top: 1px solid black;
-            padding-left: var(--hspace); padding-right: var(--hspace);
-            display: flex; align-items: center;
-            background-color: snow;
-            white-space: nowrap;
-        }
-        header > input, select { border: solid thin black; }
-        main > label { justify-content: flex-end; padding-top: var(--hspace); padding-bottom: var(--hspace); }
-        main > section { justify-content: center; }
-        button { background-color: transparent; font-size: 160%; border: transparent solid thin; font-family: "Consolas"; }
-        button { margin-top: var(--vspace-button); margin-bottom: var(--vspace-button); }
-        button { padding: 0; }
-        button:hover { background-color: #A0E5FF; }
-        button::-moz-focus-inner, a::-moz-focus-inner { border: 0; }
-        button:focus { outline: solid black thin; }
-        button.down:hover { background-color: #EEEEFF; }
-        button:active, button.down:active { background-color: yellow; }
-        button > b { opacity: 0.5; pointer-events: none; }
-        button.down > b { opacity: 1; }
-        select { padding: 3px; }
-        optgroup { color: darkblue; font-weight: bolder; font-style: normal; font-size: 1.1rem; }
-        option { font-size: 0.8rem; padding-left: var(--hspace); padding-right: var(--hspace); padding-top: var(--vspace); padding-bottom: var(--vspace); color: black; }
-        body > aside { display: block; margin-top: 0.6em; visibility: hidden; color: red; }
-        hr { margin-bottom: 0; }
-        body > footer  { margin-top: var(--vspace); font-size: 70%; }
-        body > footer  b { font-weight: normal; }
-        input, select option { border-radius: 4px; }
-    </style>
+   <title>Storage-Free Pass</title>
+   <meta charset="utf-8"/>
+   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+   <meta name="version" content="2.0.0">
+   <meta name="author" content="Sergey A Kryukov">
+   <meta name="owner" content="Sergey A Kryukov">
+   <meta name="copyright" content="Sergey A Kryukov, 2020-2021">
+   <meta name="description" content="System for entering secure passwords, storage-free">
+   <meta name="keywords" content="security, password, passwords, generator, cryptography, cryptographic, hash, SHA-256">
+  <script src="redirectAPI.js"></script>
+   <style>
+      :root {
+         --small-vertical-gap: 0.2em;
+         --vertical-gap: 0.4em;
+         --big-vertical-gap: 1em;
+         --small-horizontal-gap: 0.2em;
+         --big-horizontal-gap: 1em;
+         --horizontal-gap: 0.6em;
+         --frame: 0.2em 1.2em 0.2em 1.2em;
+         --border: solid thin gray;
+      }
+      * { padding: 0; margin: 0; box-sizing: border-box; }
+      * { font-family: sans-serif; }
+      select { height: 100%; outline: var(--border); border: none; }
+      input, table { border: var(--border); }
+      html, body { height: 100%; }
+      body { display: flex; flex-flow: column; height: 100%; user-select: none; }
+      header input { outline: none; width: 24em; text-overflow: ellipsis; padding: 0.4em; padding-left: 0.6em; padding-right: 0.6em; border-radius: 4px; }
+      header > section { display: flex; align-items: center; width: fit-content; }
+      header > section > div { width: var(--horizontal-gap); }
+      h1 { font-size: 150%; margin-top: var(--big-vertical-gap); margin-bottom: var(--big-vertical-gap); }
+      h1 > small { font-size: 80%; font-weight: normal; }
+      option, input, main, footer, header, th, td { padding: var(--big-horizontal-gap); }
+      option, input, footer, header, th, tr { padding-top: var(--small-vertical-gap); padding-bottom: var(--small-vertical-gap); }
+      optgroup { padding-left: var(--horizontal-gap); }
+      main { padding-top: var(--big-vertical-gap); padding-bottom: var(--big-vertical-gap); }
+      table { border-collapse: collapse; }
+      table, main aside { margin-left: 3em; }
+      main aside { margin-top: var(--big-vertical-gap); color: red; visibility: hidden; }
+      th { font-weight: normal; padding: 1em; }
+      td { border-top: var(--border); vertical-align: middle; }
+      td:first-child { text-align: right; }
+      td:last-child { padding-left: 0; }
+      td { width: fit-content; }
+      td:nth-of-type(2) { width: 0.1em; text-align: center; }
+      td:nth-last-child(2) { padding: var(--horizontal-gap); }
+      button { border: none; font-size: 160%; padding: 0.2em; outline: none; }
+      button:focus { outline: var(--border) }
+      main { flex: auto; }
+      main > section { display: inline-block; vertical-align: top; }
+      footer { border-top: var(--border); }
+      footer b { font-style: normal; font-weight: normal; }
+      footer a { margin-left: var(--big-horizontal-gap); }
+      header > section, h1, footer, td { white-space: nowrap; }
+      header { background-color: transparent; }
+      html, body { background-color: papayawhip; }
+      footer { background-color: azure; }
+      table { background-color: white; }
+      button { background-color: transparent; }
+      select:focus, input:focus, button:focus { background-color: #DDEEFF; }
+  </style>
 </head>
 <body>
 
-<hgroup>
-<h1></h1>
-<p>&ensp;v.&thinsp;<b>version</b></p>
-</hgroup>
-
-<header title="Master password, should be memorized and never disclosed to anyone"><label accesskey="M" for="master-password"><u>M</u>aster Password:</label><input type="password" id="master-password" spellcheck="false"/><button title="Toggle visibility"><b>&#x1F576;</b></button></header>
-
-<select size="20" title="Set of accounts protected by passwords"></select>
+<header>
+  <h1><span></span> <small>v.&thinsp;<span></span></small></h1>
+  <section>
+    <label>Master Password:</label>
+    <div></div>
+    <input type="password"/>
+    <div></div>
+    <button title="Toggle visibility">&#x1F576;</button>
+  </section>
+</header>
 
 <main>
-  <label></label>
-  <section title="Optional account URL used for authentication">&nbsp;</section>
-  <aside></aside>
-  <label for="user-name-clipboard" accesskey="N"><a>User</a>&ensp;<u>N</u>ame:</label>
-  <section title="Optional account user name"></section>
-  <aside><button id="user-name-clipboard" title="Copy to clipboard">&#x1F4CB;</button><button title="Toggle visibility"><b>&#x1F576;</b></button></aside>
-  <label>Seed:</label>
-  <section title="Essential data security-critical element: seed for cryptographic hash generation, should always be defined"></section>
-  <aside></aside>
-  <label>Selection:</label>
-  <section title="Selection of data used for password generation: start of password in cryptographic hash, password length, character repertoire offset, inserts"></section>
-  <aside></aside>
-  <label for="password-clipboard"><u>P</u>assword:</label>
-  <section title="Account password"></section>
-  <aside><button id="password-clipboard" accesskey="P" title="Copy to clipboard">&#x1F4CB;</button><button title="Toggle visibility"><b>&#x1F576;</b></button></aside>
+  <select multiple="true"></select>
+  <section>
+    <table>
+      <tr title="Optional account URL used for authentication">
+        <th colspan="4">Account</th>
+      </tr>
+      <tr title="Optional account user name">
+        <td><a href="">User</a> <u>N</u>ame:</td>
+        <td></td>
+        <td><button title="Copy to clipboard">&#x1F4CB;</button></td>
+        <td><button title="Toggle visibility">&#x1F576;</button></td>
+      </tr>
+      <tr title="Essential data security-critical element: seed for cryptographic hash generation, should always be defined">
+        <td>Seed:</td><td></td><td></td><td></td>
+      </tr>
+      <tr title="Selection of data used for password generation: start of password in cryptographic hash, password length, character repertoire offset, inserts">
+        <td>Selection:</td><td></td><td></td><td></td>
+      </tr>
+      <tr title="Account password">
+        <td>Password:</td>
+        <td></td>
+        <td><button title="Copy to clipboard">&#x1F4CB;</button></td>
+        <td><button title="Toggle visibility">&#x1F576;</button></td>
+      </tr>
+    </table>
+    <aside>Sensitive data has been added to the system clipboard.<br/>Make sure to wipe it when it is no longer needed.</aside>
+  </section>
 </main>
 
-<aside>Sensitive data has been added to the system clipboard. Make sure to wipe it when it is no longer needed.</aside>
-
-<p><a href="help.html">Help</a></p>
-<hr/>
-
-<footer>Copyright &copy; <b></b></footer>
+<footer><small>Copyright &copy; <b></b> <a href="help.html">Help</a></small></footer>
 
 <script src="main.js"></script>
 
-</body></html>
+</body>
+</html>

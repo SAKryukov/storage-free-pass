@@ -51,4 +51,10 @@ const utility = {
 
     styleSize: value => `${value}px`,
 
+    showPartialVersion: (version, count) => {
+        const separator = ".";
+        const components = version.split(separator);
+        return components.splice(0, count).join(separator);
+    } //showPartialVersion
+
 };
