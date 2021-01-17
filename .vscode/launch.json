@@ -5,7 +5,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Tools",
-            "file": "${workspaceFolder}/docs/tools.html"
+            "file": "${workspaceFolder}/code/index.html"
         }
     ]
 }
