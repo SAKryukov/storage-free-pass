@@ -18,7 +18,7 @@ Run the application "index.html". Enter the master password. The account passwor
 
 For source code, see [code](./code)
 
-[Live Demo](https://SAKryukov.github.io/html-javascript-password-generator).
+[Live Demo](https://sakryukov.github.io/storage-free-pass/code).
 
 ## Credits
 
