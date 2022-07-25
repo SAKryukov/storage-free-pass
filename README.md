@@ -8,7 +8,15 @@ This password generator is deterministic. It doesn't store any passwords in any 
 
 ## Basic Usage
 
-Edit user-data.js for your very own set of accounts. Make sure to fill in account `name` values and different `seed` values for each case. If you need to change the password, change the `seed` value. It's a good idea to use date or date/time of password creation in the `seed` string, combined with the accound name. Strictly speaking, seed values don't have to be kept in secret.
+Create and HTML file and reference the script API.js in the `head` element:
+
+```
+<head>
+<script src="../storage-free-pass.api/API.js"></script>
+</head>
+```
+
+In the `<body>` element, add a single script. It should define the function `const userData = () => {/*...*/};` and return the structure of the user accounts. Make sure to fill in account `name` values and different `seed` values for each case. If you need to change the password, change the `seed` value. It's a good idea to use date or date/time of password creation in the `seed` string, combined with the accound name. Strictly speaking, seed values don't have to be kept in secret. See [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user-demo/index.html) and the page source for more detail.
 
 Really secret piece of data is your master password, which should better be memorized and not disclosed to anyone. It can be used for a long time. If you decide to change your master password, you would have to change all the account passwords.
 
