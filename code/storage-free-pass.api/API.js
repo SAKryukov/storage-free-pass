@@ -13,7 +13,7 @@ const api = (()=>{
     
     const applyScripts = (sourceFileNames, customCryptoScript) => {
         if (customCryptoScript == null) {
-            showError("Crypto system is not defined");
+            setTimeout(() => { showError("Crypto system is not defined"); });
             return;
         } //if
         const search = new URLSearchParams(document.location.search);
