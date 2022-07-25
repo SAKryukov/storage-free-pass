@@ -20,6 +20,8 @@ For source code, see [code](./code)
 
 [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user-demo/index.html).
 
+![Screenshot](doc/main.webp)
+
 ## Credits
 
 Inspired by [this work](https://SS64.com/pass) by [Simon Sheppard](https://ss64.com). 
