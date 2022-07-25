@@ -1,0 +1,48 @@
+﻿      :root {
+         --small-vertical-gap: 0.2em;
+         --vertical-gap: 0.4em;
+         --big-vertical-gap: 1em;
+         --small-horizontal-gap: 0.2em;
+         --big-horizontal-gap: 1em;
+         --horizontal-gap: 0.6em;
+         --frame: 0.2em 1.2em 0.2em 1.2em;
+         --border: solid thin gray;
+      }
+      * { padding: 0; margin: 0; box-sizing: border-box; }
+      * { font-family: sans-serif; }
+      select { height: 100%; outline: var(--border); border: none; }
+      input, table { border: var(--border); }
+      html, body { height: 100%; }
+      body { display: flex; flex-flow: column; height: 100%; user-select: none; }
+      header input { outline: none; width: 24em; text-overflow: ellipsis; padding: 0.4em; padding-left: 0.6em; padding-right: 0.6em; border-radius: 4px; }
+      header > section { display: flex; align-items: center; width: fit-content; }
+      header > section > div { width: var(--horizontal-gap); }
+      h1 { font-size: 150%; margin-top: var(--big-vertical-gap); margin-bottom: var(--big-vertical-gap); }
+      h1 > small { font-size: 80%; font-weight: normal; }
+      option, input, main, footer, header, th, td { padding: var(--big-horizontal-gap); }
+      option, input, footer, header, th, tr { padding-top: var(--small-vertical-gap); padding-bottom: var(--small-vertical-gap); }
+      optgroup { padding-left: var(--horizontal-gap); }
+      main { padding-top: var(--big-vertical-gap); padding-bottom: var(--big-vertical-gap); }
+      table { border-collapse: collapse; }
+      table, main aside { margin-left: 3em; }
+      main aside { margin-top: var(--big-vertical-gap); color: red; visibility: hidden; }
+      th { font-weight: normal; padding: 1em; }
+      td { border-top: var(--border); vertical-align: middle; }
+      td:first-child { text-align: right; }
+      td:last-child { padding-left: 0; }
+      td { width: fit-content; }
+      td:nth-of-type(2) { width: 0.1em; text-align: center; }
+      td:nth-last-child(2) { padding: var(--horizontal-gap); }
+      button { border: none; font-size: 160%; padding: 0.2em; outline: none; }
+      button:focus { outline: var(--border) }
+      main { flex: auto; }
+      main > section { display: inline-block; vertical-align: top; }
+      footer { border-top: var(--border); }
+      footer a { margin-left: var(--big-horizontal-gap); }
+      header > section, h1, footer, td { white-space: nowrap; }
+      header { background-color: transparent; }
+      html, body { background-color: papayawhip; }
+      footer { background-color: azure; }
+      table { background-color: white; }
+      button { background-color: transparent; }
+      select:focus, input:focus, button:focus { background-color: #DDEEFF; }

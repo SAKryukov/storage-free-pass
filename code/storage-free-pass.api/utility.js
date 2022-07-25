@@ -58,3 +58,4 @@ const utility = {
     } //showPartialVersion
 
 };
+

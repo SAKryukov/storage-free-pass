@@ -2,6 +2,9 @@
 
 (function ui() {
 
+    let elements = null;
+    const elementSet = createContent();
+
     const inputData = prepareData();
 
     const generatedData = [];
@@ -126,16 +129,21 @@
     //////// main:
 
     window.onload = () => {
-        elements.populate(inputData, refresh, accountIndexMap);
-        elements.password.clipboardButton.onclick = ev => {
+        elements = createElements();
+        elements.populate(elementSet, inputData, refresh, accountIndexMap);
+        const clipboardCopyHandler = textCreator => {
+            const text = textCreator();
+            if (text == null || text.length < 1) return;
             elements.setClipboardWarning(true);
-            utility.clipboard.copy(generatedData[accountIndexMap[elements.accountSelector.selectedIndex]]);
-        };
-        elements.userInfo.clipboardButton.onclick = ev => {
-            elements.setClipboardWarning(true);
-            utility.clipboard.copy(inputData.accounts[accountIndexMap[elements.accountSelector.selectedIndex]].display.user.name);
-        };
-        elements.password.visibilityButton.addEventListener("click", ev => {
+            utility.clipboard.copy(text);
+        }; //clipboardCopyHandler
+        elements.password.clipboardButton.onclick = () => {
+            clipboardCopyHandler(() => generatedData[accountIndexMap[elements.accountSelector.selectedIndex]]);
+        }; //elements.password.clipboardButton.onclick
+        elements.userInfo.clipboardButton.onclick = () => {
+            clipboardCopyHandler(() => inputData.accounts[accountIndexMap[elements.accountSelector.selectedIndex]].display.user.name);
+        }; //elements.userInfo.clipboardButton.onclick
+        elements.password.visibilityButton.addEventListener("click", () => {
             showPassword();
         }); //elements.password.visibilityButton on click        
         populate();
@@ -147,6 +155,7 @@
             elements.accountSelector.selectedIndex = 0;
             refresh(0);
         } //if
-    }; //main
+        setTimeout( () => { elements.masterPassword.focus(); });
+    }; //window.onload
 
 })();
