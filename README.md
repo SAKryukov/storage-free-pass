@@ -16,9 +16,13 @@ Create an HTML file and reference the script “API.js” in the `head` element:
 </head>
 ```
 
+<<<<<<< HEAD
+In the `<body>` element, add a single script. It should define the function `const userData = () => {/*...*/};` and return the structure of the user accounts. Make sure to fill in account `name` values and different `seed` values for each case. If you need to change the password, change the `seed` value. It's a good idea to use the date or date/time of password creation in the `seed` string, combined with the account name. Strictly speaking, seed values don't have to be kept secret. See [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user-demo/index.html) and the page source for the complete sample. See also the product [Help](https://sakryukov.github.io/storage-free-pass/code/storage-free-pass.api/help.html).
+=======
 In the `<body>` element, add a single script. It should define the function `const userData = () => {/*...*/};` and return the structure of the user accounts. Make sure to fill in account `name` values and different `seed` values for each case. If you need to change the password, change the `seed` value. It's a good idea to use the date or date/time of password creation in the `seed` string, combined with the account name. Strictly speaking, seed values don't have to be kept secret. See [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user-demo/index.html) and the page source for complete sample. See also the product [Help](https://sakryukov.github.io/storage-free-pass/code/storage-free-pass.api/help.html).
+>>>>>>> 78b039235aa568093c205463da8ec1206bf5dd54
 
-Really secret piece of data is your master password, which should better be memorized and not disclosed to anyone. It can be used for a long time. If you decide to change your master password, you would have to change all the account passwords.
+A really secret piece of data is your master password, which should better be memorized and not disclosed to anyone. It can be used for a long time. If you decide to change your master password, you would have to change all the account passwords.
 
 Run the application “index.html”. Enter the master password. The account passwords will be generated each time you modify the master passwords string. You can access the password using the buttons “Copy to clipboard” or “Toggle visibility”.
 
