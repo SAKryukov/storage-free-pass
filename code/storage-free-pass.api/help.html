@@ -14,9 +14,17 @@
 </head>
 <body>
 
-<h1>User Data</h1>
+<h1>Usage</h1>
 
-<p>The use can fill in account information in the file "userData.js". Let's consider the following example with only one account defined:</p>
+Create and HTML file and reference the script “API.js” in the <code>head</code> element:
+
+<pre lang="JavaScript">
+&lt;head&gt;
+  &lt;script&gt; src="../storage-free-pass.api/API.js"&lt;/script&gt;
+&lt;/head&gt;
+</pre>
+
+In the <code>&lt;body&gt;</code> element, add a single script. It should define the function <code>const userData = () => {/*...*/};</code> and return the structure of the user accounts. For example:
 
 <pre>
 "use strict";
@@ -28,7 +36,7 @@ const userData = () => {
    const strongCharacterRepertoire = "!#$%&()+-0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^abcdefghijkmnopqrstuvwxyz|~/";
       
    return {
-      metadata: { title: `${String.fromCodePoint(0x1F642)} User` },
+      metadata: { title: `User Data Sample ${String.fromCodePoint(0x1f9e1)}`, version: "1.0.0", },
       accounts: [
          {
             identity: {
@@ -191,20 +199,18 @@ const userData = () => {
     </details>
 </details>
 
-<h1>Redirect API</h1>
+<h2 id="custom-crypto">Custom Crypto System</h2>
 
-<p>SHA-2 Password Generator can be used as is, if the user edits the file "userData.js", as if it was a part of the application. However, this would be utterly inconvenient, especially when a new version of the application is pulled from its Git repository; then the user would either support a separate copy of all files, resolve conflicts, and so on. It would also be difficult to support more than one set of accounts.<p>
+<p>Optionally, the user can provide a custom crypto system:</p>
 
-<p>Redirect API is the way to have a separate user data file with a separate HTML file, which would launch the application through redirection, supplying a separate user data file as a parameter.<p>
-
-<p>Let's consider the example shown in the directory "redirect-demo", placed as a sub-directory of the application directory, with the user data file "accounts.js". Then a near-minimal HTML file can look like this:</p>
-
-<pre>
-&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;
-&lt;script src="../redirectAPI.js"&gt;&lt;/script&gt;
-&lt;script&gt;redirectAPI.redirect("../index.html", { userData: "./redirect-demo/accounts" } );&lt;/script&gt;
+<pre lang="JavaScript">
+&lt;head&gt;
+  &lt;script&gt;script data-crypto="../storage-free-pass.api/crypto.js" src="../storage-free-pass.api/API.js"&lt;/script&gt;
+&lt;/head&gt;
 </pre>
 
-<p>Note that the paths in "accounts.js" are still the paths relative to the application directory. In practice, the user-supplied files should be placed anywhere outside of the application directory.</p>
+The file “crypto.js” can be any file used to replace the file “storage-free-pass.api/crypto.js”. If should implement the same functionality and define the function <code>const passwordGenerator = (() => {/* ... */}</code>.
+
+The file is found by the attribute <code>script</code> attrubute <code>data-crypto</code>. If this attribute is not defined, the default file “storage-free-pass.api/crypto.js” is used.
 
 </body></html>

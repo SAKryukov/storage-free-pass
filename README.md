@@ -1,4 +1,4 @@
-# Storage-Free Pass
+﻿# Storage-Free Pass
 
 *Generator of highly secure passwords based on cryptographic hash and master password, which should be memorized; no password storage is involved*
 
@@ -8,7 +8,7 @@ This password generator is deterministic. It doesn't store any passwords in any 
 
 ## Basic Usage
 
-Create and HTML file and reference the script API.js in the `head` element:
+Create and HTML file and reference the script “API.js” in the `head` element:
 
 ```
 <head>
