@@ -70,11 +70,27 @@ const userData = () => {
          },
          {
             identity: {
-               seed: "GitHub 2020/02/12",
+               seed: "GitHub 2022/07/25",
                selection: { start: 1, length: 16, shift: 0 }
             },
             display: { name: "GitHub", group: "Software", url: "https://github.com", user: {name: "me"} }
          },
+         {
+            identity: {
+               seed: "CodeProject 2022/07/25",
+               selection: { start: 1, length: 16, shift: 0 }
+            },
+            display: { name: "CodeProject", group: "Software", url: "https://www.codeproject.com", user: {name: "me"} }
+         },
+
+         {
+            identity: {
+               seed: "My work 2022/07/16",
+               selection: { characterRepertoire: strongCharacterRepertoire, inserts: { value: "1Fb", position: 4 }, start: 0, length: 16, shift: 0 }
+            },
+            display: { group: String.fromCodePoint(0x2692), name: "My work", user: { name: "employee" } },
+         },
+
       ], // accounts    
       default: {
          identity: { seed: "ERROR! define seed!",
