@@ -16,7 +16,7 @@
 
 <h1>Usage</h1>
 
-Create and HTML file and reference the script “API.js” in the <code>head</code> element:
+Create an HTML file and reference the script “API.js” in the <code>head</code> element:
 
 <pre lang="JavaScript">
 &lt;head&gt;
@@ -199,9 +199,9 @@ const userData = () => {
     </details>
 </details>
 
-<h2 id="custom-crypto">Custom Crypto System</h2>
+<h2 id="custom-crypto">Custom Cryptosystem</h2>
 
-<p>Optionally, the user can provide a custom crypto system:</p>
+<p>Optionally, the user can provide a custom cryptosystem:</p>
 
 <pre lang="JavaScript">
 &lt;head&gt;
@@ -211,6 +211,6 @@ const userData = () => {
 
 The file “crypto.js” can be any file used to replace the file “storage-free-pass.api/crypto.js”. If should implement the same functionality and define the function <code>const passwordGenerator = (() => {/* ... */}</code>.
 
-The file is found by the attribute <code>script</code> attrubute <code>data-crypto</code>. If this attribute is not defined, the default file “storage-free-pass.api/crypto.js” is used.
+The file is found by the attribute <code>script</code> attribute <code>data-crypto</code>. If this attribute is not defined, the default file “storage-free-pass.api/crypto.js” is used.
 
 </body></html>
