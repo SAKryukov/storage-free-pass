@@ -22,7 +22,7 @@
       option, input, main, footer, header, th, td { padding: var(--big-horizontal-gap); }
       option, input, footer, header, th, tr { padding-top: var(--small-vertical-gap); padding-bottom: var(--small-vertical-gap); }
       optgroup { padding-left: var(--horizontal-gap); }
-      main { padding-top: var(--big-vertical-gap); padding-bottom: var(--big-vertical-gap); }
+      main { padding-top: var(--big-vertical-gap); padding-bottom: var(--big-vertical-gap); white-space: nowrap; }
       table { border-collapse: collapse; }
       table, main aside { margin-left: 3em; }
       main aside { margin-top: var(--big-vertical-gap); color: red; visibility: hidden; }
