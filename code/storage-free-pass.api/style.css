@@ -19,6 +19,7 @@
       header > section > div { width: var(--horizontal-gap); }
       h1 { font-size: 150%; margin-top: var(--big-vertical-gap); margin-bottom: var(--big-vertical-gap); }
       h1 > small { font-size: 80%; font-weight: normal; }
+      h1 > span:last-of-type { font-size: 85%; color: darkred; } /* user metadata title */
       option, input, main, footer, header, th, td { padding: var(--big-horizontal-gap); }
       option, input, footer, header, th, tr { padding-top: var(--small-vertical-gap); padding-bottom: var(--small-vertical-gap); }
       optgroup { padding-left: var(--horizontal-gap); }

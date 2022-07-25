@@ -12,7 +12,6 @@
                 const downProperty = Symbol();
                 const visionOnCharacter = String.fromCodePoint(0x1F441);
                 const visionOffCharacter = String.fromCodePoint(0x1F576);
-                this.thinSpace = String.fromCodePoint(0x2009);
                 this.clipboardWarningTimeout = definitionSet.clipboardWarningTimeout;
                 //
                 this.table  = elementSet.table;
@@ -117,14 +116,19 @@
                 const mainTitleElement = elementSet.titlePlaceholder;
                 const copyrightElement = elementSet.copyrightElement;
                 const versionElement = elementSet.versionPlaceholder;
+                const userMetadataPlaceholder = elementSet.userMetadataPlaceholder;
                 const directory = api.getCurrentDirectory();
-                elementSet.helpAnchor.href = directory + definitionSet.help;
                 document.title = definitionSet.title;
+                elementSet.helpAnchor.href = directory + definitionSet.help;
                 mainTitleElement.textContent = definitionSet.title;
-                mainTitleElement.title = `${definitionSet.description}\n\nv.${this.thinSpace}${definitionSet.version}`;
-                if (this.inputData.metadata.title) definitionSet.title += ` ${this.inputData.metadata.title}`;
+                mainTitleElement.title =
+                    definitionSet.formats.mainTitleTooltip(definitionSet.description, definitionSet.version, this.inputData.metadata.title, this.inputData.metadata.version);
                 copyrightElement.textContent = definitionSet.copyright;
                 versionElement.textContent = utility.showPartialVersion(definitionSet.version, 2);
+                if (this.inputData.metadata.title) {
+                    elementSet.userMetadataSeparatorPlaceholder.style.display = "inline";
+                    userMetadataPlaceholder.textContent = this.inputData.metadata.title;
+                } //if
                 for (let metaElement of definitionSet.meta) {
                     const meta = document.createElement("meta");
                     meta.name = metaElement.name;

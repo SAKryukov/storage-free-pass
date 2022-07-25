@@ -10,4 +10,8 @@ const definitionSet = {
     ],
     help: "help.html",
     clipboardWarningTimeout: 5000,
+    formats: {
+        mainTitleTooltip: (description, version, userTitle, userVersion) =>
+            `${description}\nv.${String.fromCodePoint(0x2009)}${version}\nUser data: ${userTitle} ${userVersion ? "v." + String.fromCodePoint(0x2009) + userVersion.toString() : ""}`,
+    },
 };

@@ -15,9 +15,15 @@ const createContent = () => {
         const versionPlaceholderParent = document.createElement("small");
         versionPlaceholderParent.appendChild(versionDenotation);
         versionPlaceholderParent.appendChild(elementSet.versionPlaceholder);
+        elementSet.userMetadataPlaceholder = document.createElement("span");
+        elementSet.userMetadataSeparatorPlaceholder = document.createElement("span");
+        elementSet.userMetadataSeparatorPlaceholder.textContent = ` ${String.fromCodePoint(0x2014)} `;
+        elementSet.userMetadataSeparatorPlaceholder.style.display = "none";
         mainHeading.appendChild(elementSet.titlePlaceholder);
         mainHeading.appendChild(blank);
         mainHeading.appendChild(versionPlaceholderParent);
+        mainHeading.appendChild(elementSet.userMetadataSeparatorPlaceholder);
+        mainHeading.appendChild(elementSet.userMetadataPlaceholder);
         const section = document.createElement("section");
         const masterPasswordLabel = document.createElement("label");
         masterPasswordLabel.innerHTML = "Master Password:&nbsp;";
