@@ -2,6 +2,10 @@
 
 const api = (()=>{
 
+    const defaultCryptoScript = "crypto.js";
+    const scriptChain = [ "definitionSet", "utility", "contentCreator", "controls", "ui" ];
+    
+    /*
     const showError = error => {
         while (document.body.lastChild)
             document.body.removeChild(document.body.lastChild);
@@ -10,12 +14,12 @@ const api = (()=>{
         element.textContent = error;
         document.body.appendChild(element);
     }; //showError
+    */
     
     const applyScripts = (sourceFileNames, customCryptoScript) => {
-        if (customCryptoScript == null) {
-            setTimeout(() => { showError("Crypto system is not defined"); });
-            return;
-        } //if
+        let directory = getCurrentDirectory();
+        if (customCryptoScript == null)
+            customCryptoScript = directory + defaultCryptoScript;
         const search = new URLSearchParams(document.location.search);
         const effectiveSourceFileNames = [];
         if (customCryptoScript != null)
@@ -26,7 +30,6 @@ const api = (()=>{
             effectiveSourceFileNames.push(effectiveSource);
         } //loop
         let currentIndex = 0;
-        let directory = getCurrentDirectory();
         const addScript = () => {
             if (currentIndex >= effectiveSourceFileNames) return;
             const source = effectiveSourceFileNames[currentIndex++];
@@ -59,7 +62,7 @@ const api = (()=>{
         return cryptoScript;
     }; //getCustomCrypto
 
-    applyScripts([ "definitionSet", "utility", "contentCreator", "controls", "ui" ], getCustomCrypto());
+    applyScripts(scriptChain, getCustomCrypto());
 
     return { getCurrentDirectory: getCurrentDirectory }
 
