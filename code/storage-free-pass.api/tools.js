@@ -2,8 +2,89 @@
 
 (() => {
 
+    const userData = () => {
+
+        const defaultPasswordLength = 16;
+        const basicCharacterRepertoire = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        const testCharacterRepertoire = basicCharacterRepertoire;
+        const strongCharacterRepertoire = "!#$%&()+-0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^abcdefghijkmnopqrstuvwxyz|~/";
+        const easiestCharacterRepertoire = "0123456789abcdefghijkmnopqrstuvwxyz";
+        const easyCharacterRepertoire = "0123456789abcdefghijkmnopqrstuvwxyz[]-=/";
+        const ultimateCharacterRepertoire =
+            "!#$%&()*+/0123456789<=>?@ABCDEFG" +
+            "HIJKLMNOPQRSTUVWXYZ[]^abcdefghij" +
+            "klmnopqrstuvwxyz{|}~¡¢£¤¥¦§©«¬­®" +
+            "±µ»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÐÑÒÓÔÕÖ×ØÜÝÞß" +
+            "ႠႡႢႣႤႥႦႧႨႩႪႫႬႭႮႯႰႱႲႳႴႵႶႷႸႹႺႻႼႽႾႿ" +
+            "աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտր" +
+            "ሀሁሂሃሄህሆሇለሉሊላሌልሎሏሐሑሒሓሔሕሖሗመሙሚማሜምሞሟ" +
+            "ሠሡሢሣሤሥሦሧረሩሪራሬርሮሯሰሱሲሳሴስሶሷሸሹሺሻሼሽሾሿ";
+
+        return {
+            metadata: {
+                title: `User Data Sample ${String.fromCodePoint(0x1f9e1)}`, version: "1.0.0",
+                //String.fromCodePoint(0x1f497)
+                //String.fromCodePoint(0x1f9e1)
+            },
+            accounts: [
+                {
+                    identity: {
+                        seed: "Test",
+                        selection: { characterRepertoire: testCharacterRepertoire, start: 0, length: 8, shift: 0 }
+                    },
+                    display: { name: "Test", user: { name: "Test User" } }
+                },
+                {
+                    identity: {
+                        seed: "MDB 2022/07/25",
+                        selection: { characterRepertoire: ultimateCharacterRepertoire, start: 3, length: 15, shift: 1, inserts: { value: "dF1", position: 3 } }
+                    },
+                    display: { name: "Most Dependable Bank", group: "$", url: "http://www.MostDependableBank.com", user: { name: "Responsible-bank-user", url: "accounts.html#account-members" } }
+                },
+                {
+                    identity: {
+                        seed: "WikipediA 2020/02/12 13:16",
+                        selection: { start: 0, length: 32, shift: 201 }
+                    },
+                    display: { name: "WikipediA", group: `${String.fromCodePoint(0x1F4DA)}`, url: "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page", user: { name: "me" } }
+                },
+                {
+                    identity: {
+                        seed: "GitHub 2022/07/25",
+                        selection: { start: 1, length: 16, shift: 0 }
+                    },
+                    display: { name: "GitHub", group: "Software", url: "https://github.com", user: { name: "me" } }
+                },
+                {
+                    identity: {
+                        seed: "CodeProject 2022/07/25",
+                        selection: { start: 1, length: 16, shift: 0 }
+                    },
+                    display: { name: "CodeProject", group: "Software", url: "https://www.codeproject.com", user: { name: "me" } }
+                },
+
+                {
+                    identity: {
+                        seed: "My work 2022/07/16",
+                        selection: { characterRepertoire: strongCharacterRepertoire, inserts: { value: "1Fb", position: 4 }, start: 0, length: 16, shift: 0 }
+                    },
+                    display: { group: String.fromCodePoint(0x2692), name: "My work", user: { name: "employee" } },
+                },
+
+            ], // accounts    
+            default: {
+                identity: {
+                    seed: "ERROR! define seed!",
+                    selection: { characterRepertoire: strongCharacterRepertoire, start: 0, length: defaultPasswordLength, shift: 0, }
+                },
+                display: { name: "Incomplete account", url: "https://www.undefined.account", user: { name: "unknown user", url: String.empty } }
+            },
+        };
+
+    };
+
     const elements = {
-        setup: function() {
+        setup: function () {
             this.footer = document.querySelector("main > section > footer");
             this.output = document.querySelector("textarea");
             this.inputFrom = document.querySelector("#input-unicode-subset-start");
@@ -19,7 +100,7 @@
             this.password = document.querySelector("aside > div > textarea");
             this.normalizationButton = document.querySelector("button");
         }, //setup
-        processMeta: function() {
+        processMeta: function () {
             const thinSpace = String.fromCodePoint(0x2009);
             const metaElements = document.getElementsByTagName("meta");
             const mainTitleElement = document.querySelector("header");
@@ -28,18 +109,18 @@
             for (let element of metaElements)
                 meta[element.name] = element.content;
             copyrightElement.textContent = meta.copyright;
-            mainTitleElement.innerHTML = `${document.title} <b>v.${thinSpace}${displayProductVersion}</b>`;
-            mainTitleElement.title = `${meta.description}\n\nv.${thinSpace}${productVersion}`;
+            mainTitleElement.innerHTML = `${document.title} <b>v.${thinSpace}${definitionSet.version}</b>`;
+            mainTitleElement.title = `${meta.description}\n\nv.${thinSpace}${definitionSet.description}`;
         }, //processMeta
     }; //elements
 
     const getSelectedText = textArea => textArea.value.substring(textArea.selectionStart, textArea.selectionEnd);
 
     const analyzeNormalForms = textArea => {
-        let result =  "\nNormalized forms:";
+        let result = "\nNormalized forms:";
         const text = getSelectedText(textArea);
         const savedSelection = [textArea.selectionStart, textArea.selectionEnd];
-        const forms = ["NFC",  "NFD", "NFKC", "NFKD"];
+        const forms = ["NFC", "NFD", "NFKC", "NFKD"];
         const formDictionary = {};
         let formCount = 0;
         for (let form of forms) {
@@ -57,7 +138,7 @@
                 result += `\n\tForm #${++formIndex}: ${formDictionary[form].join(", ")}`;
         else
             result += " all forms are identical";
-        window.setTimeout(()=>{
+        window.setTimeout(() => {
             textArea.setSelectionRange(savedSelection[0], savedSelection[1]);
             textArea.focus();
         }, 0);
@@ -90,7 +171,7 @@
             if (element instanceof HTMLInputElement)
                 element.oninput = updater;
             else if (element instanceof HTMLSelectElement)
-                element.onchange = updater;  
+                element.onchange = updater;
     }; //setupDataChange
 
     const populateFirstAccount = () => {
@@ -110,7 +191,7 @@
         populateSelect(elements.start, 0, 64);
         populateSelect(elements.length, 1, 64);
         populateSelect(elements.shift, 0, 256);
-        populateSelect(elements.insertPosition, 0, 64);        
+        populateSelect(elements.insertPosition, 0, 64);
         elements.length.selectedIndex = 23; //SA???
         populateFirstAccount();
         const dataElements = [
@@ -126,10 +207,10 @@
                 parseInt(elements.length.value),
                 elements.characterRepertoire.value,
                 parseInt(elements.shift.value),
-                { value: elements.insertValue.value, position: elements.insertPosition.value})
-                    .then(autoGeneratedPassword => {
-                        elements.password.textContent = autoGeneratedPassword;
-                    });
+                { value: elements.insertValue.value, position: elements.insertPosition.value })
+                .then(autoGeneratedPassword => {
+                    elements.password.textContent = autoGeneratedPassword;
+                });
         });
         const generateCharacterSet = () => {
             const from = parseInt(elements.inputFrom.value);
@@ -161,7 +242,7 @@
         elements.inputFrom.onkeydown = ev => { if (ev.key == "Enter") generateCharacterSet(); }
         elements.inputLength.onkeydown = ev => { if (ev.key == "Enter") generateCharacterSet(); }
         elements.normalizationButton.onclick = ev => {
-            elements.output.value +=  analyzeNormalForms(elements.output);
+            elements.output.value += analyzeNormalForms(elements.output);
         }; //elements.normalizationButton
         elements.inputFrom.focus();
     } //window.onload    

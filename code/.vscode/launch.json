@@ -4,8 +4,14 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Tools",
+            "name": "Storage-free pass",
             "file": "${workspaceFolder}/user-demo/index.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Tools",
+            "file": "${workspaceFolder}/storage-free-pass.api/tools.html"
         }
     ]
 }

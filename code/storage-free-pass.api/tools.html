@@ -1,16 +1,17 @@
 <!doctype html>
 
-<script src="redirectAPI.js"></script>
-
 <html>
     <meta charset="UTF-8">
     <title>SHA-2 Password Generator Tools</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta name="author" content="Sergey A Kryukov">
     <meta name="owner" content="Sergey A Kryukov">
-    <meta name="copyright" content="Sergey A Kryukov, 2020">
+    <meta name="copyright" content="Sergey A Kryukov, 2020-2022">
     <meta name="description" content="Generator of highly secure passwords based on SHA-2 cryptographic hash and master password, which should be memorized; no password storage is involved">
     <meta name="keywords" content="security, password, passwords, generator, cryptography, cryptographic, hash, SHA-256">
+    <script src="definitionSet.js"></script>
+    <script src="utility.js"></script>
+    <script src="crypto.js"></script>
 <head>
   <style>
     * { padding: 0; margin: 0; font-family: sans-serif; box-sizing: border-box; }
@@ -20,6 +21,7 @@
     body, main { display: flex; overflow: hidden; height: 100%; }
     input:focus, textarea:focus, select:focus { background-color: lightblue; filter: brightness(120%); border: thin solid gray; }
     body { flex-direction: column; }
+    button, label, a { white-space: nowrap; }
     aside { background-color: lightgreen; height: 100%; }
     header, footer, section, aside { padding: 1em; padding-top: 0.4em; padding-bottom: 0.4em; }
     section { flex: 1; overflow: auto; } /* remove "flex: 1" to get content-defined width */
@@ -41,6 +43,7 @@
     body > footer { border-top: thin solid gray; }
     body > footer > p:last-child { font-size: 70%; }
     body > footer > p:last-child b { font-weight: normal; }
+    body > footer a { margin-left: 2em; }
   </style>
 <head>
 
@@ -84,12 +87,11 @@
   </main>
 
   <footer>
-    <p><a href="help.html">Help</a></p>
-    <p>Copyright &copy; <b></b></p>
+    <p>Copyright &copy; <b></b><a href="help.html">Help</a></p>
    </footer>
 
 </body>
 
-<script src="tools-main.js"></script>
+<script src="tools.js"></script>
 
 </html>
