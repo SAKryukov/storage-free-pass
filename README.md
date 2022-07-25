@@ -12,7 +12,7 @@ Create and HTML file and reference the script API.js in the `head` element:
 
 ```
 <head>
-<script src="../storage-free-pass.api/API.js"></script>
+  <script src="../storage-free-pass.api/API.js"></script>
 </head>
 ```
 
