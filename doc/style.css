@@ -1,0 +1,26 @@
+	.title { font-size: 280%; text-align: center; margin-bottom: 0; padding-bottom: 0.2em; border-bottom: solid thin gray; margin-bottom: 1em; }
+	.author { text-align: right; }
+	.demo { background-color: Cornsilk; padding-left: 1em; padding-right: 1em; border: solid thin Chocolate; }
+	code { font-size: 120%; font-weight: bold; }
+	pre, code { color: darkGreen; padding:0; font-family: sans-serif }
+	pre code { color: black; font-weight: normal; font-size: 94%; }
+        pre { background-color: antiqueWhite; }
+        html, body, p { font-family: sans-serif; }
+        h1 { border: none; }
+        h1 { font-size: 200%; }
+        h2 { font-size: 162%; }
+        h3 { font-size: 134%; }
+        h4 { font-size: 114%; }
+        h5 { font-size: 105%; }
+        h6 { font-size: 100%; }
+        h1, h2, h3, h4, h5, h6 { margin-top: 1em; margin-bottom: 0.2em; }
+        .calculator-exception { color: red; }
+        .calculator-return { color: darkGreen; font-weight: bold; }
+        .calculator-console-assert,
+        .calculator-console-debug,
+        .calculator-console-dir,
+        .calculator-console-info,
+        .calculator-console-log { color: Indigo; }
+        .calculator-console-error { color: red; }
+        .calculator-console-warn { color: brown; }
+
