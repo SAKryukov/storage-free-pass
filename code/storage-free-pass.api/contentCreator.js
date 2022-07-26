@@ -4,7 +4,18 @@ const createContent = () => {
 
     const elementSet = {};
 
-    (() => { //header
+    const labelBinder = () => {
+        let pseudoStatic = 0;
+        const generate = (label, target) => {
+            const id = `${pseudoStatic++}.${performance.now()}`;
+            label.htmlFor = id;
+            target.id = id;
+        };
+        return generate;
+    }; //labelBinder
+    const bindLabelToControl = labelBinder();
+
+    (() => { //header     
         const header = document.createElement("header");
         const mainHeading = document.createElement("h1");
         elementSet.titlePlaceholder = document.createElement("span");
@@ -88,9 +99,7 @@ const createContent = () => {
         elementSet.userNameToClipboardButton = document.createElement("button");
         elementSet.userNameToClipboardButton.title = "Copy to clipboard";
         elementSet.userNameToClipboardButton.innerHTML = "&#x1F4CB;"
-        const userNameToClipboardButtonId = performance.now().toString();
-        elementSet.userNameToClipboardButton.id = userNameToClipboardButtonId;
-        userLabel.htmlFor = userNameToClipboardButtonId;
+        bindLabelToControl(userLabel, elementSet.userNameToClipboardButton);
         elementSet.table.rows[1].cells[2].appendChild(elementSet.userNameToClipboardButton);
         elementSet.userNameToggleVisibilityButton = document.createElement("button");
         elementSet.userNameToggleVisibilityButton.title = "Toggle visibility";
@@ -108,11 +117,7 @@ const createContent = () => {
         elementSet.passwordToClipboardButton = document.createElement("button");
         elementSet.passwordToClipboardButton.title = "Copy to clipboard";
         elementSet.passwordToClipboardButton.innerHTML = "&#x1F4CB;"
-        let passwordToClipboardButtonId = performance.now().toString();
-        if (passwordToClipboardButtonId == userNameToClipboardButtonId)
-            passwordToClipboardButtonId += "unique";
-        elementSet.passwordToClipboardButton.id = passwordToClipboardButtonId;
-        passwordLabel.htmlFor = passwordToClipboardButtonId;
+        bindLabelToControl(passwordLabel, elementSet.passwordToClipboardButton);
         elementSet.table.rows[4].cells[2].appendChild(elementSet.passwordToClipboardButton);
         elementSet.passwordToggleVisibilityButton = document.createElement("button");
         elementSet.passwordToggleVisibilityButton.title = "Toggle visibility";
