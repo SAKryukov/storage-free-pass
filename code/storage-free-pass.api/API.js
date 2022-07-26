@@ -8,18 +8,24 @@ const api = (()=> {
     const errorElementTag = "h1";
     const errorElementStyle = "margin-left: 1em; margin-top: 1em";
 
-    window.onerror = function (message) {
+    window.onerror = function (message, url, line, column) {
+        const effectiveUrl = url ? `URL: ${url}\n` : "";
+        const effectiveLine = line == null ? "" : `Line: ${line}\n`;
+        const effectiveColumn = column == null ? "" : `Column: ${column}`;
+        const effectiveMessage = `${message}\n${effectiveUrl}${effectiveLine}${effectiveColumn}`;
         if (document && document.body)
-            showError(message);
+            showError(effectiveMessage);
         else
-            alert(message);
+            alert(effectiveMessage);
+        throw new Error();
     }; //window.onerror    
     const showError = error => {
+        error = error.replaceAll("\n", "<br/>");
         while (document.body.lastChild)
             document.body.removeChild(document.body.lastChild);
         const element = document.createElement(errorElementTag);
         element.style = errorElementStyle;
-        element.textContent = error;
+        element.innerHTML = error;
         document.body.appendChild(element);
     }; //showError
     const checkupCryptoPresence = () => {
