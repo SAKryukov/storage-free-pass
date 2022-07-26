@@ -1,20 +1,31 @@
 "use strict";
 
-const api = (()=>{
+const api = (()=> {
 
     const defaultCryptoScript = "crypto.js";
     const scriptChain = [ "definitionSet", "utility", "contentCreator", "controls", "ui" ];
-    
-    /*
+    const cryptoSystemNotProvidedError = `Cryptographic system is not provided, checkup HTML file`;
+    const errorElementTag = "h1";
+    const errorElementStyle = "margin-left: 1em; margin-top: 1em";
+
+    window.onerror = function (message) {
+        if (document && document.body)
+            showError(message);
+        else
+            alert(message);
+    }; //window.onerror    
     const showError = error => {
         while (document.body.lastChild)
             document.body.removeChild(document.body.lastChild);
-        const element = document.createElement("h1");
-        element.style.margin = "1em 1em 1em 1em";
+        const element = document.createElement(errorElementTag);
+        element.style = errorElementStyle;
         element.textContent = error;
         document.body.appendChild(element);
     }; //showError
-    */
+    const checkupCryptoPresence = () => {
+        if (typeof passwordGenerator == `${undefined}`)
+            showError(cryptoSystemNotProvidedError);
+    }; //checkupCryptoPresence
     
     const applyScripts = (sourceFileNames, customCryptoScript) => {
         let directory = getCurrentDirectory();
@@ -43,6 +54,7 @@ const api = (()=>{
         style.rel="stylesheet";
         style.href = directory + "style.css";
         document.head.appendChild(style);
+        window.addEventListener("load", () => { checkupCryptoPresence(); }); // will later be disabled by window.onload = () => { /* ... */ }
     }; //applyScripts
 
     const getCurrentScript = () => {
