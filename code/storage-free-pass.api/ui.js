@@ -3,7 +3,6 @@
 (function ui() {
 
     let elements = null;
-    const elementSet = createContent();
 
     const inputData = prepareData();
 
@@ -129,8 +128,10 @@
     //////// main:
 
     window.onload = () => {
+        const elementSet = createContent();
         elements = createElements();
         elements.populate(elementSet, inputData, refresh, accountIndexMap);
+        setTimeout( () => { elements.masterPassword.focus(); });
         const clipboardCopyHandler = textCreator => {
             const text = textCreator();
             if (text == null || text.length < 1) return;
@@ -155,7 +156,6 @@
             elements.accountSelector.selectedIndex = 0;
             refresh(0);
         } //if
-        setTimeout( () => { elements.masterPassword.focus(); });
     }; //window.onload
 
 })();

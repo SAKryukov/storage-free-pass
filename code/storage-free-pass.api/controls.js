@@ -63,11 +63,8 @@
                         this.isButtonDown(ev.target) ? accountDisplay.user.name : accountDisplay.hiddenUserAuthenticationName;
                 });
                 this.processMeta(elementSet);
-                this.masterPassword.focus();      
             }, //populate
     
-            onload: function() { this.masterPassword.focus(); },
-            
             clipboardDataPresent: false,
             
             setClipboardWarning: function(fromPaste) {
