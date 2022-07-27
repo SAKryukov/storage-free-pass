@@ -8,17 +8,18 @@ const api = (()=> {
     const errorElementTag = "h1";
     const errorElementStyle = "margin-left: 1em; margin-top: 1em";
 
-    window.onerror = function (message, url, line, column) {
-        const effectiveUrl = url ? `URL: ${url}\n` : "";
-        const effectiveLine = line == null ? "" : `Line: ${line}\n`;
-        const effectiveColumn = column == null ? "" : `Column: ${column}`;
-        const effectiveMessage = `${message}\n${effectiveUrl}${effectiveLine}${effectiveColumn}`;
+    window.addEventListener('error', event => {
+        debugger;
+        const effectiveUrl = event.filename ? `URL: ${event.filename}\n` : "";
+        const effectiveLine = event.lineno == null ? "" : `Line: ${event.lineno}\n`;
+        const effectiveColumn = event.colno == null ? "" : `Column: ${event.colno}`;
+        const effectiveMessage = `${event.message}\n${effectiveUrl}${effectiveLine}${effectiveColumn}`;
         if (document && document.body)
             showError(effectiveMessage);
         else
             alert(effectiveMessage);
         throw new Error();
-    }; //window.onerror    
+    }); //window.addEventListener
     const showError = error => {
         error = error.replaceAll("\n", "<br/>");
         while (document.body.lastChild)
