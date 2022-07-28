@@ -8,8 +8,8 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="282.33618mm"
-   height="275.41071mm"
-   viewBox="0 0 282.33618 275.41071"
+   height="285.41071mm"
+   viewBox="0 0 282.33618 285.41071"
    version="1.1"
    id="svg8"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
@@ -199,7 +199,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
      inkscape:cx="650.4612"
-     inkscape:cy="523.31837"
+     inkscape:cy="542.21601"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -209,10 +209,11 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     fit-margin-top="0"
+     fit-margin-top="5"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0" />
+     fit-margin-bottom="5"
+     units="mm" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -221,7 +222,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -229,7 +230,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(66.26786,-9.7053471)">
+     transform="translate(66.26786,-4.7053471)">
     <g
        id="g959"
        transform="matrix(0.55555554,0,0,1,72.865401,11.036148)"
@@ -384,7 +385,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:Calibri;-inkscape-font-specification:Calibri;stroke-width:0.264583">Select</tspan></text>
     </g>
     <rect
-       style="fill:#ffefd5;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill;fill-opacity:1"
+       style="fill:#ffefd5;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
        id="rect1068"
        width="125.11012"
        height="21.922617"
@@ -459,19 +460,19 @@
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2241)"
-       d="m 164.41965,192.20088 -46.11312,0"
+       d="M 164.41965,192.20088 H 118.30653"
        id="path2237"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2279)"
-       d="m 164.41965,29.293144 -42.33336,0"
+       d="M 164.41965,29.293144 H 122.08629"
        id="path2275"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2363)"
-       d="m 41.955139,29.293144 41.955561,0"
+       d="M 41.955139,29.293144 H 83.9107"
        id="path2359"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0" />
@@ -606,7 +607,7 @@
     <g
        id="g1092">
       <rect
-         style="fill:#ddeeff;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill;fill-opacity:1"
+         style="fill:#ddeeff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
          id="rect2085"
          width="107.723"
          height="28.348215"
