@@ -13,7 +13,7 @@ https://www.codeproject.com/Articles/5297157/Markdown-Calculator
 
 Generator of highly secure passwords based on cryptographic hash and master password, which should be memorized; no password storage is involved
 
-Storage-Free Pass is the application used to provide passwords for multiple services based on a single master password. Unlike other systems providing the encrypted storage for the passwords, this system does not require password storage at all. Instead, the passwords are securely generated every time they are needed. It is cryptographically infeasible to restore the passwords without knowing the master password. This is the only thing a user needs to remember. How is it possible? The present article explains that.
+Storage-Free Pass is the application used to provide passwords for multiple services based on a single master password. Unlike other systems providing the encrypted storage for the passwords, this system does not require password storage at all. Instead, the deterministic passwords are securely generated every time they are needed. It is cryptographically infeasible to restore the passwords without knowing the master password. This is the only thing a user needs to remember. How is it possible? The present article explains that.
 
 <!-- copy to CodeProject from here ------------------------------------------->
 
@@ -46,6 +46,8 @@ Let's give a better Remembrall to Neville Longbottom and all other people using 
 
 ## Insights
 
+![Data flow](data-flow.svg){id=data-flow}
+
 ## Basic Usage
 
 Basic Usage:
@@ -67,6 +69,10 @@ Let's consider the usage in more detail and see how all the related problems are
 ### Password Renewal
 
 ## Implementation
+
+See [Data flow](#data-flow)
+
+???
 
 ### Cryptosystem
 
