@@ -1,0 +1,11 @@
+For CodeProject, max width is 640 px, so:
+
+v.4.0.0
+Account: bank
+Master password:
+11111111111111111111111111111111
+Font-general (style.css): 16px?, default: 100%
+Visibility: password on
+Focus: Master password
+URL:
+https://SAKryukov.GitHub.io/storage-free-pass/code/user-demo

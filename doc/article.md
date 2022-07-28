@@ -13,7 +13,7 @@ https://www.codeproject.com/Articles/5297157/Markdown-Calculator
 
 Generator of highly secure passwords based on cryptographic hash and master password, which should be memorized; no password storage is involved
 
-*This password generator is deterministic. It doesn't store any passwords in any form. Instead, passwords are re-generated every time. First, SHA-2 cryptographic hash is generated out of two strings: 1) master password, one for all accounts, memorized by the use and entered each time, and 2) seed, created per account, stored in the user's data. Then part of the hash is used for the generation of passwords; it uses the following parameters stored in the user's data, per account: starting position in the hash, length of a password, character repertoire, and shift in the character repertoire. It makes password recovery of the account passwords and the master password infeasible, even if access to the user-stored data is obtained.*
+Storage-Free Pass is the application used to provide passwords for multiple services based on a single master password. Unlike other systems providing the encrypted storage for the passwords, this system does not require password storage at all. Instead, the passwords are securely generated every time they are needed. It is cryptographically infeasible to restore the passwords without knowing the master password. This is the only thing a user needs to remember. How is it possible? The present article explains that.
 
 <!-- copy to CodeProject from here ------------------------------------------->
 
@@ -56,11 +56,19 @@ Basic Usage:
 &lt;/head&gt;
 ~~~
 
-## Live Demo
+## Usage Detail, Use Cases
 
-This is the [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user-demo).
+Let's consider the usage in more detail and see how all the related problems are addressed.
+
+### How the Services Break your Safety and How to Work Around
+
+### Test Account: Beware of the One Behind You
+
+### Password Renewal
 
 ## Implementation
+
+### Cryptosystem
 
 [GitHub](https://github.com/SAKryukov/storage-free-pass)
 
@@ -70,15 +78,7 @@ const eggs = 3.49, sourCream = 2.49, milk = 4.99
 
 ???
 
-## Use Cases
-
-Let's consider the usage in more detail and see how all the related problems are addressed.
-
-### How the Services Break your Safety and How to Work Around
-
-### Test Account: Beware of the One Behind You
-
-### Password Renewal
+### Error Handling
 
 ## Advanced Usage
 
@@ -101,6 +101,10 @@ I would highly recommend the usage of some Revision Control System for the suppo
 It's a big common misconception that such a system is only for software developers.
 
 ???
+
+## Live Demo
+
+This is the [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user-demo).
 
 ## What's Next?
 
