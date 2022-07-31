@@ -36,7 +36,7 @@ A barn owl brought Neville a small package from his grandmother. He opened it ex
 <dd>Steve Kloves, <i>Harry Potter and the Philosopher's Stone</i>, screenplay version based on the novel after J. K. Rowling</dd>
 </blockquote>
 
-## Content{no-toc}
+## Contents{no-toc}
 
 @toc
 
@@ -46,9 +46,21 @@ Let's give a better Remembrall to Neville Longbottom and all other people using 
 
 ## Insights
 
+Here is the idea: remember the old adventure movies where two characters have to get together and use two different keys at the same time to open a particularly important safe?
+
+Let's do this: combine two strings, a master password and another one, called *seed*. The seed does not have to be secret. Now, look at the data flow diagram below. For now, only the top part is important.
+
+Let's calculate [cryptographic hash](https://en.wikipedia.org/wiki/Cryptographic_hash_function) out of the combination master password + seed.
+
+In our case, the hash function returns 256 bits of data, and we can use this data to generate a password based on some *character repertoire*, the set of the characters, allowed for a password. Depending on the password size, the amount of information, contained in the hash value, can be redundant or insufficient relative to the maximum password size, but it is not important. What is important is that we can create maximally strong password for the given limitations imposed on the password by the password-protected service. What is more important, it is cryptographically infeasible to reconstruct a master password, even if one of the service password is stollen. 
+
 ![Data flow](data-flow.svg){id=data-flow}
 
-## Basic Usage
+We will discuss further detail in the [Implementation](#heading-implementation) section.
+
+## Usage
+
+### Basic Setup
 
 Basic Usage:
 
@@ -58,7 +70,7 @@ Basic Usage:
 &lt;/head&gt;
 ~~~
 
-## Usage Detail, Use Cases
+### Worling with Accounts, User Names, and Passwords
 
 Let's consider the usage in more detail and see how all the related problems are addressed.
 
