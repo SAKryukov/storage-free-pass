@@ -70,7 +70,7 @@ Basic Usage:
 &lt;/head&gt;
 ~~~
 
-### Worling with Accounts, User Names, and Passwords
+### Working with Accounts, User Names, and Passwords
 
 Let's consider the usage in more detail and see how all the related problems are addressed.
 
@@ -79,6 +79,10 @@ Let's consider the usage in more detail and see how all the related problems are
 ### Test Account: Beware of the One Behind You
 
 ### Password Renewal
+
+### Using or not Using Public Web Storage?
+
+There is nothing wrong with it. Your Web page with your instance of Storage-free Pass can be itself password-protected (but than you would need to remember one more password), and it would be relatively week protection. So what? If someone steal your files, this person would only get information on your account and user names. However, if you think this is too sensitive information, don't do it. Your passwords cannot be obtained anyway, neither your master password no your account passwords.
 
 ## Implementation
 
@@ -90,8 +94,58 @@ See [Data flow](#data-flow)
 
 [GitHub](https://github.com/SAKryukov/storage-free-pass)
 
-~~~{lang=Javascript}{id=javascript-sample}
-const eggs = 3.49, sourCream = 2.49, milk = 4.99
+~~~{lang=Javascript}{id=javascript-cryptosystem}
+"use strict";
+
+const passwordGenerator = (() => {
+
+    const hashBits = 256;
+    const cryptographicHashAlgorithmPrefix = "SHA-";
+
+    async function digestSHA2(message) {
+        // encode as (utf-8) Uint8Array
+        const msgUint8 = new TextEncoder().encode(message);
+        const hashBuffer =
+            // hash the message:
+            await crypto.subtle.digest(
+                `${cryptographicHashAlgorithmPrefix}${hashBits}`, msgUint8);
+        // convert buffer to byte array:
+        return Array.from(new Uint8Array(hashBuffer));
+    } //digestSHA2
+
+    async function generatePassword(
+            masterPassword, seed,
+            start, length, characterRepertoire,
+            shift, inserts)
+    {
+        if (!masterPassword) return String.empty;
+        const arrayOfBytes = await digestSHA2(masterPassword + seed);
+        const maxLength = arrayOfBytes.length;
+        if (!start) start = 0;
+        start = start % maxLength;
+        if (!length) length = maxLength;
+        if (length > maxLength) length = maxLength;
+        if (!shift) shift = 0;
+        shift = shift % characterRepertoire.length;
+        let output = String.empty;
+        for (let index = start; index < start + length; ++index)
+            output += characterRepertoire.charAt(
+              (shift + arrayOfBytes[index % maxLength])
+              % characterRepertoire.length);
+        if (!inserts) return output;
+        if (!(inserts instanceof Array)) inserts = [inserts];
+        for (let insert of inserts)
+            output = insert.position ?
+                output.slice(0, insert.position) + insert.value
+                    + output.slice(insert.position)
+                :
+                insert.value + output;
+        return output;
+    }; //generatePassword
+
+    return generatePassword;
+    
+})();
 ~~~
 
 ???
@@ -112,6 +166,18 @@ In fact, the [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user
 &lt;/head&gt;
 ~~~
 
+Naturally, it should be not the file "../storage-free-pass.api/crypto.js" provided, but some other file. The content of the file should provide the same interface: it should return some function, a password generator, and that function should return an asynchronous function with 7 arguments, returning a password, like the one shown in the default [cryptosystem code](#javascript-cryptosystem).
+
+I would also strongly recommend that the data flow at least once passes through a standard implementation of a cryptographic hash function. You can combine different hash functions, and use different algorithms of the character selection for a resulting password, but only a strong cryptographic hash function can make the algorithm cryptographically strong.
+
+Can a custom cryptosystem be practically useful or not? I would say, yes and no.
+
+Theoretically speaking, it can improve the strength of your protection, but how? Let's consider the fantastic situation where someone has virtually unlimited computing power and knows your account information. Also, that person would need one of your account passwords, because otherwise, it is impossible to check if some computed string is an actual password, and the Web services are usually protected against repeated attempts to authenticate. We also need to assume that this person does not have the access to your custom cryptosystem.
+
+Then, let's assume that the malicious artist successfully finds a master password resulting in some known account password. But it is found with the default cryptosystem. With your cryptosystem, that reconstructed master password would not work for other accounts, so the entire work would be useless.
+
+Is it better protection or not? First of all, the protection is improved for the unrealistic situation, because the recovery of a master password is cryptographically infeasible anyway. Also, this is a typical example of [security by obscurity](https://en.wikipedia.org/wiki/Security_through_obscurity). Conclusion? Use your own judgment.
+
 ### Importance of a Revision Control System
 
 I would highly recommend the usage of some Revision Control System for the support of the account data, presumably distributed one, like git, Mercurial, or Bazaar.
@@ -128,7 +194,7 @@ This is the [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user-
 
 The creation of the accounts structure is still manual programming. It can be done even without any programming experience, just by the available sample packages with the product.
 
-However, it's not a big problem to create another tool to be used to program accounts graphically and generate the account code. It's not a problem to make this tool based on a Web browser. The user can open 
+However, it's not a big problem to create another tool to be used to program accounts graphically and generate the account code. It's not a problem to make this tool based on a Web browser. The user can open ???
 
 ## Conclusions
 
