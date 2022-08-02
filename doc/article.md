@@ -13,7 +13,7 @@ https://www.codeproject.com/Articles/5297157/Markdown-Calculator
 
 Generator of highly secure passwords based on cryptographic hash and master password, which should be memorized; no password storage is involved
 
-Storage-Free Pass is the application used to provide passwords for multiple services based on a single master password. Unlike other systems providing the encrypted storage for the passwords, this system does not require password storage at all. Instead, the deterministic passwords are securely generated every time they are needed. It is cryptographically infeasible to restore the passwords without knowing the master password. This is the only thing a user needs to remember. How is it possible? The present article explains that.
+Storage-Free Pass is the application used to provide passwords for multiple services based on a single master password. Unlike other systems providing encrypted storage for passwords, this system does not require password storage at all. Instead, the deterministic passwords are securely generated every time they are needed. It is cryptographically infeasible to restore the passwords without knowing the master password. This is the only thing a user needs to remember. How is it possible? The present article explains that.
 
 <!-- copy to CodeProject from here ------------------------------------------->
 
@@ -50,9 +50,9 @@ Here is the idea: remember the old adventure movies where two characters have to
 
 Let's do this: combine two strings, a master password and another one, called *seed*. The seed does not have to be secret. Now, look at the data flow diagram below. For now, only the top part is important.
 
-Let's calculate [cryptographic hash](https://en.wikipedia.org/wiki/Cryptographic_hash_function) out of the combination master password + seed.
+Let's calculate the [cryptographic hash](https://en.wikipedia.org/wiki/Cryptographic_hash_function) out of the combination master password + seed.
 
-In our case, the hash function returns 256 bits of data, and we can use this data to generate a password based on some *character repertoire*, the set of the characters, allowed for a password. Depending on the password size, the amount of information, contained in the hash value, can be redundant or insufficient relative to the maximum password size, but it is not important. What is important is that we can create maximally strong password for the given limitations imposed on the password by the password-protected service. What is more important, it is cryptographically infeasible to reconstruct a master password, even if one of the service password is stollen. 
+In our case, the hash function returns 256 bits of data, and we can use this data to generate a password based on some *character repertoire*, the set of the characters acceptable for a password. Depending on the password size, the amount of information, contained in the hash value, can be redundant or insufficient relative to the maximum password size, but it is not important. What is important is that we can create a maximally strong password for the given limitations imposed on the password by the password-protected service. What is more important, it is cryptographically infeasible to reconstruct a master password, even if one of the service passwords is stolen. 
 
 ![Data flow](data-flow.svg){id=data-flow}
 
@@ -82,7 +82,7 @@ Let's consider the usage in more detail and see how all the related problems are
 
 ### Using or not Using Public Web Storage?
 
-There is nothing wrong with it. Your Web page with your instance of Storage-free Pass can be itself password-protected (but than you would need to remember one more password), and it would be relatively week protection. So what? If someone steal your files, this person would only get information on your account and user names. However, if you think this is too sensitive information, don't do it. Your passwords cannot be obtained anyway, neither your master password no your account passwords.
+There is nothing wrong with it. Your Web page with your instance of Storage-free Pass can be itself password-protected (but then you would need to remember one more password), and it would be relatively weak protection. So what? If someone steals your files, this person would only get information on your account and user names. However, if you think this is too sensitive information, don't do it, but you would not need to worry about your passwords. Neither your master password nor your account passwords can be obtained anyway.
 
 ## Implementation
 
@@ -154,7 +154,7 @@ const passwordGenerator = (() => {
 
 ## Advanced Usage
 
-In fact, the [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user-demo) code samples already shows advanced syntax of the use of the product. Even though it doesn't enable any advanced features, it can be used as a template for the advanced syntax.
+In fact, the [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user-demo) code samples already show the advanced syntax of the use of the product. Even though it doesn't enable any advanced features, it can be used as a template for the advanced syntax.
 
 ### Custom Cryptosystem
 
