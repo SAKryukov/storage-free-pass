@@ -44,6 +44,10 @@ A barn owl brought Neville a small package from his grandmother. He opened it ex
 
 Let's give a better Remembrall to Neville Longbottom and all other people using password-protected Web services.
 
+### What's Wrong with Password Managers?
+
+???
+
 ## Insights
 
 Here is the idea: remember the old adventure movies where two characters have to get together and use two different keys at the same time to open a particularly important safe?
@@ -192,9 +196,10 @@ This is the [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user-
 
 ## What's Next?
 
-The creation of the accounts structure is still manual programming. It can be done even without any programming experience, just by the available sample packages with the product.
-
+- The creation of the accounts structure is still manual programming. It can be done even without any programming experience, just by the available sample packages with the product.
 However, it's not a big problem to create another tool to be used to program accounts graphically and generate the account code. It's not a problem to make this tool based on a Web browser. The user can open ???
+
+- Maybe I'll add the possibility to use encrypted passwords. I [criticized them](#heading-what27s-wrong-with-password-managers3f), but there are situations where they are useful. ???
 
 ## Conclusions
 
