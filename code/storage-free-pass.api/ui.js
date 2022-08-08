@@ -27,7 +27,7 @@
                 });
     }; //generatePassword
 
-    const showPassword = (generateNew) => {
+    const showPassword = generateNew => {
         const optionIndex =  accountIndexMap[elements.accountSelector.selectedIndex];
         if (generateNew || generatedData[optionIndex] == undefined)
             return generatePassword();        
