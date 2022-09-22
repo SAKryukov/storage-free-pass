@@ -44,9 +44,19 @@ A barn owl brought Neville a small package from his grandmother. He opened it ex
 
 Let's give a better Remembrall to Neville Longbottom and all other people using password-protected Web services.
 
+???
+
 ### What's Wrong with Password Managers?
 
-???
+The first look at the [list of password managers on Wikipedia](https://en.wikipedia.org/wiki/List_of_password_managers) shows that half of them are proprietary. What, not only the offer me to store my passwords, but also doing so using some close-source code doing... who knows what? No, thank you, I'm not just that insane.
+
+Also, those with source code are typically too complicated to make sure that they don't do anything except what I want.
+
+The set of passwords is a too important personal assert to risk.
+
+Another problem is that most of the password managers are not cross-platform. Basically, I need to use only my own computer where the tool is installed.
+
+The product I offer is free from all those problems. It can be kept on nearly any device without the risk, even if the device is lost and stolen. It can also be kept on some Web site, even a public site. It has a clearly observable core placed in one file, and the rest of the code is quite easy to inspect and assess its safety.
 
 ## Insights
 
@@ -78,11 +88,27 @@ Basic Usage:
 
 Let's consider the usage in more detail and see how all the related problems are addressed.
 
-### How the Services Break your Safety and How to Work Around
+### Password Renewal
+
+The problem of password renewal is one of the problems people pointed out in their criticism of some password managers.
+
+To make passwords easily renewable, I would recommend maintaining a reasonable form of the seed values. It could be a string, containing the name of the service, followed by the date of the password creation, initial setup, or renewal. By the way, in all cases, the best format for a date is not the one dictated by the current *culture*, but culture-independent YYYY/MM/DD form, as it gives the form causing the lexicographical ordering the same as the time ordering, least significant digits being at the end of the string. This is not the rule, just my recommendation. I don't think anyone needs the time of the day for better accuracy because it is not very likely that some password has to be renewed more than once a day, but it can also be used if it happens for one or another reason.
+
+This way, the change of the date would be the only operation needed to renew the password. In most cases, the old password needs to be recorded, as it needs to be submitted during the password renewal process provided by the password-protected service.
+
+Unfortunately, there are rare cases when it is not enough. A problem can appear because some of the password-protected services impact some weird "good password" rules which actually can compromise the quality of our passwords. All these problems are solvable, as Storage-Free Pass suggests a workaround for all of them. Let's consider those problems.
+
+### How the Services Try to Break your Safety and How to Work Around
+
+- Character repertoire.
+
+- Patterns. Why?! What's wrong with patterns? Why "123" is a "pattern" but, say "qwerty" is not? No answer — some "security specialists" are just morons, nothing else.
+
+- "Special characters".
+
+???
 
 ### Test Account: Beware of the One Behind You
-
-### Password Renewal
 
 ### Using or not Using Public Web Storage?
 
@@ -93,6 +119,12 @@ There is nothing wrong with it. Your Web page with your instance of Storage-free
 See [Data flow](#data-flow)
 
 ???
+
+It's enough to show one key file where the cryptosystem is defined. It [can be custom](#heading-custom-cryptosystem). It implements the [data flow](#id=data-flow) based on the arguments of the function `generatePassword`. It can be any other function with the same profile returned by `passwordGenerator`.
+
+In this implementation, the combination of `password` and `seed` is a simple concatenation. It is used to get a cryptographic cache value represented by the array `arrayOfBytes`. The values of the arrays are used to get the password out of the `characterRepertoire`. The index the characters in `characterRepertoire` in a cyclic manner, and the cycle depends on the password `length`, `start` and `shift` arguments.
+
+On top of that, some array of fixed strings can be inserted in the resulting password. This array is optional and is passed as `inserts` argument. It is done to satisfy some password requirements imposed by some password-protected services. Note that it makes the password length greater than the argument `length`. In other words, `lengths` specifies not the final password length, but its length before the insertion. The reason for this feature was explained [above](#heading-how-the-services-try-to-break-your-safety-and-how-to-work-around).
 
 ### Cryptosystem
 
@@ -188,7 +220,7 @@ I would highly recommend the usage of some Revision Control System for the suppo
 
 It's a big common misconception that such a system is only for software developers.
 
-???
+SA???
 
 ## Live Demo
 
@@ -204,3 +236,5 @@ However, it's not a big problem to create another tool to be used to program acc
 ## Conclusions
 
 The inertia of thinking is a bad thing.
+
+???
