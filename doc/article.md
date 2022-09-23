@@ -11,7 +11,7 @@ https://www.codeproject.com/Articles/5297157/Markdown-Calculator
 
 [*Sergey A Kryukov*](https://www.SAKryukov.org){.author}
 
-Generator of highly secure passwords based on cryptographic hash and master password, which should be memorized; no password storage is involved
+Generator of highly secure passwords based on cryptographic hash and master password, which should be memorized; no password storage is involved.
 
 Storage-Free Pass is the application used to provide passwords for multiple services based on a single master password. Unlike other systems providing encrypted storage for passwords, this system does not require password storage at all. Instead, the deterministic passwords are securely generated every time they are needed. It is cryptographically infeasible to restore the passwords without knowing the master password. This is the only thing a user needs to remember. How is it possible? The present article explains that.
 
@@ -44,7 +44,11 @@ A barn owl brought Neville a small package from his grandmother. He opened it ex
 
 Let's give a better Remembrall to Neville Longbottom and all other people using password-protected Web services.
 
-???
+One well-recognized password problem is that multiple password-protected services require people to create multiple passwords and encourage them not to re-usе the passwords and use strong passwords. It is reasonable but multiple passwords are near-impossible to remember for most people, and it forces people to record the passwords, and that is a big compromise to security.
+
+One obvious solution is *using password managers*, but there are different factors repelling people from using them.
+
+Storage-Free Pass solves many problems related to password managers. Let's discuss them.
 
 ### What's Wrong with Password Managers?
 
@@ -52,7 +56,7 @@ The first look at the [list of password managers on Wikipedia](https://en.wikipe
 
 Also, those with source code are typically too complicated to make sure that they don't do anything except what I want.
 
-The set of passwords is a too important personal assert to risk.
+The set of passwords is a too important personal asset to risk.
 
 Another problem is that most of the password managers are not cross-platform. Basically, I need to use only my own computer where the tool is installed.
 
