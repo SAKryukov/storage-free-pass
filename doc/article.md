@@ -100,11 +100,26 @@ Unfortunately, there are rare cases when it is not enough. A problem can appear 
 
 ### How the Services Try to Break your Safety and How to Work Around
 
-- Character repertoire.
+The password-protected services try to promote "strong" passwords by adding some limitations. Naturally, no limitations can improve password strength. At the same time, I understand, that the authors of these schemas consider the limitation as a fool-proof feature used to fight potentially foolish passwords created by clients.
 
-- Patterns. Why?! What's wrong with patterns? Why "123" is a "pattern" but, say "qwerty" is not? No answer — some "security specialists" are just morons, nothing else.
+I don't really think it helps much, but it prevents the acceptance of algorithmically generated and obviously the strongest passwords.
 
-- "Special characters".
+Some of those limitations are extremely stupid and create some hassles. In all cases, Storage-Free Pass suggests the means to work around all the limitations. Let's consider them.
+
+- ***Character repertoire***. I would not limit a character repertoire in any way. In fact, I do use at least one service, accepting a very wide character repertoire. One can easily mix any, say, punctuation, Latin, Armenian, Georgian, Hebrew, Devanāgarī, Cyrillic, Persian characters, mathematical symbols, and a lot more, in one password. Why not? If a client created such a password, this person can reasonably expect that they can enter it again in all cases. If this is not the case.
+<br/><br/>
+Unfortunately, this is a rare case. A service can impose the stupidest limitations on the character repertoire. That's why a creator of the Storage-Free Pass account information can store several separate character repertoire strings to be applied to different services. Please see "user-demo/index.html" for examples.
+
+- ***Patterns***. Some password rules require that the password should not contain some "patterns", such as a sequence of consecutive or repeated characters. Why?! What's wrong with patterns? Why "123" or "111" is a "pattern" but, say, "qwerty" is not? No answer — some "security specialists" are just morons, nothing else.
+<br/><br/>Do I even have to explain that such a limitation only makes passwords less strong? Well, isn't it obvious, that with a fully random password generation process, apparently giving the strongest passwords, the probability of short patterns of this sort is high enough? The presence of some random patterns cannot make password-guessing techniques more efficient. Anyway, the server-side techniques fighting password guessing are different and well-known.
+<br/><br/>Unfortunately, it is not possible to prevent all different "patterns" automatically in all cases. The workaround can better be found by some trial and error. I add an arbitrary suffix to the seed string. This suffix can be the time of the day, or anything else. Chances are, the next renewal of the password for some other day will eliminate the need for it.
+
+- "***Special characters***". No one defined "special characters", there is no such thing. However, many password requirements include such an item as "should contain at least one low case character, upper-case character, digit, and a special character". Sometimes they define what they mean by a special character, sometimes not, then it can be determined experimentally.
+<br/><br/>
+To work around this problem, Storage-Free Pass suggests "inserts" with an arbitrary point of insertion. One can add a permanent substring with all required characters, or more than one such substring. Note that the length of inserts is not counted as a part of the password length, so their length is added to the length of a final password.
+
+- ***Password length**. I would not like a limited password length. Why? The services use relational databases, and should not store any passwords anyway, and cryptographically reasonable systems really store the cryptographic hash values of the passwords, hence the sizes of stored data are fixed. Nevertheless, the password length is usually limited, sometimes by some frustratingly low numbers of characters. It looks like they care about the ability of a client to remember the password, but this assumption is not realistic anyway.
+<br/>There is nothing you can do about it, but if passwords are limited to a short length, such as 8, this is one of the good reasons not to trust the service. If the service is a financial institution, it can make a good reason to deny its services and find something else, not because of password length, but because of the general concerns of the level of security in such an organization.
 
 ???
 
