@@ -60,6 +60,10 @@ The set of passwords is a too important personal asset to risk.
 
 Another problem is that most of the password managers are not cross-platform. Basically, I need to use only my own computer where the tool is installed.
 
+If a product is open-source, it can be difficult for many people to build it. Also, it's not so easy to assert the safety of the code.
+
+???
+
 The product I offer is free from all those problems. It can be kept on nearly any device without the risk, even if the device is lost and stolen. It can also be kept on some Web site, even a public site. It has a clearly observable core placed in one file, and the rest of the code is quite easy to inspect and assess its safety.
 
 ## Insights
