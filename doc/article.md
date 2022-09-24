@@ -256,4 +256,8 @@ However, it's not a big problem to create another tool to be used to program acc
 
 The inertia of thinking is a bad thing.
 
-???
+The idea to use stored passwords seems natural, but in fact, it stems from the practice of remembering mentally generated passwords. The same goes for the idea that a password should be easily readable and easy to type. No, it doesn't have to be.
+
+The alternative suggested in this article and implemented in Storage-Free Pass is quite working and safe. A password can be generated on the fly at the moment it is needed.
+
+Only in rare cases do we need to create a password mentally and remember or store it.
