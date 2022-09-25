@@ -272,16 +272,16 @@ SA???
 
 This is the [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user-demo).
 
+## Testing
+
+The application Storage-Free Pass has been practiced extensively for more than three last years on real financial institutions, shopping systems, communication, vendor, and other services. In particular, this practice included frequent password renewals.
+
 ## What's Next?
 
 - The creation of the accounts structure is still manual programming. It can be done even without any programming experience, just by the available sample packages with the product.
 However, it's not a big problem to create another tool to be used to program accounts graphically and generate the account code. It's not a problem to make this tool based on a Web browser. The user can open ???
 
 - Maybe I'll add the possibility to use encrypted passwords. I [criticized them](#heading-what27s-wrong-with-password-managers3f), but there are situations where they are useful. ???
-
-## Testing
-
-The application Storage-Free Pass has been practiced extensively for more than three last years on real financial institutions, shopping systems, communication, vendor, and other services. In particular, this practice included frequent password renewals.
 
 ## Conclusions
 
