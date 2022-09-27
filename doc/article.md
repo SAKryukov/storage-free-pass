@@ -80,7 +80,7 @@ Let's calculate the [cryptographic hash](https://en.wikipedia.org/wiki/Cryptogra
 
 In our case, the hash function returns 256 bits of data, and we can use this data to generate a password based on some *character repertoire*, the set of the characters acceptable for a password. Depending on the password size, the amount of information, contained in the hash value, can be redundant or insufficient relative to the maximum password size, but it is not important. What is important is that we can create a maximally strong password for the given limitations imposed on the password by the password-protected service. What is more important, it is cryptographically infeasible to reconstruct a master password, even if one of the service passwords is stolen. 
 
-![Data flow](data-flow.svg){id=data-flow}
+![Data flow](data-flow.png){id=data-flow}
 
 We will discuss further detail in the [Implementation](#heading-implementation) section.
 
@@ -95,6 +95,10 @@ Basic Usage:
   &lt;script&gt; src="../storage-free-pass.api/API.js"&lt;/script&gt;
 &lt;/head&gt;
 ~~~
+
+In the `&lt;body&gt;` element, add a single script. It should define the function const `userData = () => {/*...*/};` and return the structure of the user accounts.
+
+Please see "storage-free-pass.api/help.html" for the description of the account information structure, "user-demo/index.html" for the JavaScript sample.
 
 ### Working with Accounts, User Names, and Passwords
 
@@ -120,7 +124,7 @@ Some of those limitations are extremely stupid and create some hassles. In all c
 
 - ***Character repertoire***. I would not limit a character repertoire in any way. In fact, I do use at least one service, accepting a very wide character repertoire. One can easily mix any, say, punctuation, Latin, Armenian, Georgian, Hebrew, Devanāgarī, Cyrillic, Persian characters, mathematical symbols, and a lot more, in one password. Why not? If a client created such a password, this person can reasonably expect that they can enter it again in all cases. If this is not the case.
 <br/><br/>
-Unfortunately, this is a rare case. A service can impose the stupidest limitations on the character repertoire. That's why a creator of the Storage-Free Pass account information can store several separate character repertoire strings to be applied to different services. Please see "user-demo/index.html" for examples.
+Unfortunately, this is a rare case. A service can impose the stupidest limitations on the character repertoire. That's why a creator of the Storage-Free Pass account information can store several separate character repertoire strings to be applied to different services. Please see "storage-free-pass.api/help.html" for the description of the account information structure, "user-demo/index.html" for the JavaScript examples.
 
 - ***Patterns***. Some password rules require that the password should not contain some "patterns", such as a sequence of consecutive or repeated characters. Why?! What's wrong with patterns? Why "123" or "111" is a "pattern" but, say, "qwerty" is not? No answer — some "security specialists" are just morons, nothing else.
 <br/><br/>Do I even have to explain that such a limitation only makes passwords less strong? Well, isn't it obvious, that with a fully random password generation process, apparently giving the strongest passwords, the probability of short patterns of this sort is high enough? The presence of some random patterns cannot make password-guessing techniques more efficient. Anyway, the server-side techniques fighting password guessing are different and well-known.
@@ -133,9 +137,21 @@ To work around this problem, Storage-Free Pass suggests "inserts" with an arbitr
 - ***Password length**. I would not like a limited password length. Why? The services use relational databases, and should not store any passwords anyway, and cryptographically reasonable systems really store the cryptographic hash values of the passwords, hence the sizes of stored data are fixed. Nevertheless, the password length is usually limited, sometimes by some frustratingly low numbers of characters. It looks like they care about the ability of a client to remember the password, but this assumption is not realistic anyway.
 <br/>There is nothing you can do about it, but if passwords are limited to a short length, such as 8, this is one of the good reasons not to trust the service. If the service is a financial institution, it can make a good reason to deny its services and find something else, not because of password length, but because of the general concerns of the level of security in such an organization.
 
-???
+Please see "storage-free-pass.api/help.html" for the description of the account information structure, "user-demo/index.html" for the JavaScript sample.
 
 ### Test Account: Beware of the One Behind You
+
+It is quite possible to keep your passwords in secret, even if someone can watch what happens on your monitor.
+
+I personally never face this problem, but this is what I do: my first account is the *test account* I use exclusively for one purpose: validation of the correctness on my master password.
+
+The master password, account username and resulting account password, as they are visualized in the table representing a selected account, have two mode: hidden and visualize, toggled by three buttons showing either a human eye (visible), or sunglasses (hidden).
+
+I enter the master password when my test account is selected, and visualize its resulting account password. The seed string for the test account is chosen the way that the resulting password is easy to recognize. I don't need to learn the resulting password by heart, as I never need to enter it. It's enough to have a feeling that it is something familiar. Any mistake in the master password would make this string very different.
+
+When  I'm sure the the master password is correct, I click the button to make my account passwords hidden and perform all the authentication operations I need. Even if someone is spying on my monitor, there is no a chance to eavesdrop my communications to figure out any critical information.
+
+???
 
 ### Using or not Using Public Web Storage?
 
@@ -229,10 +245,15 @@ Note that the function `generatePassword` is asynchronous. So, the actual result
                     showPassword();
                 });
     }; //generatePassword
-
 ~~~
 
+Everything else in the code is pretty much trivial.
+
+???
+
 ### Error Handling
+
+???
 
 ## Advanced Usage
 
@@ -260,14 +281,6 @@ Then, let's assume that the malicious artist successfully finds a master passwor
 
 Is it better protection or not? First of all, the protection is improved for the unrealistic situation, because the recovery of a master password is cryptographically infeasible anyway. Also, this is a typical example of [security by obscurity](https://en.wikipedia.org/wiki/Security_through_obscurity). Conclusion? Use your own judgment.
 
-### Importance of a Revision Control System
-
-I would highly recommend the usage of some Revision Control System for the support of the account data, presumably distributed one, like git, Mercurial, or Bazaar.
-
-It's a big common misconception that such a system is only for software developers.
-
-SA???
-
 ## Live Demo
 
 This is the [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user-demo).
@@ -279,9 +292,11 @@ The application Storage-Free Pass has been practiced extensively for more than t
 ## What's Next?
 
 - The creation of the accounts structure is still manual programming. It can be done even without any programming experience, just by the available sample packages with the product.
-However, it's not a big problem to create another tool to be used to program accounts graphically and generate the account code. It's not a problem to make this tool based on a Web browser. The user can open ???
+However, it's not a big problem to create another tool to be used to program accounts graphically and generate the account code. It's not a problem to make this tool based on a Web browser. The user can open an HTML file with the `script` element, containing account information, add or edit accounts graphically and save a new HTML file. Among other things, it will simplify password renewal.
 
-- Maybe I'll add the possibility to use encrypted passwords. I [criticized them](#heading-what27s-wrong-with-password-managers3f), but there are situations where they are useful. ???
+- Maybe I'll add the possibility to use encrypted passwords. I [criticized them](#heading-what27s-wrong-with-password-managers3f), but there are situations where they are useful. One of such situations is the logon to a device, when clipboard is not accessible. In this situation, the user can get a reminder of a password stored on another device. It can be a separate application of a mode in the existing application.
+
+???
 
 ## Conclusions
 
