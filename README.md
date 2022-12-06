@@ -32,4 +32,4 @@ For source code, see [code](./code)
 
 ## Credits
 
-Inspired by [this work](https://SS64.com/pass) by [Simon Sheppard](https://ss64.com). 
+Inspired by [this work](https://SS64.com/pass) by Simon Sheppard.
