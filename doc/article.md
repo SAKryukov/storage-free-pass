@@ -2,7 +2,7 @@
     enable: false
 }
 
-{title}No need to Store, Encrypt or Memorize Passwords! (???)
+{title}No need to Store, Encrypt or Memorize Passwords!
 
 <!--
 Original publication:
@@ -33,10 +33,8 @@ A barn owl brought Neville a small package from his grandmother. He opened it ex
 <blockquote id="epigraph" class="FQ"><div class="FQA"></div>
 <br/><p>Neville Longbottom:<br/>
 — The only problem is, I can’t remember what I’ve forgotten.</p>
-<dd>Steve Kloves, <i>Harry Potter and the Philosopher's Stone</i>, screenplay version based on the novel after J. K. Rowling</dd>
+<dd>Steve Kloves, <i>Harry Potter and the Philosopher's Stone</i>, a screenplay version based on the novel after J. K. Rowling</dd>
 </blockquote>
-
-???
 
 [GitHub](https://github.com/SAKryukov/storage-free-pass)
 
@@ -48,7 +46,7 @@ A barn owl brought Neville a small package from his grandmother. He opened it ex
 
 Let's give a better Remembrall to Neville Longbottom and all other people using password-protected Web services.
 
-One well-recognized password problem is that multiple password-protected services require people to create multiple passwords and encourage them not to re-usе the passwords and use strong passwords. It is reasonable but multiple passwords are near-impossible to remember for most people, and it forces people to record the passwords, and that is a big compromise to security.
+One well-recognized password problem is that multiple password-protected services require people to create multiple passwords and encourage them not to re-usе the passwords and use strong passwords. It is reasonable but multiple passwords are near-impossible to remember for most people, and it forces people to record the passwords, which is a big compromise to security.
 
 One obvious solution is *using password managers*, but there are different factors repelling people from using them.
 
@@ -56,19 +54,17 @@ Storage-Free Pass solves many problems related to password managers. Let's discu
 
 ### What's Wrong with Password Managers?
 
-The first look at the [list of password managers on Wikipedia](https://en.wikipedia.org/wiki/List_of_password_managers) shows that half of them are proprietary. What, not only the offer me to store my passwords, but also doing so using some close-source code doing... who knows what? No, thank you, I'm not just that insane.
+The first look at the [list of password managers on Wikipedia](https://en.wikipedia.org/wiki/List_of_password_managers) shows that half of them are proprietary. What, not only do they offer me to store my passwords but also to use some close-source code doing... who knows what? No, thank you, I'm not just that insane.
 
 Also, those with source code are typically too complicated to make sure that they don't do anything except what I want.
 
 The set of passwords is a too important personal asset to risk.
 
-Another problem is that most of the password managers are not cross-platform. Basically, I need to use only my own computer where the tool is installed.
+Another problem is that most password managers are not cross-platform. Basically, I need to use only my own computer where the tool is installed.
 
 If a product is open-source, it can be difficult for many people to build it. Also, it's not so easy to assert the safety of the code.
 
-???
-
-The product I offer is free from all those problems. It can be kept on nearly any device without the risk, even if the device is lost and stolen. It can also be kept on some Web site, even a public site. It has a clearly observable core placed in one file, and the rest of the code is quite easy to inspect and assess its safety.
+The product I offer is free of all those problems. It can be kept on nearly any device without risk, even if the device is lost and stolen. It can also be kept on some Web site, even a public site. It has a clearly observable core placed in one file, and the rest of the code is quite easy to inspect and assess its safety.
 
 ## Insights
 
@@ -78,7 +74,7 @@ Let's do this: combine two strings, a master password and another one, called *s
 
 Let's calculate the [cryptographic hash](https://en.wikipedia.org/wiki/Cryptographic_hash_function) out of the combination master password + seed.
 
-In our case, the hash function returns 256 bits of data, and we can use this data to generate a password based on some *character repertoire*, the set of the characters acceptable for a password. Depending on the password size, the amount of information, contained in the hash value, can be redundant or insufficient relative to the maximum password size, but it is not important. What is important is that we can create a maximally strong password for the given limitations imposed on the password by the password-protected service. What is more important, it is cryptographically infeasible to reconstruct a master password, even if one of the service passwords is stolen. 
+In our case, the hash function returns 256 bits of data, and we can use this data to generate a password based on some *character repertoire*, the set of characters acceptable for a password. Depending on the password size, the amount of information, contained in the hash value, can be redundant or insufficient relative to the maximum password size, but it is not important. What is important is that we can create a maximally strong password for the given limitations imposed on the password by the password-protected service. What is more important, it is cryptographically infeasible to reconstruct a master password, even if one of the service passwords is stolen. 
 
 ![Data flow](data-flow.png){id=data-flow}
 
@@ -127,10 +123,10 @@ Some of those limitations are extremely stupid and create some hassles. In all c
 Unfortunately, this is a rare case. A service can impose the stupidest limitations on the character repertoire. That's why a creator of the Storage-Free Pass account information can store several separate character repertoire strings to be applied to different services. Please see "storage-free-pass.api/help.html" for the description of the account information structure, "user-demo/index.html" for the JavaScript examples.
 
 - ***Patterns***. Some password rules require that the password should not contain some "patterns", such as a sequence of consecutive or repeated characters. Why?! What's wrong with patterns? Why "123" or "111" is a "pattern" but, say, "qwerty" is not? No answer — some "security specialists" are just morons, nothing else.
-<br/><br/>Do I even have to explain that such a limitation only makes passwords less strong? Well, isn't it obvious, that with a fully random password generation process, apparently giving the strongest passwords, the probability of short patterns of this sort is high enough? The presence of some random patterns cannot make password-guessing techniques more efficient. Anyway, the server-side techniques fighting password guessing are different and well-known.
+<br/><br/>Do I even have to explain that such a limitation only makes passwords less strong? Well, isn't it obvious, that with a fully random password generation process, apparently giving the strongest passwords, the probability of short patterns of this sort is high enough? The presence of some random patterns cannot make password-guessing techniques more efficient. Anyway, the server-side techniques for fighting password guessing are different and well-known.
 <br/><br/>Unfortunately, it is not possible to prevent all different "patterns" automatically in all cases. The workaround can better be found by some trial and error. I add an arbitrary suffix to the seed string. This suffix can be the time of the day, or anything else. Chances are, the next renewal of the password for some other day will eliminate the need for it.
 
-- "***Special characters***". No one defined "special characters", there is no such thing. However, many password requirements include such an item as "should contain at least one low case character, upper-case character, digit, and a special character". Sometimes they define what they mean by a special character, sometimes not, then it can be determined experimentally.
+- "***Special characters***". No one defined "special characters", there is no such thing. However, many password requirements include such an item as "should contain at least one low-case character, upper-case character, digit, and a special character". Sometimes they define what they mean by a special character, sometimes not, then it can be determined experimentally.
 <br/><br/>
 To work around this problem, Storage-Free Pass suggests "inserts" with an arbitrary point of insertion. One can add a permanent substring with all required characters, or more than one such substring. Note that the length of inserts is not counted as a part of the password length, so their length is added to the length of a final password.
 
@@ -141,17 +137,15 @@ Please see "storage-free-pass.api/help.html" for the description of the account 
 
 ### Test Account: Beware of the One Behind You
 
-It is quite possible to keep your passwords in secret, even if someone can watch what happens on your monitor.
+It is quite possible to keep your passwords secret, even if someone can watch what happens on your monitor.
 
-I personally never face this problem, but this is what I do: my first account is the *test account* I use exclusively for one purpose: validation of the correctness on my master password.
+I personally never face this problem, but this is what I do: my first account is the *test account* I use exclusively for one purpose: validation of the correctness of my master password.
 
-The master password, account username and resulting account password, as they are visualized in the table representing a selected account, have two mode: hidden and visualize, toggled by three buttons showing either a human eye (visible), or sunglasses (hidden).
+The master password, account username, and resulting account password, as they are visualized in the table representing a selected account, have two modes: hidden and visualize, toggled by three buttons showing either a human eye (visible) or sunglasses (hidden).
 
-I enter the master password when my test account is selected, and visualize its resulting account password. The seed string for the test account is chosen the way that the resulting password is easy to recognize. I don't need to learn the resulting password by heart, as I never need to enter it. It's enough to have a feeling that it is something familiar. Any mistake in the master password would make this string very different.
+I enter the master password when my test account is selected, and visualize its resulting account password. The seed string for the test account is chosen in a way that the resulting password is easy to recognize. I don't need to learn the resulting password by heart, as I never need to enter it. It's enough to have a feeling that it is something familiar. Any mistake in the master password would make this string very different.
 
-When  I'm sure the the master password is correct, I click the button to make my account passwords hidden and perform all the authentication operations I need. Even if someone is spying on my monitor, there is no a chance to eavesdrop my communications to figure out any critical information.
-
-???
+When  I'm sure the master password is correct, I click the button to make my account passwords hidden and perform all the authentication operations I need. Even if someone is spying on my monitor, there is no chance to eavesdrop on my communications to figure out any critical information.
 
 ### Using or not Using Public Web Storage?
 
@@ -169,7 +163,7 @@ On top of that, some array of fixed strings can be inserted in the resulting pas
 
 ### Cryptosystem
 
-All the cryptography is based in the standard API coming with the JavaScript engine, `crypto.subtle`, implementing [the Web Crypto API's low-level cryptography features](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/subtle).
+All the cryptography is based on the standard API coming with the JavaScript engine, `crypto.subtle`, implementing [the Web Crypto API's low-level cryptography features](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/subtle).
 
 ~~~{lang=Javascript}{id=javascript-cryptosystem}
 "use strict";
@@ -225,7 +219,7 @@ const passwordGenerator = (() => {
 })();
 ~~~
 
-Note that the function `generatePassword` is asynchronous. So, the actual result of the password generation is exposed through the resolution of the *promise* returned by this function. For this purpose, in main application file "storage-free-pass.api/ui.js", this function is wrapped in another `generatePassword` function:
+Note that the function `generatePassword` is asynchronous. So, the actual result of the password generation is exposed through the resolution of the *promise* returned by this function. For this purpose, in the main application file "storage-free-pass.api/ui.js", this function is wrapped in another `generatePassword` function:
 
 ~~~{lang=Javascript}{id=javascript-use-generate-password}
     const generatePassword = () => {
@@ -249,15 +243,9 @@ Note that the function `generatePassword` is asynchronous. So, the actual result
 
 Everything else in the code is pretty much trivial.
 
-???
-
-### Error Handling
-
-???
-
 ## Advanced Usage
 
-In fact, the [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user-demo) code samples already show the advanced syntax of the use of the product. Even though it doesn't enable any advanced features, it can be used as a template for the advanced syntax.
+In fact, the [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user-demo) code samples already show the advanced syntax of the use of the product. Even though it doesn't enable any advanced features, it can be used as a template for advanced syntax.
 
 ### Custom Cryptosystem
 
@@ -294,9 +282,7 @@ The application Storage-Free Pass has been practiced extensively for more than t
 - The creation of the accounts structure is still manual programming. It can be done even without any programming experience, just by the available sample packages with the product.
 However, it's not a big problem to create another tool to be used to program accounts graphically and generate the account code. It's not a problem to make this tool based on a Web browser. The user can open an HTML file with the `script` element, containing account information, add or edit accounts graphically and save a new HTML file. Among other things, it will simplify password renewal.
 
-- Maybe I'll add the possibility to use encrypted passwords. I [criticized them](#heading-what27s-wrong-with-password-managers3f), but there are situations where they are useful. One of such situations is the logon to a device, when clipboard is not accessible. In this situation, the user can get a reminder of a password stored on another device. It can be a separate application of a mode in the existing application.
-
-???
+- Maybe I'll add the possibility to use encrypted passwords. I [criticized them](#heading-what27s-wrong-with-password-managers3f), but there are situations where they are useful. One such situation is the logon to a device when the clipboard is not accessible. In this situation, the user can get a reminder of a password stored on another device. It can be a separate application of a mode in the existing application.
 
 ## Conclusions
 
@@ -307,3 +293,7 @@ The idea to use stored passwords seems natural, but in fact, it stems from the p
 The alternative suggested in this article and implemented in Storage-Free Pass is quite working and safe. A password can be generated on the fly at the moment it is needed.
 
 Only in rare cases do we need to create a password mentally and remember or store it.
+
+## Credits
+
+The present work is inspired by [this work](https://ss64.com/pass) by Simon Sheppard.
