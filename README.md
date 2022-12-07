@@ -2,6 +2,8 @@
 
 *Generator of highly secure passwords based on cryptographic hash and master password, which should be memorized; no password storage is involved*
 
+[Original article](https://www.codeproject.com/Articles/5348966/No-need-to-Store-Encrypt-or-Memorize-Passwords)
+
 ## Background
 
 This password generator is deterministic. It doesn't store any passwords in any form. Instead, passwords are re-generated every time. First, [https://en.wikipedia.org/wiki/SHA-2](SHA-2) cryptographic [hash](https://en.wikipedia.org/wiki/Cryptographic_hash_function) is generated out of two strings: 1) master password, one for all accounts, memorized by the use and entered each time, and 2) _seed_, created per account, stored in the user's data. Then part of the hash is used for the generation of passwords; it uses the following parameters stored in the user's data, per account: starting position in the hash, length of a password, _character repertoire_, and shift in the character repertoire. It makes password recovery of the account passwords and the master password _infeasible_, even if access to the user-stored data is obtained.
