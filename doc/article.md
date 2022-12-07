@@ -251,9 +251,9 @@ In fact, the [Live Demo](https://sakryukov.github.io/storage-free-pass/code/user
 
 ~~~
 &lt;head&gt;
-  &lt;script&gt;script
+  &lt;script
     data-crypto="../storage-free-pass.api/crypto.js"
-    src="../storage-free-pass.api/API.js"&lt;/script&gt;
+    src="../storage-free-pass.api/API.js"&gt;&lt;/script&gt;
 &lt;/head&gt;
 ~~~
 
