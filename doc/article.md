@@ -118,7 +118,7 @@ I don't really think it helps much, but it prevents the acceptance of algorithmi
 
 Some of those limitations are extremely stupid and create some hassles. In all cases, Storage-Free Pass suggests the means to work around all the limitations. Let's consider them.
 
-- ***Character repertoire***. I would not limit a character repertoire in any way. In fact, I do use at least one service, accepting a very wide character repertoire. One can easily mix any, say, punctuation, Latin, Armenian, Georgian, Hebrew, Devanāgarī, Cyrillic, Persian characters, mathematical symbols, and a lot more, in one password. Why not? If a client created such a password, this person can reasonably expect that they can enter it again in all cases. If this is not the case.
+- ***Character repertoire***. I would not limit a character repertoire in any way. In fact, I do use at least one service, accepting a very wide character repertoire. One can easily mix any, say, punctuation, Latin, Armenian, Georgian, Hebrew, Devanāgarī, Cyrillic, Persian characters, mathematical symbols, and a lot more, in one password. Why not? If a client created such a password, this person can reasonably expect that they can enter it again in all cases.
 <br/><br/>
 Unfortunately, this is a rare case. A service can impose the stupidest limitations on the character repertoire. That's why a creator of the Storage-Free Pass account information can store several separate character repertoire strings to be applied to different services. Please see "storage-free-pass.api/help.html" for the description of the account information structure, "user-demo/index.html" for the JavaScript examples.
 
