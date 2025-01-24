@@ -1,8 +1,8 @@
 const definitionSet = {
     title: "Storage-Free Pass",
-    version: "4.0.0",
+    version: "4.1.0",
     description: "System for entering secure passwords, storage-free",
-    copyright: "Sergey A Kryukov, 2020-2022",
+    copyright: "Sergey A Kryukov, 2020-2025",
     meta: [
         { name:"author", content: "Sergey A Kryukov" },
         { name:"owner", content: "Sergey A Kryukov" },
