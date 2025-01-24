@@ -2,7 +2,7 @@
 
 *Generator of highly secure passwords based on cryptographic hash and master password, which should be memorized; no password storage is involved*
 
-[Original article](https://www.codeproject.com/Articles/5348966/No-need-to-Store-Encrypt-or-Memorize-Passwords)
+[Original article](https://sakryukov.github.io/publications/2022-12-06.No-need-to-Store-Encrypt-or-Memorize-Passwords!.html)
 
 ## Background
 
